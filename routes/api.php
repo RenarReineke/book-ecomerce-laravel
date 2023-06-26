@@ -1,6 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryResourceController;
+use App\Http\Controllers\ProductResourceController;
+use App\Http\Controllers\TagResourceController;
+use App\Http\Controllers\RewiewResourceController;
+use App\Http\Controllers\OrderResourceController;
+use App\Http\Controllers\UserResourceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +20,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/products', [ProductController::class, 'index']);
+Route::apiResources([
+    'products' => ProductResourceController::class,
+    'categories' => CategoryResourceController::class,
+    'tags' => TagResourceController::class,
+    'rewiews' => RewiewResourceController::class,
+    'orders' => OrderResourceController::class,
+    'users' => UserResourceController::class,
+]);
