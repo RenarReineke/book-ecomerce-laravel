@@ -11,7 +11,7 @@ class Product extends Model
 
     protected $fillable = ['title', 'description', 'price'];
 
-    protected $with = ['category'];
+    protected $with = ['category', 'tags', 'rewiews'];
 
     public function category()
     {
