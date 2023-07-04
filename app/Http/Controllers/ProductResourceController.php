@@ -13,7 +13,6 @@ class ProductResourceController extends Controller
      */
     public function index()
     {
-        $categories = Category::get();
         $products = Product::get();
         return $products;
     }
@@ -23,7 +22,11 @@ class ProductResourceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = Product::create($request->all());
+        $category = Category::findOrFail($request->category_id);
+        $category->products()->save($product);
+
+        return $product;
     }
 
     /**
@@ -31,7 +34,8 @@ class ProductResourceController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::find($id);
+        return $product;
     }
 
     /**
@@ -39,7 +43,11 @@ class ProductResourceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dump($request->input());
+        $product = Product::find($id);
+        $product->update(['title' => $request->title]);
+        dump($product);
+        return $product;
     }
 
     /**
@@ -47,6 +55,8 @@ class ProductResourceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Product::destroy($id);
+        $message = 'Ok';
+        return $message;
     }
 }
