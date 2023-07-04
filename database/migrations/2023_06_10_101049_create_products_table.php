@@ -18,8 +18,10 @@ return new class () extends Migration {
             $table->float('price');
             $table->index('created_at');
             $table->timestamps();
-            $table->foreignId(Category::class)->constrained()
-                    ->onUpdate('cascade')->onDelete('null');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')
+            ->cascadeOnUpdate()
+            ->nullOnDelete();
         });
     }
 

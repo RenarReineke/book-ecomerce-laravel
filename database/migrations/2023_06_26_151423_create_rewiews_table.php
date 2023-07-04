@@ -6,8 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,9 +17,9 @@ return new class extends Migration
             $table->text('text');
             $table->timestamps();
             $table->foreignIdFor(User::class)->constrained()
-            ->onUpdate('cascade')->onDelete('null');
+            ->onUpdate('cascade')->onDelete('restrict');
             $table->foreignIdFor(Product::class)->constrained()
-            ->onUpdate('cascade')->onDelete('null');
+            ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

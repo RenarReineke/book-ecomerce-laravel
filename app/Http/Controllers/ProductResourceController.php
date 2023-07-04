@@ -12,10 +12,9 @@ class ProductResourceController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
+    {
         $categories = Category::get();
         $products = Product::get();
-        dump('Helllo');
         return $products;
     }
 
