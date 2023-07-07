@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Product\StoreProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductResourceController extends Controller
 {
@@ -13,20 +15,33 @@ class ProductResourceController extends Controller
      */
     public function index()
     {
-        $products = Product::get();
-        return $products;
+        try {
+            $products = Product::get();
+            return $products;
+        } catch(\Throwable $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $product = Product::create($request->all());
-        $category = Category::findOrFail($request->category_id);
-        $category->products()->save($product);
+        try {
+            $validated = $request->validated();
 
-        return $product;
+            DB::transaction(function () use ($validated, $request) {
+                $product = Product::create($validated);
+                $category = Category::findOrFail($request->category_id);
+                $category->products()->save($product);
+                return $product;
+            });
+
+        } catch(\Throwable $e) {
+            return $e->getMessage();
+        }
+
     }
 
     /**
@@ -34,8 +49,12 @@ class ProductResourceController extends Controller
      */
     public function show(string $id)
     {
-        $product = Product::find($id);
-        return $product;
+        try {
+            $product = Product::findOrFail($id);
+            return $product;
+        } catch(\Throwable $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -43,11 +62,14 @@ class ProductResourceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        dump($request->input());
-        $product = Product::find($id);
-        $product->update(['title' => $request->title]);
-        dump($product);
-        return $product;
+
+        try {
+            $product = Product::find($id);
+            $product->update(['title' => $request->title]);
+            return $product;
+        } catch(\Throwable $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -55,8 +77,12 @@ class ProductResourceController extends Controller
      */
     public function destroy(string $id)
     {
-        Product::destroy($id);
-        $message = 'Ok';
-        return $message;
+        try {
+            Product::destroy($id);
+            $message = 'Ok';
+            return $message;
+        } catch(\Throwable $e) {
+            return $e->getMessage();
+        }
     }
 }

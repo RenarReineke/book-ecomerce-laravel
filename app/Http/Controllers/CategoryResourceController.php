@@ -12,8 +12,12 @@ class CategoryResourceController extends Controller
      */
     public function index()
     {
-        $categories = Category::get();
-        return $categories;
+        try {
+            $categories = Category::get();
+            return $categories;
+        } catch(\Throwable $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -21,15 +25,29 @@ class CategoryResourceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $request->validate([
+                'title' => 'numeric',
+                'description' => 'required',
+            ]);
+            $category = Category::create($request->all());
+            return $category;
+        } catch(\Throwable $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(string $id)
     {
-        //
+        try {
+            $category = Category::findOrFail($id);
+            return $category;
+        } catch(\Throwable $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -37,14 +55,23 @@ class CategoryResourceController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        try {
+        } catch(\Throwable $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(string $id)
     {
-        //
+        try {
+            Category::destroy($id);
+            $message = 'Ok';
+            return $message;
+        } catch(\Throwable $e) {
+            return $e->getMessage();
+        }
     }
 }
