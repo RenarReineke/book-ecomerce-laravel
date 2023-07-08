@@ -64,7 +64,7 @@ class ProductResourceController extends Controller
     {
 
         try {
-            $product = Product::find($id);
+            $product = Product::findOrFail($id);
             $product->update(['title' => $request->title]);
             return $product;
         } catch(\Throwable $e) {
