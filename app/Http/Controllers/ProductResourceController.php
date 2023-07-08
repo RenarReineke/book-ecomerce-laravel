@@ -30,7 +30,7 @@ class ProductResourceController extends Controller
     public function store(StoreProductRequest $request)
     {
         try {
-            $validated = $request->validated();
+            $validated = $request->getDto();
 
             DB::transaction(function () use ($validated, $request) {
                 $product = Product::create($validated);

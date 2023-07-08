@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
+use ProductCreateDto;
 
 class StoreProductRequest extends FormRequest
 {
@@ -27,5 +28,15 @@ class StoreProductRequest extends FormRequest
             'price' => 'numeric',
             'category_id' => 'numeric',
         ];
+    }
+
+    public function getDto(): ProductCreateDto
+    {
+        return new ProductCreateDto(
+            $this->title,
+            $this->description,
+            $this->price,
+            $this->category_id,
+        );
     }
 }
