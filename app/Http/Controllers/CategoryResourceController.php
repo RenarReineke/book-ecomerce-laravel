@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class CategoryResourceController extends Controller
     {
         try {
             $categories = Category::get();
-            return $categories;
+            return CategoryResource::collection($categories);
         } catch(\Throwable $e) {
             return $e->getMessage();
         }
@@ -44,7 +45,7 @@ class CategoryResourceController extends Controller
     {
         try {
             $category = Category::findOrFail($id);
-            return $category;
+            return new CategoryResource($category);
         } catch(\Throwable $e) {
             return $e->getMessage();
         }

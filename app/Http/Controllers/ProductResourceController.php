@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class ProductResourceController extends Controller
     {
         try {
             $products = Product::get();
-            return $products;
+            return ProductResource::collection($products);
         } catch(\Throwable $e) {
             return $e->getMessage();
         }
@@ -51,7 +52,7 @@ class ProductResourceController extends Controller
     {
         try {
             $product = Product::findOrFail($id);
-            return $product;
+            return new ProductResource($product);
         } catch(\Throwable $e) {
             return $e->getMessage();
         }
