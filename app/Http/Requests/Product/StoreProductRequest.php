@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Product;
 
+use App\DTO\ProductCreateDto;
 use Illuminate\Foundation\Http\FormRequest;
-use ProductCreateDto;
 
 class StoreProductRequest extends FormRequest
 {

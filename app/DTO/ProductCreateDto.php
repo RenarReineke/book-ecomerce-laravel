@@ -1,11 +1,11 @@
 <?php
+namespace App\DTO;
 
-readonly final class ProductCreateDto {
+final class ProductCreateDto {
     public function __construct(
-        public string $title,
-        public string $description,
-        public float $price,
-        public int $category_id,
-    )
-    {}
+        readonly public string $title,
+        readonly public ?string $description,
+        readonly public float $price,
+        readonly public int $category_id,
+    ) {}
 }

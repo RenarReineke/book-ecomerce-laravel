@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Product\StoreProductRequest;
-use App\Http\Resources\ProductResource;
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Services\ProductService;
+use App\Http\Resources\ProductResource;
+use App\Http\Requests\Product\StoreProductRequest;
 
 class ProductResourceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(private ProductService $product_service) {}
+
     public function index()
     {
         try {
@@ -30,14 +29,11 @@ class ProductResourceController extends Controller
     public function store(StoreProductRequest $request)
     {
         try {
-            $validated = $request->getDto();
+            $dto = $request->getDto();
+            $category = Category::findOrFail($request->category_id);
 
-            DB::transaction(function () use ($validated, $request) {
-                $product = Product::create($validated);
-                $category = Category::findOrFail($request->category_id);
-                $category->products()->save($product);
-                return $product;
-            });
+            $product = $this->product_service->store($dto, $category);
+            return $product;
 
         } catch(\Throwable $e) {
             return $e->getMessage();
