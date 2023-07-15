@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthSessionController;
+use App\Http\Controllers\Auth\RegisterUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('register', [RegisterUserController::class, 'store'])->middleware('guest');
+Route::post('delete-account', [RegisterUserController::class, 'destroy'])->middleware('auth');
+
+Route::post('login', [AuthSessionController::class, 'store'])->middleware('guest');
+Route::delete('logout', [AuthSessionController::class, 'destroy'])->middleware('auth');
 
 Route::get('/admin/dashboard', function () {
     return view('dashboard');

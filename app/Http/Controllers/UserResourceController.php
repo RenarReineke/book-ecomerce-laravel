@@ -12,7 +12,13 @@ class UserResourceController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $users = User::all();
+            return ['users'=> $users];
+
+        } catch(\Throwable $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -20,7 +26,11 @@ class UserResourceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+
+        } catch(\Throwable $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -28,7 +38,11 @@ class UserResourceController extends Controller
      */
     public function show(User $user)
     {
-        //
+        try {
+            return $user;
+        } catch(\Throwable $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -36,7 +50,11 @@ class UserResourceController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        try {
+
+        } catch(\Throwable $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -44,6 +62,10 @@ class UserResourceController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        try {
+
+        } catch(\Throwable $e) {
+            return $e->getMessage();
+        }
     }
 }

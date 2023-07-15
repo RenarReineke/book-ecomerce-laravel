@@ -43,6 +43,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected static function booted()
+    {
+        static::deleting(fn(User $user) => $user->tokens()->delete());
+    }
+
     public function orders() {
         return $this->hasMany(Order::class);
     }
