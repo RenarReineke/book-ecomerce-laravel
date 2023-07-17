@@ -65,7 +65,7 @@ class ProductResourceController extends Controller
             $product->update(['title' => $request->title]);
             return $product;
         } catch(\Throwable $e) {
-            return $e->getMessage();
+            return 'Heeeeeeyyyyy';
         }
     }
 
