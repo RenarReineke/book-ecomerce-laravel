@@ -40,12 +40,8 @@ class TagResourceController extends Controller
      */
     public function show(string $id)
     {
-        try {
-            $tag = Tag::findOrFail($id);
-            return new TagResource($tag);
-        } catch(\Throwable $e) {
-            return $e->getMessage();
-        }
+        $tag = Tag::findOrFail($id);
+        return new TagResource($tag);
     }
 
     /**
@@ -53,16 +49,13 @@ class TagResourceController extends Controller
      */
     public function update(TagRequest $request, string $id)
     {
+        $tag = Tag::findOrFail($id);
+
         try {
-            $tag = Tag::findOrFail($id);
             $tag->update(['title' => $request->getDto()->title]);
             return $tag;
         } catch(\Throwable $e) {
-            dump("Ошибка епта!");
-            $rrr = response($e->getMessage(), 404);
-            dump($e->getCode());
-            dump($rrr);
-            return $rrr;
+            return response($e->getMessage(), 404);
         }
     }
 
