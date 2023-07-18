@@ -13,12 +13,8 @@ class CategoryResourceController extends Controller
      */
     public function index()
     {
-        try {
-            $categories = Category::get();
-            return CategoryResource::collection($categories);
-        } catch(\Throwable $e) {
-            return $e->getMessage();
-        }
+        $categories = Category::get();
+        return CategoryResource::collection($categories);
     }
 
     /**
@@ -26,16 +22,12 @@ class CategoryResourceController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'title' => 'numeric',
-                'description' => 'required',
-            ]);
-            $category = Category::create($request->all());
-            return $category;
-        } catch(\Throwable $e) {
-            return $e->getMessage();
-        }
+        $request->validate([
+            'title' => 'numeric',
+            'description' => 'required',
+        ]);
+        $category = Category::create($request->all());
+        return $category;
     }
 
     /**
@@ -43,12 +35,8 @@ class CategoryResourceController extends Controller
      */
     public function show(string $id)
     {
-        try {
-            $category = Category::findOrFail($id);
-            return new CategoryResource($category);
-        } catch(\Throwable $e) {
-            return $e->getMessage();
-        }
+        $category = Category::findOrFail($id);
+        return new CategoryResource($category);
     }
 
     /**
@@ -56,10 +44,7 @@ class CategoryResourceController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        try {
-        } catch(\Throwable $e) {
-            return $e->getMessage();
-        }
+
     }
 
     /**
@@ -67,12 +52,8 @@ class CategoryResourceController extends Controller
      */
     public function destroy(string $id)
     {
-        try {
-            Category::destroy($id);
-            $message = 'Ok';
-            return $message;
-        } catch(\Throwable $e) {
-            return $e->getMessage();
-        }
+        Category::destroy($id);
+        $message = 'Ok';
+        return $message;
     }
 }
