@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TagRequest;
 use App\Http\Resources\TagResource;
 use App\Models\Tag;
-use Illuminate\Http\Response;
+use Throwable;
 
 class TagResourceController extends Controller
 {
@@ -14,12 +14,8 @@ class TagResourceController extends Controller
      */
     public function index()
     {
-        try {
-            $tags = Tag::get();
-            return TagResource::collection($tags);
-        } catch(\Throwable $e) {
-            return $e->getMessage();
-        }
+        $tags = Tag::get();
+        return TagResource::collection($tags);
     }
 
     /**
@@ -27,12 +23,8 @@ class TagResourceController extends Controller
      */
     public function store(TagRequest $request)
     {
-        try {
-            $tag = Tag::create(['title' => $request->getDto()->title]);
-            return $tag;
-        } catch(\Throwable $e) {
-            return $e->getMessage();
-        }
+        $tag = Tag::create(['title' => $request->getDto()->title]);
+        return $tag;
     }
 
     /**
@@ -40,6 +32,7 @@ class TagResourceController extends Controller
      */
     public function show(string $id)
     {
+
         $tag = Tag::findOrFail($id);
         return new TagResource($tag);
     }
@@ -50,13 +43,9 @@ class TagResourceController extends Controller
     public function update(TagRequest $request, string $id)
     {
         $tag = Tag::findOrFail($id);
+        $tag->update(['title' => $request->getDto()->title]);
+        return $tag;
 
-        try {
-            $tag->update(['title' => $request->getDto()->title]);
-            return $tag;
-        } catch(\Throwable $e) {
-            return response($e->getMessage(), 404);
-        }
     }
 
     /**
@@ -64,11 +53,7 @@ class TagResourceController extends Controller
      */
     public function destroy(string $id)
     {
-        try {
-            Tag::destroy($id);
-            return response()->noContent();
-        } catch(\Throwable $e) {
-            return $e->getMessage();
-        }
+        Tag::destroy($id);
+        return response()->noContent();
     }
 }
