@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Throwable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -56,12 +58,14 @@ class Handler extends ExceptionHandler
                     'error' => $exeption->getMessage()
                 ];
 
-                return response($message, Response::HTTP_NO_CONTENT);
+                return response($message, Response::HTTP_NOT_FOUND);
             } else {
                 return redirect()->back()->withInput()->withErrors([
                     'error' => $exeption->getMessage()
                 ]);
             }
         }
+
+        return parent::render($request, $exeption);
     }
 }
