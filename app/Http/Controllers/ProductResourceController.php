@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Http\Resources\ProductResource;
 use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 
 class ProductResourceController extends Controller
 {
@@ -26,10 +27,8 @@ class ProductResourceController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $dto = $request->getDto();
         $category = Category::findOrFail($request->category_id);
-
-        $product = $this->product_service->store($dto, $category);
+        $product = $this->product_service->store($request->validated(), $category);
         return $product;
     }
 
@@ -45,11 +44,11 @@ class ProductResourceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProductRequest $request, string $id)
     {
         $product = Product::findOrFail($id);
-        $product->update(['title' => $request->title]);
-        return $product;
+        $product->update($request->validated());
+        return new ProductResource($product);
     }
 
     /**

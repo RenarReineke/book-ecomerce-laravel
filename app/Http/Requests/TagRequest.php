@@ -27,8 +27,8 @@ class TagRequest extends FormRequest
         ];
     }
 
-    public function getDto(): TagDto
-    {
-        return new TagDto($this->title);
-    }
+    // public function getDto(): TagDto
+    // {
+    //     return new TagDto($this->title);
+    // }
 }

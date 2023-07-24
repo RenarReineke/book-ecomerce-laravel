@@ -4,16 +4,18 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\Category;
-use App\DTO\ProductCreateDto;
 use Illuminate\Support\Facades\DB;
 
 final class ProductService
 {
-    public function store(ProductCreateDto $dto, Category $category) {
-        DB::transaction(function () use($dto, $category) {
-            $product = Product::create((array)$dto);
+    public function store(array $request, Category $category): Product
+    {
+        $product = DB::transaction(function () use ($request, $category) {
+            $product = Product::create($request);
             $category->products()->save($product);
             return $product;
         });
+
+        return $product;
     }
 }

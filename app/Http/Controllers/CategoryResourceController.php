@@ -22,9 +22,9 @@ class CategoryResourceController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(CategoryRequest $request)
-    {   
-        $category = Category::create((array)$request->getDto());
-        return $category;
+    {
+        $category = Category::create($request->validated());
+        return new CategoryResource($category);
     }
 
     /**
@@ -42,8 +42,8 @@ class CategoryResourceController extends Controller
     public function update(CategoryRequest $request, string $id)
     {
         $category = Category::findOrFail($id);
-        $category->update((array)$request->getDto());
-        return $category;
+        $category->update($request->validated());
+        return new CategoryResource($category);
     }
 
     /**

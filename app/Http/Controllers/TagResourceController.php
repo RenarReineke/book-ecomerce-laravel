@@ -23,8 +23,8 @@ class TagResourceController extends Controller
      */
     public function store(TagRequest $request)
     {
-        $tag = Tag::create(['title' => $request->getDto()->title]);
-        return $tag;
+        $tag = Tag::create($request->validated());
+        return new TagResource($tag);
     }
 
     /**
@@ -32,7 +32,6 @@ class TagResourceController extends Controller
      */
     public function show(string $id)
     {
-
         $tag = Tag::findOrFail($id);
         return new TagResource($tag);
     }
@@ -43,8 +42,8 @@ class TagResourceController extends Controller
     public function update(TagRequest $request, string $id)
     {
         $tag = Tag::findOrFail($id);
-        $tag->update(['title' => $request->getDto()->title]);
-        return $tag;
+        $tag->update($request->validated());
+        return new TagResource($tag);
 
     }
 

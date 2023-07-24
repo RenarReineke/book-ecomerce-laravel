@@ -23,20 +23,26 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'string',
-            'desciption' =>  'nullable',
-            'price' => 'numeric',
-            'category_id' => 'numeric',
+            'title' => 'required|string',
+            'desciption' => 'nullable',
+            'price' => 'required|numeric',
+            'category_id' => 'required|numeric',
         ];
     }
 
-    public function getDto(): ProductCreateDto
-    {
-        return new ProductCreateDto(
-            $this->title,
-            $this->description,
-            $this->price,
-            $this->category_id,
-        );
-    }
+    // public function getDto(): ProductCreateDto
+    // {
+    //     $ta = [
+    //         'title' => $this->title,
+    //         'desc' => $this->desc,
+    //         'price' => $this->price,
+    //         'category' => $this->category_id
+    //     ];
+    //     return new ProductCreateDto(
+    //         $this->title,
+    //         $this->price,
+    //         $this->category_id,
+    //         $this->description,
+    //     );
+    // }
 }

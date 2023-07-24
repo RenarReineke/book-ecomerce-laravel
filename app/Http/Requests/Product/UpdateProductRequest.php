@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Product;
 
-use App\DTO\CategoryDto;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,20 +22,10 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string',
-            'description' => 'required|string'
-        ];
-    }
-
-    // public function getDto()
-    // {
-    //     return new CategoryDto($this->title, $this->description);
-    // }
-
-    public function messages()
-    {
-        return [
-            'title.required' => 'No title - vot eta povorot!'
+            'title' => 'string',
+            'desciption' => 'string',
+            'price' => 'numeric',
+            'category_id' => 'numeric',
         ];
     }
 }
