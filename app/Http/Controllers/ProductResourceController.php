@@ -11,16 +11,14 @@ use App\Http\Requests\Product\StoreProductRequest;
 
 class ProductResourceController extends Controller
 {
-    public function __construct(private ProductService $product_service) {}
+    public function __construct(private ProductService $product_service)
+    {
+    }
 
     public function index()
     {
-        try {
-            $products = Product::get();
-            return ProductResource::collection($products);
-        } catch(\Throwable $e) {
-            return $e->getMessage();
-        }
+        $products = Product::get();
+        return ProductResource::collection($products);
     }
 
     /**
@@ -28,17 +26,11 @@ class ProductResourceController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        try {
-            $dto = $request->getDto();
-            $category = Category::findOrFail($request->category_id);
+        $dto = $request->getDto();
+        $category = Category::findOrFail($request->category_id);
 
-            $product = $this->product_service->store($dto, $category);
-            return $product;
-
-        } catch(\Throwable $e) {
-            return $e->getMessage();
-        }
-
+        $product = $this->product_service->store($dto, $category);
+        return $product;
     }
 
     /**
@@ -46,12 +38,8 @@ class ProductResourceController extends Controller
      */
     public function show(string $id)
     {
-        try {
-            $product = Product::findOrFail($id);
-            return new ProductResource($product);
-        } catch(\Throwable $e) {
-            return $e->getMessage();
-        }
+        $product = Product::findOrFail($id);
+        return new ProductResource($product);
     }
 
     /**
@@ -59,14 +47,9 @@ class ProductResourceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
-        try {
-            $product = Product::findOrFail($id);
-            $product->update(['title' => $request->title]);
-            return $product;
-        } catch(\Throwable $e) {
-            return 'Heeeeeeyyyyy';
-        }
+        $product = Product::findOrFail($id);
+        $product->update(['title' => $request->title]);
+        return $product;
     }
 
     /**
@@ -74,12 +57,7 @@ class ProductResourceController extends Controller
      */
     public function destroy(string $id)
     {
-        try {
-            Product::destroy($id);
-            $message = 'Ok';
-            return $message;
-        } catch(\Throwable $e) {
-            return $e->getMessage();
-        }
+        Product::destroy($id);
+        return response()->noContent();
     }
 }
