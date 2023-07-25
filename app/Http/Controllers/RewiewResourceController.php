@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rewiew;
-use Illuminate\Http\Request;
+use App\Http\Requests\Rewiew\CreateRewiewRequest;
+use App\Http\Requests\Rewiew\UpdateRewiewRequest;
+use App\Http\Resources\RewiewResource;
 
 class RewiewResourceController extends Controller
 {
@@ -12,15 +14,15 @@ class RewiewResourceController extends Controller
      */
     public function index()
     {
-        //
+        return RewiewResource::collection(Rewiew::all());
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateRewiewRequest $request)
     {
-        //
+        return new RewiewResource(Rewiew::create($request->validated()));
     }
 
     /**
@@ -28,15 +30,16 @@ class RewiewResourceController extends Controller
      */
     public function show(Rewiew $rewiew)
     {
-        //
+        return new RewiewResource($rewiew);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Rewiew $rewiew)
+    public function update(UpdateRewiewRequest $request, Rewiew $rewiew)
     {
-        //
+        $rewiew->update($request->validated());
+        return new RewiewResource($rewiew);
     }
 
     /**
@@ -44,6 +47,7 @@ class RewiewResourceController extends Controller
      */
     public function destroy(Rewiew $rewiew)
     {
-        //
+        $rewiew->delete();
+        return response()->noContent();
     }
 }
