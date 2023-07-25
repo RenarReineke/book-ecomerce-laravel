@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Rewiew;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,6 +22,8 @@ class ProductResource extends JsonResource
             'description' => $this->description,
             'price' => $this->price,
             'category' => $this->category?->title,
+            'tags' => TagResource::collection($this->tags),
+            'rewiews' => RewiewResource::collection($this->rewiews),
         ];
     }
 }
