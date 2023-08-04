@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -12,8 +14,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $name = 'The best admin';
-        return view('dashboard', ['name' => $name]);
+        $products = DB::table('products')->distinct()->count();
+        dd($products);
+        return view('dashboard', compact('products'));
     }
 
     /**

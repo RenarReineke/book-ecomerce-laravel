@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Tag;
+use App\Models\Order;
+use App\Models\Rewiew;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -26,6 +30,11 @@ class Product extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
     }
 
     public function scopeFilter($query, array $filters)

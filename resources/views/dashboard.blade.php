@@ -6,6 +6,10 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <h3>{{$title}} для {{$name}}</h3>
+    <h3>{{$title}}</h3>
+
+    
+
+    
 </body>
 </html>

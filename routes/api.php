@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,7 @@ Route::apiResources([
     'tags' => TagResourceController::class,
     'rewiews' => RewiewResourceController::class,
     'orders' => OrderResourceController::class,
+    'carts' => CartController::class,
     'users' => UserResourceController::class,
 ]);
 

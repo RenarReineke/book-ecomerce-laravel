@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         Product::factory(10)->has(Tag::factory()->count(3))
                             ->has(Rewiew::factory()->count(3))
                             ->create();
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

@@ -15,7 +15,8 @@ return new class () extends Migration {
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->float('price');
+            $table->decimal('price');
+            $table->integer('amount')->default(0);
             $table->index('created_at');
             $table->timestamps();
             $table->unsignedBigInteger('category_id')->nullable();

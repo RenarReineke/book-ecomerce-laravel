@@ -10,7 +10,9 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -45,18 +47,26 @@ class User extends Authenticatable
 
     protected static function booted()
     {
-        static::deleting(fn(User $user) => $user->tokens()->delete());
+        static::deleting(fn (User $user) => $user->tokens()->delete());
     }
 
-    public function orders() {
+    public function orders()
+    {
         return $this->hasMany(Order::class);
     }
 
-    public function role() {
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function role()
+    {
         return $this->belongsTo(Role::class);
     }
 
-    public function rewiews() {
+    public function rewiews()
+    {
         return $this->hasMany(Rewiew::class);
     }
 }
