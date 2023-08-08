@@ -8,7 +8,11 @@
 <body>
     <h3>{{$title}}</h3>
 
-    
+    @if (auth()->guest())
+        <div>Hello</div>
+    @else
+        <div>World</div>
+    @endif
 
     
 </body>

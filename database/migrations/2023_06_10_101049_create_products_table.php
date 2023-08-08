@@ -17,12 +17,17 @@ return new class () extends Migration {
             $table->text('description')->nullable();
             $table->decimal('price');
             $table->integer('amount')->default(0);
+            $table->integer('pages')->nullable();
+            $table->string('size')->nullable();
+            $table->string('cover-type')->nullable();
+            $table->integer('weight')->nullable();
+            $table->integer('year')->nullable();
+            $table->integer('rating')->nullable();
             $table->index('created_at');
             $table->timestamps();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')
-            ->cascadeOnUpdate()
-            ->nullOnDelete();
+            ->cascadeOnUpdate()->nullOnDelete();
         });
     }
 

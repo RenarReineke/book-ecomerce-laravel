@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\CartController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use Laravel\Sanctum\PersonalAccessToken;
 use App\Http\Controllers\TagResourceController;
 use App\Http\Controllers\UserResourceController;
@@ -34,13 +35,17 @@ Route::apiResources([
     'users' => UserResourceController::class,
 ]);
 
-Route::get('/login', function (Request $request) {
-    // $token = $request->user()->createToken('ttt');
-    $token = Auth::check();
-    return ['token' => $token];
-});
+// Route::get('/login', function (Request $request) {
+//     // $token = $request->user()->createToken('ttt');
+//     $token = Auth::check();
+//     return ['token' => $token];
+// });
 
-Route::middleware('auth:sanctum')->get('/test', function (Request $request) {
+Route::get('/test', function (Request $request) {
+    $user = User::find(1);
+    Auth::login($user);
+    session(["hello" => "world"]);
+    dump($request->session()->all());
     return 'Test';
 });
 

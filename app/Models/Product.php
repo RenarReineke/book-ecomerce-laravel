@@ -13,9 +13,12 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'price'];
+    protected $fillable = [
+        'title', 'description', 'price', 'amount', 'pages', 'size', 'cover-type', 'weight',
+        'year', 'rating'
+    ];
 
-    protected $with = ['category', 'tags', 'rewiews'];
+    protected $with = ['category', 'tags', 'rewiews', 'images'];
 
     public function category()
     {
@@ -27,6 +30,11 @@ class Product extends Model
         return $this->hasMany(Rewiew::class);
     }
 
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
@@ -35,6 +43,21 @@ class Product extends Model
     public function orders()
     {
         return $this->belongsToMany(Order::class);
+    }
+
+    public function authors()
+    {
+        return $this->belongsToMany(Author::class);
+    }
+
+    public function publishers()
+    {
+        return $this->belongsToMany(Publisher::class);
+    }
+
+    public function series()
+    {
+        return $this->belongsToMany(Series::class);
     }
 
     public function scopeFilter($query, array $filters)

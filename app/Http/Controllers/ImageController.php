@@ -1,25 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreImageRequest;
+use App\Http\Requests\UpdateImageRequest;
+use App\Models\Image;
 
-class DashboardController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $products = DB::table('products')->distinct()->count();
-        Auth::login(User::find(1));
-        // dd(session()->all());
-        return view('dashboard', compact('products'));
+        //
     }
 
     /**
@@ -33,7 +27,7 @@ class DashboardController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreImageRequest $request)
     {
         //
     }
@@ -41,7 +35,7 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Image $image)
     {
         //
     }
@@ -49,7 +43,7 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Image $image)
     {
         //
     }
@@ -57,7 +51,7 @@ class DashboardController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateImageRequest $request, Image $image)
     {
         //
     }
@@ -65,7 +59,7 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Image $image)
     {
         //
     }
