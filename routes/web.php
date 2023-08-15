@@ -27,5 +27,14 @@ Route::post('login', [AuthSessionController::class, 'store'])->middleware('guest
 Route::delete('logout', [AuthSessionController::class, 'destroy'])->middleware('auth');
 
 Route::prefix('admin')->controller(DashboardController::class)->group(function () {
-    Route::get('/dashboard', 'index');
+    Route::get('/dashboard', 'index')->name('admin');
+});
+
+Route::prefix('admin')->group(function () {
+    Route::view('/register', 'registerForm')->name('register');
+    Route::view('/login', 'loginForm')->name('login');
+    Route::view('/forgot-password', 'forgotPassword')->name('forgot');
+    Route::view('/reset-password', 'resetPassword')->name('reset');
+    Route::view('/confirm-password', 'confirmPassword')->name('confirm');
+    Route::view('/verify-email', 'verifyEmail')->name('verifyEmail');
 });

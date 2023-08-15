@@ -17,7 +17,7 @@ class DashboardController extends Controller
     public function index()
     {
         $products = DB::table('products')->distinct()->count();
-        Auth::login(User::find(1));
+        // Auth::login(User::find(1));
         // dd(session()->all());
         return view('dashboard', compact('products'));
     }
