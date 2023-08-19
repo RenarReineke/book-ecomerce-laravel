@@ -32,11 +32,12 @@ class RegisterUserController extends Controller
 
             return response($user, Response::HTTP_CREATED);
         } catch(\Throwable $e) {
-            return $e->getMessage();
+            return response($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
     }
 
-    public function destroy(Request $request) {
+    public function destroy(Request $request)
+    {
 
         $user = $request->user();
 

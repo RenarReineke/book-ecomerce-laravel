@@ -35,7 +35,8 @@ class AuthSessionController extends Controller
         }
     }
 
-    public function destroy(Request $request) {
+    public function destroy(Request $request)
+    {
         Auth::logout();
 
         $request->session()->invalidate();

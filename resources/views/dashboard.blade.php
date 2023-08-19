@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-</head>
-<body>
-    <h3>{{$title}}</h3>
+@extends('layout')
 
-    @if (auth()->guest())
-        <div>Hello</div>
-    @else
-        <div>World</div>
-    @endif
-
-    
-</body>
-</html>
+@section('dashboard')
+<div class="flex flex-row h-screen">
+    @include('layouts.sidebar')
+    <div class="basis-11/12">
+        @yield('statistic')
+        @yield('clients')
+    </div>
+</div>
+@endsection
