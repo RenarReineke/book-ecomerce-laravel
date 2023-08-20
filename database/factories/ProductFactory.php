@@ -21,7 +21,15 @@ class ProductFactory extends Factory
             'title' => fake()->sentence(),
             'description' => fake()->text(),
             'price' => fake()->randomDigitNotNull(),
+            'amount' => fake()->randomDigitNotNull(),
+            'pages' => fake()->randomDigitNotNull(),
+            'size' => fake()->sentence(),
+            'cover-type' => fake()->sentence(),
+            'weight' => fake()->randomDigitNotNull(),
+            'year' => fake()->randomDigitNotNull(),
+            'rating' => fake()->randomDigitNotNull(),
             'category_id' => Category::factory(),
+
         ];
     }
 }
