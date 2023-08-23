@@ -59,7 +59,7 @@
                     />
                 </svg>
 
-                <span>Профиль</span>
+                <span>{{Auth::user()->name}}</span>
             </a>
             <form action="{{ route('logout') }}" method="post">
                 @csrf

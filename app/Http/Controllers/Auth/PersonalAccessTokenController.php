@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -35,7 +35,8 @@ class PersonalAccessTokenController extends Controller
         }
     }
 
-    public function destroy(Request $request) {
+    public function destroy(Request $request)
+    {
         $request->user()->currentAccessToken()->delete();
     }
 }

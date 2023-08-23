@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\User\LoginUserRequest;
+use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
+use App\Http\Requests\User\LoginUserRequest;
 
 class LoginController extends Controller
 {
@@ -19,23 +21,44 @@ class LoginController extends Controller
     {
         $credentials = $request->validated();
 
-        if(!Auth::attempt($credentials, $request->boolean('remember'))) {
-            return back()->withInput()->withErrors([
-                'email' => trans('auth.failed')
-            ]);
+        try {
+            if(!Auth::attempt($credentials)) {
+                if (!$request->expectsJson()) {
+                    return back()->withInput()->withErrors([
+                        'email' => trans('auth.failed')
+                    ]);
+                }
+
+                return response([
+                    'error' => 'Указаны неверные данные для входа'
+                ], Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+
+            $request->session()->regenerate();
+
+            if (!$request->expectsJson()) {
+                return redirect()->intended(RouteServiceProvider::HOME);
+            }
+
+            return response($request->user(), Response::HTTP_CREATED);
+
+        } catch(\Throwable $e) {
+            return response($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
-
-        $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
-    public function destroy()
+    public function destroy(Request $request)
     {
         Auth::logout();
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
 
-        return redirect('/');
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        if (!$request->expectsJson()) {
+            return redirect('/');
+        }
+
+        return response()->noContent();
     }
 }

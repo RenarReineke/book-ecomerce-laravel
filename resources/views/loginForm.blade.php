@@ -15,7 +15,7 @@
 
     <!-- Форма -->
     <div class="mt-6 sm:mt-10 p-6 sm:p-10 mx-auto max-w-md w-full bg-white/80 backdrop-blur-xl rounded-xl shadow-xl">
-        <form action="/admin/login" method="post" autocomplete="off" novalidate class="space-y-6">
+        <form action="/auth/login" method="post" autocomplete="off" novalidate class="space-y-6">
 
             @csrf
 
