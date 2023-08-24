@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Series;
 
-use App\DTO\TagDto;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TagRequest extends FormRequest
+class StoreSeriesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -23,12 +22,7 @@ class TagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'string'
+            //
         ];
     }
-
-    // public function getDto(): TagDto
-    // {
-    //     return new TagDto($this->title);
-    // }
 }

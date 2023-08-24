@@ -32,6 +32,4 @@ Route::prefix('admin')->group(function () {
     Route::view('/profile', 'profile');
     Route::view('/statistic', 'admin.statistic', ['total' => User::all()->count()]);
     Route::view('/clients', 'admin.clients', ['users' => User::all()]);
-
-    Route::post('/register', [AdminRegisterController::class, 'store'])->middleware('guest');
 });

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Tag;
 
-use App\DTO\CategoryDto;
+use App\DTO\TagDto;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class TagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,20 +23,12 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string',
-            'description' => 'required|string'
+            'title' => 'string'
         ];
     }
 
-    // public function getDto()
+    // public function getDto(): TagDto
     // {
-    //     return new CategoryDto($this->title, $this->description);
+    //     return new TagDto($this->title);
     // }
-
-    public function messages()
-    {
-        return [
-            'title.required' => 'No title - vot eta povorot!'
-        ];
-    }
 }

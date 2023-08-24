@@ -8,7 +8,7 @@ use App\Http\Requests\StoreCartRequest as RequestsStoreCartRequest;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 
-class CartController extends Controller
+class CartResourceController extends Controller
 {
     /**
      * Display a listing of the resource.
