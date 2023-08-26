@@ -1,4 +1,5 @@
-@extends('dashboard') @section('statistic')
+@extends('layouts.dashboard')
+@section('statistic')
 <h1 class="mx-auto mt-10 w-96 text-2xl text-gray-700">Панель администратора</h1>
 
 <div class="flex justify-around items-center w-full h-auto">

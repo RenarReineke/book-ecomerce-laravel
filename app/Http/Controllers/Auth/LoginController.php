@@ -14,7 +14,7 @@ class LoginController extends Controller
 {
     public function create()
     {
-        return view('loginForm');
+        return view('auth.loginForm');
     }
 
     public function store(LoginUserRequest $request)

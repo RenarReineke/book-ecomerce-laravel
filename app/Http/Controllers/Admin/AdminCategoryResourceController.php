@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
-use App\Models\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
+use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class AdminCategoryResourceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $total = DB::table('products')->distinct()->count();
-        return view('admin.main.statistic', compact('total'));
+        $categories = Category::all();
+        return view('admin.main.categories', compact('categories'));
     }
 
     /**

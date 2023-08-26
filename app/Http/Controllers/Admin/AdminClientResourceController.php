@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
-use App\Models\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class AdminClientResourceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $total = DB::table('products')->distinct()->count();
-        return view('admin.main.statistic', compact('total'));
+        $clients = User::all();
+        return view('admin.main.clients', compact('clients'));
     }
 
     /**

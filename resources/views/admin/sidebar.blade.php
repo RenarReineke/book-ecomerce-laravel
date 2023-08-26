@@ -1,8 +1,8 @@
-<div class="basis-1/12 bg-green-100/30 text-grey-700 backdrop-blur-sm">
-    <ul class="mx-auto mt-10 w-full text-xl text-bold space-y-4">
-        <x-admin-item title="Статистика" url="statistic">
+<div class="basis-1/12 bg-blue-900 text-white backdrop-blur-sm">
+    <ul class="mx-auto mt-1 w-full text-md text-bold space-y-2">
+        <x-admin-item title="Статистика" url="dashboard">
             <svg
-                class="mr-2 w-6 h-6 text-black"
+                class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
                 fill="currentColor"
             >
@@ -12,9 +12,11 @@
             </svg>
         </x-admin-item>
 
+        <br>
+
         <x-admin-item title="Клиенты" url="clients">
             <svg
-                class="mr-2 w-6 h-6 text-black"
+                class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
                 fill="currentColor"
             >
@@ -29,9 +31,9 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Сотрудники" url="statistic">
+        <x-admin-item title="Сотрудники" url="employees">
             <svg
-                class="mr-2 w-6 h-6 text-black"
+                class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
                 fill="currentColor"
             >
@@ -47,9 +49,9 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Заказы" url="statistic">
+        <x-admin-item title="Заказы" url="orders">
             <svg
-                class="mr-2 w-6 h-6 text-black"
+                class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
                 fill="currentColor"
             >
@@ -61,9 +63,9 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Корзины" url="statistic">
+        <x-admin-item title="Корзины" url="carts">
             <svg
-                class="mr-2 w-6 h-6 text-black"
+                class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
                 fill="currentColor"
             >
@@ -73,9 +75,11 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Категории" url="statistic">
+        <br>
+
+        <x-admin-item title="Категории" url="categories">
             <svg
-                class="mr-2 w-6 h-6 text-black"
+                class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
                 fill="currentColor"
             >
@@ -87,9 +91,9 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Книги" url="statistic">
+        <x-admin-item title="Книги" url="products">
             <svg
-                class="mr-2 w-6 h-6 text-black"
+                class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
                 fill="currentColor"
             >
@@ -99,9 +103,9 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Авторы" url="statistic">
+        <x-admin-item title="Авторы" url="authors">
             <svg
-                class="mr-2 w-6 h-6 text-black"
+                class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
                 fill="currentColor"
             >
@@ -113,9 +117,9 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Издатели" url="statistic">
+        <x-admin-item title="Издатели" url="publishers">
             <svg
-                class="mr-2 w-6 h-6 text-black"
+                class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
                 fill="currentColor"
             >
@@ -130,9 +134,9 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Серии" url="statistic">
+        <x-admin-item title="Серии" url="series">
             <svg
-                class="mr-2 w-6 h-6 text-black"
+                class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
                 fill="currentColor"
             >
@@ -142,9 +146,11 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Изображения" url="statistic">
+        <br>
+
+        <x-admin-item title="Изображения" url="images">
             <svg
-                class="mr-2 w-6 h-6 text-black"
+                class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
                 fill="currentColor"
             >
@@ -156,9 +162,9 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Отзывы" url="statistic">
+        <x-admin-item title="Отзывы" url="rewiews">
             <svg
-                class="mr-2 w-6 h-6 text-black"
+                class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
                 fill="currentColor"
             >
@@ -170,9 +176,9 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Теги" url="statistic">
+        <x-admin-item title="Теги" url="tags">
             <svg
-                class="mr-2 w-6 h-6 text-black"
+                class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
                 fill="currentColor"
             >

@@ -5,7 +5,7 @@ namespace App\Http\Requests\Tag;
 use App\DTO\TagDto;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TagRequest extends FormRequest
+class StoreTagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

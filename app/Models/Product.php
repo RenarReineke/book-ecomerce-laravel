@@ -18,7 +18,7 @@ class Product extends Model
         'year', 'rating'
     ];
 
-    protected $with = ['category', 'tags', 'rewiews', 'images'];
+    protected $with = ['tags', 'rewiews', 'images'];
 
     public function category()
     {

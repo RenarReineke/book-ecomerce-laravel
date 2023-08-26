@@ -3,13 +3,26 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
 
+use App\Http\Controllers\Admin\AdminTagResourceController;
+use App\Http\Controllers\Admin\AdminCartResourceController;
+use App\Http\Controllers\Admin\AdminImageResourceController;
+use App\Http\Controllers\Admin\AdminOrderResourceController;
 use App\Http\Controllers\Admin\Auth\AdminRegisterController;
+use App\Http\Controllers\Admin\AdminAuthorResourceController;
+use App\Http\Controllers\Admin\AdminClientResourceController;
+use App\Http\Controllers\Admin\AdminRewiewResourceController;
+use App\Http\Controllers\Admin\AdminSeriesResourceController;
+use App\Http\Controllers\Admin\AdminProductResourceController;
+use App\Http\Controllers\Admin\AdminCategoryResourceController;
+use App\Http\Controllers\Admin\AdminEmployeeResourceController;
+use App\Http\Controllers\Admin\AdminPublisherResourceController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.welcome');
 });
 
 Route::prefix('auth')->group(function () {
@@ -29,7 +42,19 @@ Route::prefix('auth')->group(function () {
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth:sanctum')->name('dashboard');
-    Route::view('/profile', 'profile');
-    Route::view('/statistic', 'admin.statistic', ['total' => User::all()->count()]);
-    Route::view('/clients', 'admin.clients', ['users' => User::all()]);
+    Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth:sanctum')->name('profile');
+    Route::resources([
+        'products' => AdminProductResourceController::class,
+        'authors' => AdminAuthorResourceController::class,
+        'series' => AdminSeriesResourceController::class,
+        'publishers' => AdminPublisherResourceController::class,
+        'categories' => AdminCategoryResourceController::class,
+        'tags' => AdminTagResourceController::class,
+        'rewiews' => AdminRewiewResourceController::class,
+        'images' => AdminImageResourceController::class,
+        'orders' => AdminOrderResourceController::class,
+        'carts' => AdminCartResourceController::class,
+        'clients' => AdminClientResourceController::class,
+        'employees' => AdminEmployeeResourceController::class,
+    ]);
 });
