@@ -14,7 +14,7 @@ class RewiewResourceController extends Controller
      */
     public function index()
     {
-        return RewiewResource::collection(Rewiew::all());
+        return RewiewResource::collection(Rewiew::paginate(10));
     }
 
     /**
