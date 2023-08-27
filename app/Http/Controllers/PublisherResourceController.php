@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Publisher\StorePublisherRequest;
+use App\Http\Requests\Publisher\UpdatePublisherRequest;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
+use App\Http\Resources\PublisherResource;
 
 class PublisherResourceController extends Controller
 {
@@ -12,15 +15,16 @@ class PublisherResourceController extends Controller
      */
     public function index()
     {
-        //
+         $publishers = Publisher::paginate(10);
+        return PublisherResource::collection( $publishers);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePublisherRequest $request)
     {
-        //
+        return Publisher::create($request->validated());
     }
 
     /**
@@ -28,15 +32,17 @@ class PublisherResourceController extends Controller
      */
     public function show(Publisher $publisher)
     {
-        //
+        return new PublisherResource( $publisher);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Publisher $publisher)
+    public function update(UpdatePublisherRequest $request, string $id)
     {
-        //
+         $publisher = Publisher::findOrFail($id);
+         $publisher->update($request->validated());
+        return  $publisher;
     }
 
     /**
@@ -44,6 +50,7 @@ class PublisherResourceController extends Controller
      */
     public function destroy(Publisher $publisher)
     {
-        //
+         $publisher->delete();
+        return response()->noContent();
     }
 }
