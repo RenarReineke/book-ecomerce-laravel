@@ -18,7 +18,7 @@ class ProductResourceController extends Controller
 
     public function index()
     {
-        $products = Product::filter(request(['search']))->get();
+        $products = Product::filter(request(['search']))->paginate(5);
         return ProductResource::collection($products);
     }
 

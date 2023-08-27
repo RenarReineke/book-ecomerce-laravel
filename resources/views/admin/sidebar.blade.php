@@ -1,4 +1,4 @@
-<div class="basis-1/12 bg-blue-900 text-white backdrop-blur-sm">
+<div class="basis-1/12 bg-slate-800 text-white backdrop-blur-sm">
     <ul class="mx-auto mt-1 w-full text-md text-bold space-y-2">
         <x-admin-item title="Статистика" url="dashboard">
             <svg

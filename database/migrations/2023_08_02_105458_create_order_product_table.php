@@ -14,7 +14,7 @@ return new class () extends Migration {
     {
         Schema::create('order_product', function (Blueprint $table) {
             $table->id();
-            $table->unsignedTinyInteger('amount');
+            $table->unsignedTinyInteger('amount')->default(0);
             $table->timestamps();
             $table->foreignIdFor(Product::class)->constrained()
             ->onUpdate('cascade')->onDelete('cascade');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Author\StoreAuthorRequest;
 use App\Http\Requests\Author\UpdateAuthorRequest;
+use App\Http\Resources\AuthorResource;
 use App\Models\Author;
 
 class AuthorResourceController extends Controller
@@ -13,15 +14,8 @@ class AuthorResourceController extends Controller
      */
     public function index()
     {
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $authors = Author::paginate(10);
+        return AuthorResource::collection($authors);
     }
 
     /**
@@ -29,7 +23,7 @@ class AuthorResourceController extends Controller
      */
     public function store(StoreAuthorRequest $request)
     {
-        //
+        return Author::create($request->validated());
     }
 
     /**
@@ -37,7 +31,7 @@ class AuthorResourceController extends Controller
      */
     public function show(Author $author)
     {
-        //
+        return new AuthorResource($author);
     }
 
     /**
