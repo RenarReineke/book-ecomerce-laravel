@@ -17,7 +17,7 @@
     </head>
 
     <body
-        class="min-h-screen bg-[url('../../public/storage/wave.svg')] bg-fixed bg-bottom bg-no-repeat"
+        class="h-screen bg-[url('../../public/storage/wave.svg')] bg-fixed bg-bottom bg-no-repeat"
     >
         
 
@@ -25,6 +25,7 @@
                 @include('admin.sidebar')
                 <div class="basis-11/12">
                     @include('admin.header')
+                    @yield('profile')
                     @yield('statistic')
                     @yield('clients')
                     @yield('employees')
