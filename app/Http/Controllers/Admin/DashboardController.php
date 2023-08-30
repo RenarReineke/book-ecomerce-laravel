@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Product;
+use App\Models\Publisher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Publisher;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -17,9 +18,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $total = DB::table('products')->count();
+        $total = 37;
+        $total_products = Product::count();
         $total_publishers = Publisher::count();
-        return view('admin.main.statistic', compact('total', 'total_publishers'));
+        $total_users = User::count();
+        $total_orders = Order::count();
+        return view('admin.main.statistic', compact('total', 'total_products', 'total_publishers', 'total_users', 'total_orders'));
     }
 
     /**
