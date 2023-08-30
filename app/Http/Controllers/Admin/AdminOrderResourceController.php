@@ -13,7 +13,7 @@ class AdminOrderResourceController extends Controller
      */
     public function index()
     {
-        $orders = Order::paginate(10);
+        $orders = Order::withCount('products')->paginate(10);
         return view('admin.main.orders', compact('orders'));
     }
 
