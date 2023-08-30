@@ -20,5 +20,8 @@
              @endforeach
         </tbody>
     </table>
+    <div class="mt-3">
+        {{$seriesList->links()}}
+    </div>
 </div>
 @endsection

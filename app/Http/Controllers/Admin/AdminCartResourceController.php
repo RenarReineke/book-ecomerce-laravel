@@ -13,7 +13,7 @@ class AdminCartResourceController extends Controller
      */
     public function index()
     {
-        $carts = Cart::all();
+        $carts = Cart::paginate();
         return view('admin.main.carts', compact('carts'));
     }
 

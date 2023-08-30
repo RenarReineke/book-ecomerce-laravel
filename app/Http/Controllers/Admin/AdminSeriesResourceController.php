@@ -13,7 +13,7 @@ class AdminSeriesResourceController extends Controller
      */
     public function index()
     {
-        $seriesList = Series::all();
+        $seriesList = Series::paginate(10);
         return view('admin.main.series', compact('seriesList'));
     }
 

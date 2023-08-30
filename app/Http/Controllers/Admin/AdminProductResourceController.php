@@ -13,7 +13,7 @@ class AdminProductResourceController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(5);
+        $products = Product::paginate(10);
         return view('admin.main.products', compact('products'));
     }
 

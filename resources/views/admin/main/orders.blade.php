@@ -5,7 +5,8 @@
     <table class="mx-auto w-full table-auto border-collapse border border-slate-400 bg-white text-lg">
         <thead class="bg-slate-400">
             <tr class="h-10">
-                <th class="border border-slate-300">ID</th>
+                <th class="border border-slate-300">ID заказа</th>
+                <th class="border border-slate-300">Клиент</th>
                 
             </tr>
         </thead>
@@ -13,10 +14,14 @@
             @foreach ($orders as $order)
             <tr class="h-10 hover:bg-slate-200 hover:cursor-pointer">
                 <th class="border border-slate-300">{{$order->id}}</th>
+                <th class="border border-slate-300">{{$order->user->name}}</th>
         
             </tr>
              @endforeach
         </tbody>
     </table>
+    <div class="mt-3">
+        {{$orders->links()}}
+    </div>
 </div>
 @endsection

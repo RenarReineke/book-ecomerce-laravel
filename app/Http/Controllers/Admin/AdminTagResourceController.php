@@ -13,7 +13,7 @@ class AdminTagResourceController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
+        $tags = Tag::paginate(10);
         return view('admin.main.tags', compact('tags'));
     }
 

@@ -7,7 +7,6 @@
             <tr class="h-10">
                 <th class="border border-slate-300">ID</th>
                 <th class="border border-slate-300">Название</th>
-                <th class="border border-slate-300">Описание</th>
             </tr>
         </thead>
         <tbody>
@@ -15,10 +14,12 @@
             <tr class="h-10 hover:bg-slate-200 hover:cursor-pointer">
                 <th class="border border-slate-300">{{$category->id}}</th>
                 <th class="border border-slate-300">{{$category->title}}</th>
-                <th class="border border-slate-300">{{$category->description}}</th>
             </tr>
              @endforeach
         </tbody>
     </table>
+    <div class="mt-3">
+        {{$categories->links()}}
+    </div>
 </div>
 @endsection
