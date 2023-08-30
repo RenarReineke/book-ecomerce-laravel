@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('clients')
 <h1 class="mx-auto mt-10 w-96 text-2xl text-gray-700 text-center">Клиенты</h1>
-<div class="m-3 p-10 h-auto bg-green-50">
+<div class="m-3 p-10 h-auto bg-sky-50">
     <table class="mx-auto w-full table-auto border-collapse border border-slate-400 bg-white text-lg">
         <thead class="bg-slate-400">
             <tr class="h-10">
