@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Series;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Publisher extends Model
 {
@@ -13,8 +15,13 @@ class Publisher extends Model
 
     protected $with = ['products'];
 
+    public function series()
+    {
+        return $this->hasMany(Series::class);
+    }
+
     public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->hasManyThrough(Product::class, Series::class);
     }
 }

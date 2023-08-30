@@ -8,6 +8,13 @@
                 <th class="border border-slate-300">ID</th>
                 <th class="border border-slate-300">Название</th>
                 <th class="border border-slate-300">Цена</th>
+                <th class="border border-slate-300">Рейтинг</th>
+                <th class="border border-slate-300">Страниц</th>
+                <th class="border border-slate-300">Тип обложки</th>
+                <th class="border border-slate-300">Вес</th>
+                <th class="border border-slate-300">Издатель</th>
+                <th class="border border-slate-300">Год выпуска</th>
+                <th class="border border-slate-300">Серия</th>
             </tr>
         </thead>
         <tbody>

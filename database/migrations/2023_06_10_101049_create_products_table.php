@@ -26,7 +26,10 @@ return new class () extends Migration {
             $table->index('created_at');
             $table->timestamps();
             $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('series_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')
+            ->cascadeOnUpdate()->nullOnDelete();
+            $table->foreign('series_id')->references('id')->on('series')
             ->cascadeOnUpdate()->nullOnDelete();
         });
     }

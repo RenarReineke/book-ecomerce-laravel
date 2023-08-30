@@ -50,14 +50,9 @@ class Product extends Model
         return $this->belongsToMany(Author::class);
     }
 
-    public function publishers()
-    {
-        return $this->belongsToMany(Publisher::class);
-    }
-
     public function series()
     {
-        return $this->belongsToMany(Series::class);
+        return $this->belongsTo(Series::class);
     }
 
     public function scopeFilter($query, array $filters)

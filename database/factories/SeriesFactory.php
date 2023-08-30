@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Publisher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class SeriesFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence()
+            'title' => fake()->sentence(),
+            'publisher_id' => Publisher::factory()
         ];
     }
 }

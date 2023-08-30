@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Series;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -29,6 +30,7 @@ class ProductFactory extends Factory
             'year' => fake()->randomDigitNotNull(),
             'rating' => fake()->randomDigitNotNull(),
             'category_id' => Category::factory(),
+            'series_id' => Series::factory()
 
         ];
     }

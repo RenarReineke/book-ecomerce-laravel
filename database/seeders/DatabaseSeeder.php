@@ -7,6 +7,7 @@ use App\Models\Tag;
 use App\Models\User;
 use App\Models\Author;
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\Rewiew;
 use App\Models\Series;
@@ -23,22 +24,18 @@ class DatabaseSeeder extends Seeder
     {
         // Product::truncate();
 
-        Product::factory(50)->has(Tag::factory()->count(3))
-                            ->has(Rewiew::factory()->count(3))
-                            ->has(Author::factory()->count(2))
-                            ->has(Series::factory()->count(2))
-                            ->has(Publisher::factory()->count(2))
-                            ->has(Order::factory()->count(2))
+        Product::factory(50)->has(Tag::factory(3))
+                            ->has(Rewiew::factory(3))
+                            ->has(Author::factory(2))
+                            ->has(Order::factory(2))
                             ->create();
 
-        User::factory(10)->has(Rewiew::factory()->count(3))
-                        ->has(Order::factory()->count(2))
+        Publisher::factory(15)->has(Series::factory(2)->has(Product::factory(3)))->create();
+
+        User::factory(10)->has(Rewiew::factory(3))
+                        ->has(Order::factory(2))
                         ->create();
 
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        Order::factory(10)->hasProducts(5);
     }
 }
