@@ -19,13 +19,13 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence(),
+            'title' => fake()->word(),
             'description' => fake()->text(),
             'price' => fake()->randomDigitNotNull(),
             'amount' => fake()->randomDigitNotNull(),
             'pages' => fake()->randomDigitNotNull(),
-            'size' => fake()->sentence(),
-            'cover-type' => fake()->sentence(),
+            'size' => fake()->word(),
+            'cover_type' => fake()->word(),
             'weight' => fake()->randomDigitNotNull(),
             'year' => fake()->randomDigitNotNull(),
             'rating' => fake()->randomDigitNotNull(),

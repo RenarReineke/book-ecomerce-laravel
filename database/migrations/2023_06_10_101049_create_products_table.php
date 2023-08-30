@@ -19,7 +19,7 @@ return new class () extends Migration {
             $table->integer('amount')->default(0);
             $table->integer('pages')->nullable();
             $table->string('size')->nullable();
-            $table->string('cover-type')->nullable();
+            $table->string('cover_type')->nullable();
             $table->integer('weight')->nullable();
             $table->integer('year')->nullable();
             $table->integer('rating')->nullable();

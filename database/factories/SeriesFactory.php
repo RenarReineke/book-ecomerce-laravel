@@ -18,7 +18,7 @@ class SeriesFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence(),
+            'title' => fake()->word(),
             'publisher_id' => Publisher::factory()
         ];
     }
