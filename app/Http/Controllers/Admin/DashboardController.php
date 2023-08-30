@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class DashboardController extends Controller
 {
@@ -18,6 +19,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        Gate::allowIf(fn ($user) => $user->role->title !== "client");
         $total = 37;
         $total_products = Product::count();
         $total_publishers = Publisher::count();
