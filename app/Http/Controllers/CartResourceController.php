@@ -10,6 +10,7 @@ use App\Http\Requests\Cart\StoreCartRequest;
 use App\Http\Requests\Cart\UpdateCartRequest;
 use App\Http\Requests\StoreCartRequest as RequestsStoreCartRequest;
 use App\Http\Resources\CartResource;
+use App\Services\CartService;
 
 class CartResourceController extends Controller
 {
@@ -57,20 +58,30 @@ class CartResourceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCartRequest $request, Cart $cart)
-    {
+    public function update(UpdateCartRequest $request, Cart $cart, CartService $cartService)
+    {   
+        // Имитирует юзера, который должен браться из запроса
         $user = User::findOrFail(1);
 
-        foreach($request->products as $product_item) 
-        {
-            $product = Product::findOrFail($product_item['id']);
-            
-            $cart->products()->attach($product, ['amount' => $product_item['amount']]);
-        }
+        $product_id = $request->validated()['product_id'];
+
+        $updatedCart = $cartService->removeCartItem($cart, $product_id);
         
-        $cart->push();
+        return $updatedCart;
+    }
+
+    public function updateCartItem(UpdateCartRequest $request, Cart $cart, CartService $cartService)
+    {   
+
+        // Имитирует юзера, который должен браться из запроса
+        $user = User::findOrFail(1);
         
-        return $cart;
+        // Получить конкретное значение из отвалидированного массива
+        $product_id = $request->validated()['product_id'];
+        
+        $updatedCart = $cartService->addCartItem($cart, $product_id);
+        
+        return $updatedCart;
     }
 
     /**
