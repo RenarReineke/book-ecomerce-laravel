@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CartController;
 use Laravel\Sanctum\PersonalAccessToken;
 use App\Http\Controllers\TagResourceController;
+use App\Http\Controllers\CartResourceController;
 use App\Http\Controllers\RoleResourceController;
 use App\Http\Controllers\UserResourceController;
 use App\Http\Controllers\ImageResourceController;
@@ -27,7 +27,7 @@ Route::apiResources([
     'tags' => TagResourceController::class,
     'rewiews' => RewiewResourceController::class,
     'orders' => OrderResourceController::class,
-    'carts' => CartController::class,
+    'carts' => CartResourceController::class,
     'users' => UserResourceController::class,
     'authors' => AuthorResourceController::class,
     'publishers' => PublisherResourceController::class,

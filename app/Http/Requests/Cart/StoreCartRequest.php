@@ -23,7 +23,6 @@ class StoreCartRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'numeric'],
             'products' => ['required', 'array', new CartRule()]
         ];
     }

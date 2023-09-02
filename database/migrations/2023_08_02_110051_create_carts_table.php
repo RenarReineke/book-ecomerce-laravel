@@ -14,7 +14,6 @@ return new class () extends Migration {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->json('products');
             $table->foreignIdFor(User::class)->constrained()
             ->onUpdate('cascade')->onDelete('cascade');
         });
