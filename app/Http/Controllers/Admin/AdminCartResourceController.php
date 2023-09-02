@@ -38,7 +38,8 @@ class AdminCartResourceController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $cart = Cart::findOrFail($id);
+        return view('admin.main.carts.cartDetail', compact('cart'));
     }
 
     /**

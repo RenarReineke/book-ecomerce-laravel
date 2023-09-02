@@ -35,3 +35,5 @@ Route::apiResources([
     'roles' => RoleResourceController::class,
     'images' => ImageResourceController::class,
 ]);
+
+Route::put('/carts/{cart}/add', [CartResourceController::class, 'updateCartItem']);

@@ -31,6 +31,7 @@
                     @yield('employees')
                     @yield('orders')
                     @yield('carts')
+                    @yield('cartDetail')
                     @yield('categories')
                     @yield('products')
                     @yield('authors')

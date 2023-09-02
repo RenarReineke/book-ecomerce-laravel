@@ -57,4 +57,7 @@ Route::prefix('admin')->group(function () {
         'clients' => AdminClientResourceController::class,
         'employees' => AdminEmployeeResourceController::class,
     ]);
+
+    Route::post('carts/{:id}/remove', [AdminCartResourceController::class, 'remove'])->name('removeItemFromCart');
+    Route::post('carts/{:id}/add', [AdminCartResourceController::class, 'remove'])->name('removeItemFromCart');
 });
