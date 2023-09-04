@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Services\CartService;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Cart\UpdateCartRequest;
 
 class AdminCartResourceController extends Controller
 {
@@ -55,7 +58,7 @@ class AdminCartResourceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd('Test');
     }
 
     /**
@@ -63,6 +66,47 @@ class AdminCartResourceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $cart = Cart::find($id);
+        $cart->delete();
+        return redirect('admin/carts');
+    }
+
+    public function remove(UpdateCartRequest $request, Cart $cart, CartService $cartService)
+    {
+        // Имитирует юзера, который должен браться из запроса
+        $user = User::findOrFail(1);
+
+        $product_id = $request->validated()['product_id'];
+
+        $cartService->removeCartItem($cart, $product_id);
+        
+        return back();
+    }
+
+    public function increase(UpdateCartRequest $request, Cart $cart, CartService $cartService)
+    {   
+        // Имитирует юзера, который должен браться из запроса
+        $user = User::findOrFail(1);
+        
+        // Получить конкретное значение из отвалидированного массива
+        $product_id = $request->validated()['product_id'];
+        
+        $cartService->increaseAmount($cart, $product_id);
+        
+        return back();
+    }
+
+    public function decrease(UpdateCartRequest $request, Cart $cart, CartService $cartService)
+    {   
+
+        // Имитирует юзера, который должен браться из запроса
+        $user = User::findOrFail(1);
+        
+        // Получить конкретное значение из отвалидированного массива
+        $product_id = $request->validated()['product_id'];
+        
+        $cartService->decreaseAmount($cart, $product_id);
+        
+        return back();
     }
 }
