@@ -58,6 +58,8 @@ Route::prefix('admin')->group(function () {
         'employees' => AdminEmployeeResourceController::class,
     ]);
 
-    Route::post('carts/{:id}/remove', [AdminCartResourceController::class, 'remove'])->name('removeItemFromCart');
-    Route::post('carts/{:id}/add', [AdminCartResourceController::class, 'remove'])->name('removeItemFromCart');
+    Route::post('carts/{cart}/remove', [AdminCartResourceController::class, 'remove'])->name('removeItemFromCart');
+    Route::put('carts/{cart}/increase', [AdminCartResourceController::class, 'increase'])->name('increaseItemCart');
+    Route::put('carts/{cart}/decrease', [AdminCartResourceController::class, 'decrease'])->name('decreaseItemCart');
+    Route::post('carts/{id}/delete', [AdminCartResourceController::class, 'destroy'])->name('deleteCart');
 });
