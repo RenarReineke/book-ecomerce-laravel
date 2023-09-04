@@ -84,6 +84,34 @@ class CartResourceController extends Controller
         return $updatedCart;
     }
 
+    public function increase(UpdateCartRequest $request, Cart $cart, CartService $cartService)
+    {   
+
+        // Имитирует юзера, который должен браться из запроса
+        $user = User::findOrFail(1);
+        
+        // Получить конкретное значение из отвалидированного массива
+        $product_id = $request->validated()['product_id'];
+        
+        $updatedCart = $cartService->increaseAmount($cart, $product_id);
+        
+        return $updatedCart;
+    }
+
+    public function decrease(UpdateCartRequest $request, Cart $cart, CartService $cartService)
+    {   
+
+        // Имитирует юзера, который должен браться из запроса
+        $user = User::findOrFail(1);
+        
+        // Получить конкретное значение из отвалидированного массива
+        $product_id = $request->validated()['product_id'];
+        
+        $updatedCart = $cartService->decreaseAmount($cart, $product_id);
+        
+        return $updatedCart;
+    }
+
     /**
      * Remove the specified resource from storage.
      */

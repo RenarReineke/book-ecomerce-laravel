@@ -37,3 +37,6 @@ Route::apiResources([
 ]);
 
 Route::put('/carts/{cart}/add', [CartResourceController::class, 'updateCartItem']);
+Route::put('/carts/{cart}/increase', [CartResourceController::class, 'increase']);
+Route::put('/carts/{cart}/decrease', [CartResourceController::class, 'decrease']);
+
