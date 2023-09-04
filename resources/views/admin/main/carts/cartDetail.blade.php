@@ -5,93 +5,145 @@
     Корзина {{$cart->id}} клиента {{$cart->user->name}}
 </h1>
 <div class="m-3 p-10 h-auto bg-sky-50">
-    <div class="mx-auto w-full bg-white text-md">
+    <div class="mx-auto w-1/2 bg-white text-md">
         <!-- Заголовок -->
         <div
-            class="h-10 flex justify-between items-stretch border-y border-slate-500 bg-slate-400 text-bold"
+            class="h-10 flex justify-between items-stretch border-y border-slate-500 bg-indigo-600 text-bold text-white rounded-t-lg"
         >
+            <div class="flex justify-center items-center border-slate-500 w-10">
+                Del
+            </div>
+
             <div
                 class="flex justify-center items-center border-l border-slate-500 flex-1"
             >
-                ID товара
+                Товар
             </div>
-            <div
-                class="flex justify-center items-center border-l border-slate-500 flex-1"
-            >
-                Название
-            </div>
+
             <div
                 class="flex justify-center items-center border-l border-slate-500 flex-1"
             >
                 Осталось
             </div>
+
             <div
                 class="flex justify-center items-center border-l border-slate-500 flex-1"
             >
                 Цена
             </div>
+
             <div
-                class="flex justify-center items-center border-x border-slate-500 flex-1"
+                class="flex justify-center items-center border-l border-slate-500 w-28"
             >
-                Количество в корзине
+                Количество
+            </div>
+
+            <div
+                class="flex justify-center items-center border-l border-slate-500 w-28"
+            >
+                Стоимость
             </div>
         </div>
 
         <!-- Тело -->
         @foreach ($cart->products as $product)
-        <!-- Форма удаления -->
-        <div class="h-10 w-10 relative -left-8 top-2">
-            <form method="post" action="products/{{$product->id}}>
-                @csrf
-                <button type="submit" class="bg-lime-600 h-10 w-10 hover:cursor-default">
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        class="w-6 h-6 text-red-600"
-                    >
-                        <path
-                            fill-rule="evenodd"
-                            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
-                            clip-rule="evenodd"
-                        />
-                    </svg>
-                </button>
-            </form>
-        </div>
-
         <!-- Строка -->
-        <a href="products/{{$product->id}}" class="block hover:bg-red-100">
+        <div
+            class="relative h-20 hover:bg-slate-200 flex justify-between items-stretch border-b"
+        >
             <div
-                class="relative h-10 hover:bg-slate-200 hover:cursor-pointer flex justify-between items-stretch border-b"
+                class="flex justify-center items-center border-l border-slate-300 w-10"
             >
-                <div
-                    class="flex justify-center items-center border-l border-slate-300 flex-1"
-                >
-                    {{$product->id}}
-                </div>
-                <div
-                    class="flex justify-center items-center border-l border-slate-300 flex-1"
-                >
-                    {{$product->title}}
-                </div>
-                <div
-                    class="flex justify-center items-center border-l border-slate-300 flex-1"
-                >
-                    {{$product->amount}}
-                </div>
-                <div
-                    class="flex justify-center items-center border-l border-slate-300 flex-1"
-                >
-                    {{$product->price}}
-                </div>
-                <div
-                    class="flex justify-center items-center border-x border-slate-300 flex-1"
-                >
-                    {{$product->pivot->amount}}
-                </div>
+                <!-- Форма удаления -->
+                <x-delete-button
+                    url="{{$cart->id}}/remove"
+                    product="{{$product->id}}"
+                />
             </div>
-        </a>
+
+            <a
+                href="products/{{$product->id}}"
+                class="flex justify-center items-center border-l border-slate-300 flex-1 hover:cursor-pointer hover:text-white hover:bg-slate-500 hover:underline"
+            >
+                {{$product->title}}
+            </a>
+
+            <div
+                class="flex justify-center items-center border-l border-slate-300 flex-1"
+            >
+                {{$product->amount}}
+            </div>
+
+            <div
+                class="flex justify-center items-center border-l border-slate-300 flex-1"
+            >
+                {{$product->price}} Р/шт
+            </div>
+
+            <!-- Форма для изменения количества товара в корзине -->
+            <div
+                class="flex justify-center items-center border-l border-slate-300 w-28"
+            >
+                <form
+                    class="mt-2 flex flex-col justify-center items-center"
+                    method="post"
+                    action="{{ route('increaseItemCart', ['cart' => $cart->id]) }}"
+                >
+                    @csrf @method('PUT')
+                    <input type="hidden" name="product_id" value="{{$product->id}}" />
+                    <input
+                        class="w-2/3 h-2/3 border rounded-lg pl-6 border-slate-500 text-center hover:bg-slate-700 hover:text-white"
+                        type="number"
+                        name="amount"
+                        value="{{$product->pivot->amount}}"
+                        id="amount"
+                    />
+                    <button
+                        class="text-xs bg-indigo-500 rounded-lg hover:text-white hover:bg-indigo-600 mt-1 p-1"
+                        type="submit"
+                    >
+                        Изменить
+                    </button>
+                </form>
+            </div>
+
+            <div
+                class="flex justify-center items-center border-x border-slate-300 flex-1"
+            >
+                {{$product->price * $product->pivot->amount}} Р
+            </div>
+        </div>
         @endforeach
+
+        <!-- Общая цена -->
+        <div
+            class="flex justify-around items-center h-20 border-b border-x border-slate-300"
+        >
+            <button
+                class="bg-indigo-700 text-white rounded-2xl p-2 text-sm hover:bg-indigo-900"
+            >
+                Оформить заказ
+            </button>
+            <a
+                href="/admin/products"
+                class="border border-slate-300 rounded-2xl p-2 text-sm hover:bg-slate-500 hover:text-white hover:cursor-pointer"
+                >Продолжить покупки</a
+            >
+            <div class="text-indigo-700">Скидка <span>500 P</span></div>
+            <div class="">
+                Сумма: <span class="font-bold">{{$cart->TotalPrice()}}</span>
+            </div>
+        </div>
     </div>
 </div>
-@endsection
+@push('scripts')
+<script>
+    let amountInput = document.getElementById("amount");
+    amountInput.onclick = function (event) {
+        event.stopPropagation();
+    };
+    amountInput.onchange = function (event) {
+        event.stopPropagation();
+    };
+</script>
+@endpush @endsection

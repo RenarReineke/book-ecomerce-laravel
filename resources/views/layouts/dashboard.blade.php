@@ -19,8 +19,6 @@
     <body
         class="h-screen bg-[url('../../public/storage/wave.svg')] bg-fixed bg-bottom bg-no-repeat"
     >
-        
-
             <div class="flex flex-row h-full">
                 @include('admin.sidebar')
                 <div class="basis-11/12">
@@ -42,6 +40,6 @@
                     @yield('tags')
                 </div>
             </div>
-        
+        @stack('scripts')
     </body>
 </html>

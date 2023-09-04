@@ -5,7 +5,7 @@
         <svg
             viewBox="0 0 24 24"
             fill="currentColor"
-            class="w-10 h-10 text-red-600"
+            class="w-10 h-10 text-red-600 hover:text-red-800"
         >
             <path
                 fill-rule="evenodd"
