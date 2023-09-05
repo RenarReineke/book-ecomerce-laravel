@@ -109,4 +109,18 @@ class AdminCartResourceController extends Controller
         
         return back();
     }
+
+    public function change(UpdateCartRequest $request, Cart $cart, CartService $cartService)
+    {   
+
+        // Имитирует юзера, который должен браться из запроса
+        $user = User::findOrFail(1);
+        // Получить конкретное значение из отвалидированного массива
+        $product_id = $request->validated()['product_id'];
+        $amount = $request->validated()['amount'];
+        
+        $cartService->changeAmount($cart, $product_id, $amount);
+        
+        return back();
+    }
 }

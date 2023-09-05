@@ -87,7 +87,7 @@
                 <form
                     class="mt-2 flex flex-col justify-center items-center"
                     method="post"
-                    action="{{ route('increaseItemCart', ['cart' => $cart->id]) }}"
+                    action="{{ route('changeCart', ['cart' => $cart->id]) }}"
                 >
                     @csrf @method('PUT')
                     <input type="hidden" name="product_id" value="{{$product->id}}" />
@@ -97,6 +97,8 @@
                         name="amount"
                         value="{{$product->pivot->amount}}"
                         id="amount"
+                        min="1"
+                        max="{{$product->amount}}"
                     />
                     <button
                         class="text-xs bg-indigo-500 rounded-lg hover:text-white hover:bg-indigo-600 mt-1 p-1"

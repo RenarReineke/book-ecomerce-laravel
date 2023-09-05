@@ -59,4 +59,20 @@ final class CartService
         $cart->push();       
         return $cart;
     }
+
+    public function changeAmount(Cart $cart, int $item_id, int $amount): Cart
+    {
+        $product = Product::findOrFail($item_id);
+        $cartItem = $cart->products()->where('product_id', $product->id)->first()->pivot;
+        // $totalCount = $cartItem->amount + $count;
+        if($amount > 0)
+        {
+            $cartItem->update(['amount' => $amount]);
+        } else
+        {
+            $cartItem->delete();
+        }
+        $cart->push();       
+        return $cart;
+    }
 }
