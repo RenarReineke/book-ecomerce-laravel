@@ -22,7 +22,7 @@ class AdminProductResourceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.main.products.productCreateForm');
     }
 
     /**
@@ -62,6 +62,8 @@ class AdminProductResourceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $cart = Product::find($id);
+        $cart->delete();
+        return redirect('admin/products');
     }
 }

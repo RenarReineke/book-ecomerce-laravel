@@ -13,7 +13,7 @@
             rel="stylesheet"
         />
 
-        @vite('resources/css/app.css')
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 
     <body
@@ -30,8 +30,12 @@
                     @yield('orders')
                     @yield('carts')
                     @yield('cartDetail')
+
                     @yield('categories')
+
                     @yield('products')
+                    @yield('productCreateForm')
+
                     @yield('authors')
                     @yield('publishers')
                     @yield('series')

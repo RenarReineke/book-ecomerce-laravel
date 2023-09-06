@@ -63,4 +63,6 @@ Route::prefix('admin')->group(function () {
     Route::put('carts/{cart}/decrease', [AdminCartResourceController::class, 'decrease'])->name('decreaseItemCart');
     Route::post('carts/{id}/delete', [AdminCartResourceController::class, 'destroy'])->name('deleteCart');
     Route::put('carts/{cart}/change', [AdminCartResourceController::class, 'change'])->name('changeCart');
+
+    Route::post('products/{id}/delete', [AdminProductResourceController::class, 'destroy'])->name('deleteProducts');
 });

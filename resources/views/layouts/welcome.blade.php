@@ -23,7 +23,8 @@
 
             @include('admin.header')
 
-            <h1 class="mx-auto mt-10 w-96 text-2xl text-gray-700">Добро пожаловать!</h1>
+            <h1 class="text-center mt-10 text-2xl text-gray-700">Добро пожаловать!</h1>
+            <img class="w-1/2 h-auto mx-auto rounded-xl mt-5" src="{{ Vite::asset('resources/images/many.jpg') }}">
         
             @yield('register')
             @yield('login')

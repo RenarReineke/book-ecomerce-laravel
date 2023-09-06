@@ -85,14 +85,14 @@
                 class="flex justify-center items-center border-l border-slate-300 w-28"
             >
                 <form
-                    class="mt-2 flex flex-col justify-center items-center"
+                    class="mt-2 flex flex-col justify-center items-center relative"
                     method="post"
                     action="{{ route('changeCart', ['cart' => $cart->id]) }}"
                 >
                     @csrf @method('PUT')
                     <input type="hidden" name="product_id" value="{{$product->id}}" />
                     <input
-                        class="w-2/3 h-2/3 border rounded-lg pl-6 border-slate-500 text-center hover:bg-slate-700 hover:text-white"
+                        class="appearance-none w-2/3 h-2/3 border rounded-lg pl-6 border-slate-500 text-center hover:bg-slate-700 hover:text-white"
                         type="number"
                         name="amount"
                         value="{{$product->pivot->amount}}"
@@ -100,6 +100,8 @@
                         min="1"
                         max="{{$product->amount}}"
                     />
+                    <!-- <button id="plus-button" class="absolute top-0 left-4 h-9 w-6 bg-blue-600 rounded-l-lg text-white text-xl hover:bg-blue-800">+</button>
+                    <button id="plus-button" class="absolute top-0 right-4 h-9 w-6 bg-blue-600 rounded-r-lg text-white text-xl hover:bg-blue-800">+</button> -->
                     <button
                         class="text-xs bg-indigo-500 rounded-lg hover:text-white hover:bg-indigo-600 mt-1 p-1"
                         type="submit"
@@ -140,12 +142,14 @@
 </div>
 @push('scripts')
 <script>
-    let amountInput = document.getElementById("amount");
-    amountInput.onclick = function (event) {
-        event.stopPropagation();
-    };
-    amountInput.onchange = function (event) {
-        event.stopPropagation();
-    };
+    // let amountInput = document.getElementById("amount");
+    // let plusButton = document.getElementById("plus-button");
+    // let minusButton = document.getElementById("minus-button");
+    // plusButton.onclick = function () {
+    //     amountInput.value = +amountInput.value + 1;
+    // };
+    // minusButton.onclick = function () {
+    //     amountInput.stepDown();
+    // };
 </script>
 @endpush @endsection

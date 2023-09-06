@@ -1,6 +1,6 @@
 <div class="basis-1/12 bg-slate-800 text-white backdrop-blur-sm">
     <ul class="mx-auto mt-1 w-full text-md text-bold space-y-2">
-        <x-admin-item title="Статистика" url="dashboard">
+        <x-admin-item title="Статистика" url="{{route('dashboard')}}">
             <svg
                 class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
@@ -14,7 +14,7 @@
 
         <br>
 
-        <x-admin-item title="Клиенты" url="clients">
+        <x-admin-item title="Клиенты" url="{{route('clients.index')}}">
             <svg
                 class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
@@ -31,7 +31,7 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Сотрудники" url="employees">
+        <x-admin-item title="Сотрудники" url="{{route('employees.index')}}">
             <svg
                 class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
@@ -49,7 +49,7 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Заказы" url="orders">
+        <x-admin-item title="Заказы" url="{{route('orders.index')}}">
             <svg
                 class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
@@ -77,7 +77,7 @@
 
         <br>
 
-        <x-admin-item title="Категории" url="categories">
+        <x-admin-item title="Категории" url="{{route('categories.index')}}">
             <svg
                 class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
@@ -91,7 +91,7 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Книги" url="products">
+        <x-admin-item title="Книги" url="{{route('products.index')}}">
             <svg
                 class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
@@ -103,7 +103,7 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Авторы" url="authors">
+        <x-admin-item title="Авторы" url="{{route('authors.index')}}">
             <svg
                 class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
@@ -117,7 +117,7 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Издатели" url="publishers">
+        <x-admin-item title="Издатели" url="{{route('publishers.index')}}">
             <svg
                 class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
@@ -134,7 +134,7 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Серии" url="series">
+        <x-admin-item title="Серии" url="{{route('series.index')}}">
             <svg
                 class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
@@ -148,7 +148,7 @@
 
         <br>
 
-        <x-admin-item title="Изображения" url="images">
+        <x-admin-item title="Изображения" url="{{route('images.index')}}">
             <svg
                 class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
@@ -162,7 +162,7 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Отзывы" url="rewiews">
+        <x-admin-item title="Отзывы" url="{{route('rewiews.index')}}">
             <svg
                 class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
@@ -176,7 +176,7 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Теги" url="tags">
+        <x-admin-item title="Теги" url="{{route('tags.index')}}">
             <svg
                 class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"
