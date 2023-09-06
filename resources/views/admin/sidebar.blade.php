@@ -1,4 +1,4 @@
-<div class="basis-1/12 bg-slate-800 text-white backdrop-blur-sm">
+<div class="bg-slate-800 text-white backdrop-blur-sm min-h-[1000px] fixed z-10">
     <ul class="mx-auto mt-1 w-full text-md text-bold space-y-2">
         <x-admin-item title="Статистика" url="{{route('dashboard')}}">
             <svg

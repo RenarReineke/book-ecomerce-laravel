@@ -17,11 +17,11 @@
     </head>
 
     <body
-        class="h-screen bg-[url('../../public/storage/wave.svg')] bg-fixed bg-bottom bg-no-repeat"
+        class="h-screen"
     >
-            <div class="flex flex-row h-full">
+            
                 @include('admin.sidebar')
-                <div class="basis-11/12">
+                <div class="pl-[271px] relative">
                     @include('admin.header')
                     @yield('profile')
                     @yield('statistic')
@@ -43,7 +43,7 @@
                     @yield('rewiews')
                     @yield('tags')
                 </div>
-            </div>
+            
         @stack('scripts')
     </body>
 </html>

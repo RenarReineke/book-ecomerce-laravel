@@ -26,7 +26,18 @@ class StoreProductRequest extends FormRequest
             'title' => 'required|string',
             'description' => 'string',
             'price' => 'required|numeric',
-            'category_id' => 'required|numeric',
+            'amount' => 'numeric',
+            'pages' => 'required|numeric',
+            'size' => 'required|string',
+            'cover-type' => 'required|string',
+            'weight' => 'required|numeric',
+            'year' => 'required|numeric',
+            'rating' => 'required|numeric',
+            'category' => 'required|numeric',
+            'publisher' => 'required|numeric',
+            'series' => 'required|numeric',
+            'tags' => 'array',
+            'authors' => 'array'
         ];
     }
 

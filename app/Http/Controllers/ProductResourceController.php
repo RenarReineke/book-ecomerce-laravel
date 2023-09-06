@@ -12,7 +12,7 @@ use App\Http\Requests\Product\UpdateProductRequest;
 
 class ProductResourceController extends Controller
 {
-    public function __construct(private ProductService $product_service)
+    public function __construct()
     {
     }
 
@@ -25,10 +25,10 @@ class ProductResourceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductRequest $request, ProductService $productService)
     {
         $category = Category::findOrFail($request->category_id);
-        $product = $this->product_service->store($request->validated(), $category);
+        $product = $productService->store($request->validated(), $category);
         return $product;
     }
 

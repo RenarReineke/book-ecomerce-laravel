@@ -3,7 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\StoreProductRequest;
+use App\Models\Author;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\Publisher;
+use App\Models\Series;
+use App\Models\Tag;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class AdminProductResourceController extends Controller
@@ -22,15 +29,21 @@ class AdminProductResourceController extends Controller
      */
     public function create()
     {
-        return view('admin.main.products.productCreateForm');
+        $categories = Category::all();
+        $tags = Tag::all();
+        $publishers = Publisher::all();
+        $seriesList = Series::all();
+        $authors = Author::all();
+        return view('admin.main.products.productCreateForm', compact('categories', 'tags', 'publishers', 'seriesList', 'authors'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request, ProductService $productService)
     {
-        //
+        $product = $productService->store($request->validated());
+        return redirect()->route('products.index');
     }
 
     /**
@@ -64,6 +77,6 @@ class AdminProductResourceController extends Controller
     {
         $cart = Product::find($id);
         $cart->delete();
-        return redirect('admin/products');
+        return back();
     }
 }
