@@ -12,6 +12,7 @@ use App\Models\Series;
 use App\Models\Tag;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminProductResourceController extends Controller
 {
@@ -41,7 +42,7 @@ class AdminProductResourceController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreProductRequest $request, ProductService $productService)
-    {
+    {   
         $product = $productService->store($request->validated());
         return redirect()->route('products.index');
     }

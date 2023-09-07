@@ -63,10 +63,16 @@
                 <td
                     class="p-2 text-center border border-slate-300 flex justify-center"
                 >
-                    <img
+                    <!-- <img
                         class="object-cover w-10 h-6"
                         src="{{ Vite::asset('resources/images/book.jpg') }}"
-                    />
+                    /> -->
+                    @foreach ($product->images as $image)
+                        <img
+                            class="object-cover w-10 h-6"
+                            src="{{ asset('storage/' . $image->url) }}"
+                        />
+                    @endforeach
                 </td>
                 <td class="p-2 text-center border border-slate-300">
                     {{$product->id}}

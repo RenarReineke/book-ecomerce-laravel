@@ -37,7 +37,8 @@ class StoreProductRequest extends FormRequest
             'publisher' => 'required|numeric',
             'series' => 'required|numeric',
             'tags' => 'array',
-            'authors' => 'array'
+            'authors' => 'array',
+            'images.*' => 'image'
         ];
     }
 

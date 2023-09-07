@@ -3,11 +3,13 @@
 namespace App\Services;
 
 use App\Models\Tag;
+use App\Models\Image;
 use App\Models\Author;
 use App\Models\Series;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 final class ProductService
 {
@@ -45,6 +47,12 @@ final class ProductService
             {
                 $author = Author::findOrFail($authorId);
                 $product->authors()->attach($author);
+            }
+
+            $images = array_map(fn($image) => Storage::disk('public')->put('/products', $image), $request['images']);
+            foreach($images as $imagePath)
+            {
+                $product->images()->create(['url' => $imagePath]);
             }
 
             $product->push();

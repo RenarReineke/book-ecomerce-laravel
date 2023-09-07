@@ -14,7 +14,7 @@
 <div class="mt-2 sm:mt-3 mx-auto max-w-md w-full h-10 bg-slate-600 rounded-t-xl"></div>
 <!-- Форма -->
 <div class="p-6 sm:p-10 sm:pt-0 mx-auto max-w-md w-full bg-white/80 backdrop-blur-xl rounded-xl shadow-xl">
-    <form action="{{route('products.store')}}" method="post" novalidate class="space-y-6">
+    <form action="{{route('products.store')}}" method="post" novalidate class="space-y-6" enctype="multipart/form-data">
         @csrf
         <!-- Название продукта -->
         <div>
@@ -350,7 +350,7 @@
         <!-- Изображение продукта -->
         <div>
             <label for="image" class="block text-sm font-medium text-gray-700">Изображение</label>     
-            <input value="{{old('image')}}" type="file" multiple id="image" name="image" class="p-1 bg-slate-300 w-full rounded-md text-sm {{ $errors->has('image') ? 'placeholder-red-300 border-red-300 focus:border-red-500 focus:ring-red-500' : 'placeholder:text-gray-400 border-gray-300 focus:border-cyan-500 focus:ring-cyan-500'}}">
+            <input value="{{old('image')}}" type="file" multiple id="image" name="images[]" class="p-1 bg-slate-300 w-full rounded-md text-sm {{ $errors->has('image') ? 'placeholder-red-300 border-red-300 focus:border-red-500 focus:ring-red-500' : 'placeholder:text-gray-400 border-gray-300 focus:border-cyan-500 focus:ring-cyan-500'}}">
             @error('image')
                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
             @enderror
