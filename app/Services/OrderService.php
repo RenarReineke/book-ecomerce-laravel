@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\OrderStatusEnum;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
@@ -16,8 +17,8 @@ final class OrderService
         $order->phone = $request['phone'];
         $order->address = $request['address'];
 
-        // Поставить заказу статус 'Новый', полученный из константы модели
-        $order->status = Order::STATUS[0];
+        // Поставить заказу статус 'Оформлен'
+        $order->status = OrderStatusEnum::Processed;
 
         // Связать заказ с юзером, по чьей корзине формируется заказ
         $order->user()->associate($cart->user);

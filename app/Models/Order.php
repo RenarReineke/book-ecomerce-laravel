@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\OrderStatusEnum;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,12 +13,8 @@ class Order extends Model
 
     protected $fillable = ['phone', 'address', 'status'];
 
-    public const STATUS = [
-        0 => 'Новый',
-        1 => 'Не оплачен',
-        2 => 'Оплачен',
-        3 => 'Завершен',
-        4 => 'Отменен'
+    protected $casts = [
+        'status' => OrderStatusEnum::class
     ];
 
     public function user()

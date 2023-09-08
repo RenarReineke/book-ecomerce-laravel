@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,6 +18,7 @@ return new class () extends Migration {
             $table->string('phone');
             $table->string('address');
             $table->string('status');
+            $table->boolean('payment')->default(false);
             $table->foreignIdFor(User::class)->constrained()
             ->onUpdate('cascade')->onDelete('restrict');
         });
