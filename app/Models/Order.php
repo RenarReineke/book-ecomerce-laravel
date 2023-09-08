@@ -26,4 +26,9 @@ class Order extends Model
     {
         return $this->belongsToMany(Product::class)->withPivot('amount');
     }
+
+    public function scopeTotalPrice(): int
+    {   
+        return $this->products->reduce(fn($accum, $product) => $accum + $product->price * $product->pivot->amount, 0);
+    }
 }

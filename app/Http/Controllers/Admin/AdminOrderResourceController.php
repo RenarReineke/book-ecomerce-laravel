@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Services\OrderService;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Order\StoreOrderRequest;
 
 class AdminOrderResourceController extends Controller
 {
@@ -22,15 +26,21 @@ class AdminOrderResourceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.main.orders.orderCreateForm');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreOrderRequest $request, OrderService $orderService)
     {
-        //
+        Auth::login(User::find(1));
+        
+        $cart = $request->user()->carts()->first();
+        
+        $order = $orderService->saveOrder($request->validated(), $cart);
+
+        return redirect()->route('orders.show', ['order' => $order]);
     }
 
     /**
@@ -38,7 +48,8 @@ class AdminOrderResourceController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $order = Order::findOrFail($id);
+        return view('admin.main.orders.orderDetail', compact('order'));
     }
 
     /**
