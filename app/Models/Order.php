@@ -10,6 +10,16 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['phone', 'address', 'status'];
+
+    public const STATUS = [
+        0 => 'Новый',
+        1 => 'Не оплачен',
+        2 => 'Оплачен',
+        3 => 'Завершен',
+        4 => 'Отменен'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

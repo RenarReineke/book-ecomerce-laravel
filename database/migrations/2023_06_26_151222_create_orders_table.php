@@ -14,6 +14,9 @@ return new class () extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('phone');
+            $table->string('address');
+            $table->string('status');
             $table->foreignIdFor(User::class)->constrained()
             ->onUpdate('cascade')->onDelete('restrict');
         });

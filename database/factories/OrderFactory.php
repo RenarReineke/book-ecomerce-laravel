@@ -18,7 +18,10 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory()
+            'user_id' => User::factory(),
+            'phone' => fake()->phoneNumber,
+            'address' => fake()->address,
+            'status' => 'Новый'
         ];
     }
 }

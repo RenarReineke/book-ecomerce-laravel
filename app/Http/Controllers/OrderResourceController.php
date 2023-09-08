@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Order\StoreOrderRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,24 +25,14 @@ class OrderResourceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreOrderRequest $request, OrderService $orderService)
     {
         Auth::login(User::find(1));
-        $user = $request->user();
 
-        $order = new Order();
-        $order->user_id = $user->id;
-        $order->save();
-
-        $cart = $user->carts->first();
-
-        foreach($cart->products as $product) {
-            $orderItem = new OrderProduct();
-            $orderItem->product_id = $product['id'];
-            $orderItem->amount = $product['amount'];
-            $orderItem->order_id = $order->id;
-            $orderItem->save();
-        }
+        
+        $cart = $request->user()->carts()->first();
+        
+        $order = $orderService->saveOrder($request->validated(), $cart);
 
         return $order;
     }
