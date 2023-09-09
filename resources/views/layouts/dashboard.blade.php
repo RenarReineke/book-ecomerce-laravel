@@ -44,7 +44,10 @@
                     @yield('publishers')
                     @yield('series')
                     @yield('images')
+
                     @yield('rewiews')
+                    @yield('rewiewDetail')
+
                     @yield('tags')
                 </div>
             

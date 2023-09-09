@@ -38,6 +38,6 @@ class Rewiew extends Model
 
     public function likes()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'likes');
     }
 }

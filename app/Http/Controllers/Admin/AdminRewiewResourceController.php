@@ -36,9 +36,9 @@ class AdminRewiewResourceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Rewiew $rewiew)
     {
-        //
+        return view('admin.main.rewiews.rewiewDetail', compact('rewiew'));
     }
 
     /**
