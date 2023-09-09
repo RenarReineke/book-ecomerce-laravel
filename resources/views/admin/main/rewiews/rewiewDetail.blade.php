@@ -9,6 +9,16 @@
     <span class="ml-1 font-bold">{{$rewiew->product->title}}</span>
 </h1>
 <div class="m-3 p-10 h-auto bg-slate-100">
+
+    <!-- Фото товара, загруженные юзером -->
+    <div>
+        @foreach ($rewiew->images() as $image)
+            @if ($image)
+                <img src="{{ asset('storage/' . $image->url) }}" alt="Фото от юзера" class="h-20 w-20 border-2 border-slate-600 rounded-md">
+            @endif
+        @endforeach
+    </div>
+
     <!-- Отзыв -->
     <div class="mx-auto w-1/2 text-md space-y-8 bg-white p-4 rounded-lg">
         <div class="shadow-lg rounded-lg p-4 pt-1">
@@ -25,6 +35,7 @@
         </div>
         <div class="shadow-lg rounded-lg p-4 pt-1 flex justify-between">
             <p class="font-medium text-slate-900">Лайки: <span class="ml-1 text-slate-500">{{$rewiew->likes->count()}}</span></p>
+            <p class="font-medium text-slate-900">Оценка товара: <span class="mx-1 text-slate-500">{{$rewiew->rating}} из 5</span></p>
         </div>
 
         <!-- Комментарии -->

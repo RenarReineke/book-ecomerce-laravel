@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\RatingEnum;
 use App\Models\Rewiew;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Rewiew\StoreRewiewRequest;
+use App\Services\RewiewService;
+use ReflectionClass;
 
 class AdminRewiewResourceController extends Controller
 {
@@ -21,16 +25,21 @@ class AdminRewiewResourceController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        //
+    {   
+        $ratings = RatingEnum::class;
+        $reflection = new ReflectionClass($ratings);
+        $ratingList = $reflection->getConstants();
+        return view('admin.main.rewiews.rewiewCreateForm', compact('ratingList'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRewiewRequest $request, RewiewService $rewiewService)
     {
-        //
+        $user = $request->user();
+        $rewiew = $rewiewService->store($request->validated(), $user);
+        return redirect()->route('rewiews.show', ['rewiew' => $rewiew]);
     }
 
     /**

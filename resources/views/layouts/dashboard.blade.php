@@ -47,6 +47,7 @@
 
                     @yield('rewiews')
                     @yield('rewiewDetail')
+                    @yield('rewiewCreateForm')
 
                     @yield('tags')
                 </div>

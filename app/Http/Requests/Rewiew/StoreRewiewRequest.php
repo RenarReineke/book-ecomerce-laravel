@@ -4,7 +4,7 @@ namespace App\Http\Requests\Rewiew;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRewiewRequest extends FormRequest
+class StoreRewiewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,10 @@ class CreateRewiewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'text' => 'required|string',
-            'user_id' => 'required|numeric',
+            'rating' => 'string',
+            'profit' => 'string',
+            'unprofit' => 'string',
+            'text' => 'string',
             'product_id' => 'required|numeric'
         ];
     }
