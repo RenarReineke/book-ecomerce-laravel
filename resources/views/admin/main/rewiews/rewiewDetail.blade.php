@@ -40,7 +40,22 @@
 
         <!-- Комментарии -->
     <div class="flex flex-col items-end space-y-2">
-        <h6 class="font-medium text-slate-900 mr-64">Комментарии ({{$rewiew->comments->count()}}):</h6>
+        <h6 class="font-medium text-slate-900 mr-64">
+            Комментарии ({{$rewiew->comments->count()}})
+            <a href="{{route('comments.create', ['rewiew_id' => $rewiew->id])}}" class="mx-auto w-12 block">
+                <svg
+                    class="w-8 h-8 text-sky-700/30 hover:text-sky-700"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+            </a>
+        </h6>
         <ul class="w-[500px] bg-white divide-y divide-slate-200">
             @foreach ($rewiew->comments as $comment)
                 <li class="p-4">
@@ -51,9 +66,7 @@
                             <div class="text-slate-300">{{$comment->updated_at}}</div>
                         </div>
                     </div>
-                    <p class="text-sm text-slate-500 overflow-hidden">{{$comment->message}}
-                        egegegegherhrhthhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-                    </p>
+                    <p class="text-sm text-slate-500 overflow-hidden">{{$comment->message}}</p>
                 </li>
             @endforeach
         </ul>

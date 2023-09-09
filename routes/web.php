@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\AdminRewiewResourceController;
 use App\Http\Controllers\Admin\AdminSeriesResourceController;
 use App\Http\Controllers\Admin\AdminProductResourceController;
 use App\Http\Controllers\Admin\AdminCategoryResourceController;
+use App\Http\Controllers\Admin\AdminCommentResourceController;
 use App\Http\Controllers\Admin\AdminEmployeeResourceController;
 use App\Http\Controllers\Admin\AdminPublisherResourceController;
 
@@ -56,6 +57,7 @@ Route::prefix('admin')->group(function () {
         'carts' => AdminCartResourceController::class,
         'clients' => AdminClientResourceController::class,
         'employees' => AdminEmployeeResourceController::class,
+        'comments' => AdminCommentResourceController::class,
     ]);
 
     Route::post('carts/{cart}/remove', [AdminCartResourceController::class, 'remove'])->name('removeItemFromCart');
