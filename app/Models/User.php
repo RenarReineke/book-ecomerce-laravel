@@ -70,4 +70,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Rewiew::class);
     }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Rewiew::class);
+    }
 }

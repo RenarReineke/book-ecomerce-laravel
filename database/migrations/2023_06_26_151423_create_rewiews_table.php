@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\RatingEnum;
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -14,7 +16,10 @@ return new class () extends Migration {
     {
         Schema::create('rewiews', function (Blueprint $table) {
             $table->id();
-            $table->text('text');
+            $table->text('profit')->nullable();
+            $table->text('unprofit')->nullable();
+            $table->text('text')->nullable();
+            $table->integer('rating')->default(RatingEnum::None->value);
             $table->timestamps();
             $table->foreignIdFor(User::class)->constrained()
             ->onUpdate('cascade')->onDelete('restrict');

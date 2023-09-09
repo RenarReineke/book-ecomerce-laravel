@@ -7,6 +7,7 @@ use App\Models\Tag;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Author;
+use App\Models\Comment;
 use App\Models\Rewiew;
 use App\Models\Series;
 use App\Models\Product;
@@ -26,7 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
 
         Product::factory(50)->has(Tag::factory(3))
-                            ->has(Rewiew::factory(3))
+                            ->has(Rewiew::factory(3)->has(Comment::factory(3)))
                             ->has(Author::factory(2))
                             ->has(Order::factory(2))
                             ->create();

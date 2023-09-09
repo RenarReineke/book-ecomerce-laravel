@@ -15,4 +15,9 @@ class Image extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function rewiew()
+    {
+        return $this->belongsTo(Rewiew::class);
+    }
 }

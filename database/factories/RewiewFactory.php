@@ -19,7 +19,10 @@ class RewiewFactory extends Factory
     public function definition(): array
     {
         return [
+            'profit' => fake()->word(),
+            'unprofit' => fake()->word(),
             'text' => fake()->text(),
+            'rating' => fake()->numberBetween(0, 5),
             'user_id' => User::factory(),
             'product_id' => Product::factory(),
         ];
