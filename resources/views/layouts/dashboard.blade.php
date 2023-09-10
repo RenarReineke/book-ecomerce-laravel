@@ -51,6 +51,7 @@
 
                     @yield('commentDetail')
                     @yield('commentCreateForm')
+                    @yield('commentUpdateForm')
 
                     @yield('tags')
                 </div>

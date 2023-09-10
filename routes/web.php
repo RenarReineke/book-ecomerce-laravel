@@ -67,4 +67,6 @@ Route::prefix('admin')->group(function () {
     Route::put('carts/{cart}/change', [AdminCartResourceController::class, 'change'])->name('changeCart');
 
     Route::post('products/{id}/delete', [AdminProductResourceController::class, 'destroy'])->name('deleteProducts');
+
+    Route::post('comments/{comment}/delete', [AdminCommentResourceController::class, 'destroy'])->name('comments.destroy');
 });
