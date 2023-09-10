@@ -22,7 +22,10 @@ class UpdateRewiewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'text' => 'required|string',
+            'rating' => 'string',
+            'profit' => 'string',
+            'unprofit' => 'string',
+            'text' => 'string',
         ];
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Rewiew;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Rewiew\StoreRewiewRequest;
+use App\Http\Requests\Rewiew\UpdateRewiewRequest;
 use App\Services\RewiewService;
 use ReflectionClass;
 
@@ -53,24 +54,30 @@ class AdminRewiewResourceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
+    public function edit(Rewiew $rewiew)
+    {   
+        $ratings = RatingEnum::class;
+        $reflection = new ReflectionClass($ratings);
+        $ratingList = $reflection->getConstants();
+        return view('admin.main.rewiews.rewiewUpdateForm', compact('rewiew', 'ratingList'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRewiewRequest $request, Rewiew $rewiew, RewiewService $rewiewService)
     {
-        //
+        $user = $request->user();
+        $updatedComment = $rewiewService->update($request->validated(), $user, $rewiew);
+        return redirect()->route('rewiews.show', ['rewiew' => $rewiew]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Rewiew $rewiew)
     {
-        //
+        $rewiew->delete();
+        return back();
     }
 }

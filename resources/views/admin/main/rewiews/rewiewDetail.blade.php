@@ -43,7 +43,7 @@
         <h6 class="font-medium text-slate-900 mr-64">
             Комментарии ({{$rewiew->comments->count()}})
 
-            <!-- Ссылка/кнопка на создание комментария -->
+            <!-- Форма на создание комментария -->
             <form method="get" action="{{route('comments.create')}}" class="mx-auto w-12">
                 <input type="hidden" name="rewiew_id" value="{{$rewiew->id}}">
                 <button type="submit" class="h-full w-full">
@@ -75,7 +75,7 @@
                             </div>
                         </div>
 
-                        <!-- Формы/кнопки удаления/редактирования -->
+                        <!-- Формы удаления/редактирования -->
                         <div class="flex space-x-1">
                             <!-- Удалить коммент -->
                             <form
@@ -83,6 +83,7 @@
                             action="{{route('comments.destroy', ['comment' => $comment])}}"
                             >
                                 @csrf
+                                @method('DELETE')
                                 <button type="submit" class="h-full w-full">
                                     <svg
                                         class="w-5 h-5 text-red-500 hover:text-red-400"

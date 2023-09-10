@@ -34,11 +34,13 @@
             @foreach ($rewiews as $rewiew)
             <tr class="h-10 hover:bg-slate-200 hover:cursor-pointer">
                 <td class="text-center border border-slate-300 pl-4">
+                    <!-- Удалить отзыв -->
                     <form
                         method="post"
                         action="{{route('rewiews.destroy', ['rewiew' => $rewiew])}}"
                     >
                         @csrf
+                        @method('DELETE')
                         <button type="submit" class="h-full w-full">
                             <svg
                                 class="w-6 h-6 text-red-600 hover:text-red-800"
@@ -65,7 +67,8 @@
                 <td class="p-2 text-center border border-slate-300">{{$rewiew->comments->count()}}</td>
                 <td class="p-2 text-center border border-slate-300">{{$rewiew->likes->count()}}</td>
                 <td class="pl-4 text-center border border-slate-300">
-                    <form method="post" action="{{route('rewiews.edit', ['rewiew' => $rewiew])}}">
+                    <!-- Редактировать отзыв -->
+                    <form method="get" action="{{route('rewiews.edit', ['rewiew' => $rewiew])}}">
                         @csrf
                         <button type="submit" class="h-full w-full">
                             <svg

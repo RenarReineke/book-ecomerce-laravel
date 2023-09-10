@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignIdFor(User::class)->constrained()
-            ->onUpdate('cascade')->onDelete('restrict');
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->foreignIdFor(Rewiew::class)->constrained()
-            ->onUpdate('cascade')->onDelete('restrict');
+            ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

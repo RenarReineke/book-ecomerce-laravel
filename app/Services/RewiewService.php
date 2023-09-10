@@ -23,4 +23,15 @@ final class RewiewService
 
         return $rewiew;
     }
+
+    public function update(array $request, User $user, Rewiew $rewiew): Rewiew
+    {
+        $rewiew->rating = $request['rating'];
+        $rewiew->profit = $request['profit'];
+        $rewiew->unprofit = $request['unprofit'];
+        $rewiew->text = $request['text'];
+        $rewiew->save();
+
+        return $rewiew;
+    }
 }

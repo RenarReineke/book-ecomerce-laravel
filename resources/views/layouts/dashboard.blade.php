@@ -48,6 +48,7 @@
                     @yield('rewiews')
                     @yield('rewiewDetail')
                     @yield('rewiewCreateForm')
+                    @yield('rewiewUpdateForm')
 
                     @yield('commentDetail')
                     @yield('commentCreateForm')
