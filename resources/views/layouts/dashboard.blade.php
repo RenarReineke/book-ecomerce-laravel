@@ -23,38 +23,58 @@
                 @include('admin.sidebar')
                 <div class="pl-[271px] relative">
                     @include('admin.header')
-                    @yield('profile')
-                    @yield('statistic')
-                    @yield('clients')
-                    @yield('employees')
 
-                    @yield('orders')
+                    @yield('statistic')
+                    @yield('profile')
+
+                    @yield('clientList')
+                    @yield('employeeList')
+
+                    @yield('orderList')
                     @yield('orderDetail')
                     @yield('orderCreateForm')
 
-                    @yield('carts')
+                    @yield('cartList')
                     @yield('cartDetail')
 
-                    @yield('categories')
+                    @yield('categoryList')
+                    @yield('categoryDetail')
+                    @yield('categoryCreateForm')
+                    @yield('categoryUpdateForm')
 
-                    @yield('products')
+                    @yield('productList')
                     @yield('productCreateForm')
 
-                    @yield('authors')
-                    @yield('publishers')
-                    @yield('series')
-                    @yield('images')
+                    @yield('tagList')
+                    @yield('tagDetail')
+                    @yield('tagCreateForm')
+                    @yield('tagUpdateForm')
 
-                    @yield('rewiews')
+                    @yield('authorList')
+                    @yield('authorDetail')
+                    @yield('authorCreateForm')
+                    @yield('authorUpdateForm')
+
+                    @yield('publisherList')
+                    @yield('publisherDetail')
+                    @yield('publisherCreateForm')
+                    @yield('publisherUpdateForm')
+
+                    @yield('seriesList')
+                    @yield('seriesDetail')
+                    @yield('seriesCreateForm')
+                    @yield('seriesUpdateForm')
+                    
+                    @yield('rewiewList')
                     @yield('rewiewDetail')
                     @yield('rewiewCreateForm')
                     @yield('rewiewUpdateForm')
-
+                    
                     @yield('commentDetail')
                     @yield('commentCreateForm')
                     @yield('commentUpdateForm')
-
-                    @yield('tags')
+                    
+                    @yield('images')
                 </div>
             
         @stack('scripts')

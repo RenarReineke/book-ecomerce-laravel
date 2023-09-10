@@ -1,10 +1,9 @@
 @extends('layouts.dashboard')
-@section('rewiewList')
+@section('categoryList')
 <h1 class="mx-auto mt-5 w-96 text-lg text-gray-700 text-center">
-    Отзывы
-
-    <!-- Форма на создание отзыва -->
-    <form method="get" action="{{route('rewiews.create')}}" class="mx-auto w-12">
+    Категории
+    <!-- Форма на создание категории -->
+    <form method="get" action="{{route('categories.create')}}" class="mx-auto w-12">
                 <button type="submit" class="h-full w-full">
                     <svg
                         class="w-8 h-8 text-sky-700/30 hover:text-sky-700"
@@ -25,23 +24,19 @@
         <thead class="bg-slate-400">
             <tr class="h-10">
                 <th class="border border-slate-300">Del</th>
-                <th class="border border-slate-300">ID отзыва</th>
-                <th class="border border-slate-300">Пользователь</th>
-                <th class="border border-slate-300">Товар</th>
-                <th class="border border-slate-300">Оценка товара</th>
-                <th class="border border-slate-300">Комментарии</th>
-                <th class="border border-slate-300">Лайки</th>
+                <th class="border border-slate-300">ID</th>
+                <th class="border border-slate-300">Название</th>
                 <th class="border border-slate-300">Edit</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($rewiews as $rewiew)
+            @foreach ($categories as $category)
             <tr class="h-10 hover:bg-slate-200 hover:cursor-pointer">
-                <td class="text-center border border-slate-300 pl-4">
+            <td class="text-center border border-slate-300 pl-4">
                     <!-- Удалить -->
                     <form
                         method="post"
-                        action="{{route('rewiews.destroy', ['rewiew' => $rewiew])}}"
+                        action="{{route('categories.destroy', ['category' => $category])}}"
                     >
                         @csrf
                         @method('DELETE')
@@ -62,18 +57,14 @@
                 </td>
                 <td class="p-2 text-center border border-slate-300">
                     <!-- Ссылка на детальную страницу -->
-                    <a href="{{route('rewiews.show', ['rewiew' => $rewiew])}}" class="block hover:bg-slate-700 hover:text-white">
-                        {{$rewiew->id}}
+                    <a href="{{route('categories.show', ['category' => $category])}}" class="block hover:bg-slate-700 hover:text-white">
+                        {{$category->id}}
                     </a>
                 </td>
-                <td class="p-2 text-center border border-slate-300">{{$rewiew->user->name}}</td>
-                <td class="p-2 text-center border border-slate-300">{{$rewiew->product->title}}</td>
-                <td class="p-2 text-center border border-slate-300">{{$rewiew->rating}}</td>
-                <td class="p-2 text-center border border-slate-300">{{$rewiew->comments->count()}}</td>
-                <td class="p-2 text-center border border-slate-300">{{$rewiew->likes->count()}}</td>
+                <td class="p-2 text-center border border-slate-300">{{$category->title}}</td>
                 <td class="pl-4 text-center border border-slate-300">
                     <!-- Редактировать -->
-                    <form method="get" action="{{route('rewiews.edit', ['rewiew' => $rewiew])}}">
+                    <form method="get" action="{{route('categories.edit', ['category' => $category])}}">
                         @csrf
                         <button type="submit" class="h-full w-full">
                             <svg
@@ -103,7 +94,7 @@
         </tbody>
     </table>
     <div class="mt-3">
-        {{$rewiews->links()}}
+        {{$categories->links()}}
     </div>
 </div>
 @endsection

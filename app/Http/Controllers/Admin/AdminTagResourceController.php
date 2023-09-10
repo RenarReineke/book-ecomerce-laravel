@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Tag;
+use App\Services\TagService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Tag\StoreTagRequest;
+use App\Http\Requests\Tag\UpdateTagRequest;
 
 class AdminTagResourceController extends Controller
 {
@@ -14,7 +17,7 @@ class AdminTagResourceController extends Controller
     public function index()
     {
         $tags = Tag::paginate(10);
-        return view('admin.main.tags', compact('tags'));
+        return view('admin.main.tags.tagList', compact('tags'));
     }
 
     /**
@@ -22,46 +25,49 @@ class AdminTagResourceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.main.tags.tagCreateForm');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTagRequest $request, TagService $tagService)
     {
-        //
+        $tag = $tagService->store($request->validated());
+        return redirect()->route('tags.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Tag $tag)
     {
-        //
+        return view('admin.main.tags.tagUpdateForm', compact('tag'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
+    public function edit(Tag $tag)
+    {   
+        return view('admin.main.tags.tagUpdateForm', compact('tag'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateTagRequest $request, Tag $tag, TagService $tagService)
     {
-        //
+        $tag = $tagService->update($request->validated(), $tag);
+        return redirect()->route('tags.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return back();
     }
 }

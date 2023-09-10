@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('carts')
+@section('cartList')
 <h1 class="mx-auto mt-5 w-96 text-lg text-gray-700 text-center">Корзины</h1>
 <div class="m-3 p-10 h-auto bg-sky-50">
     <table class="mx-auto w-full table-auto border-collapse border border-slate-400 bg-white text-md">

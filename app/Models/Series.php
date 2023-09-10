@@ -11,7 +11,7 @@ class Series extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title'];
+    protected $fillable = ['title', 'publisher_id'];
 
     protected $with = ['products'];
 

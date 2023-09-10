@@ -1,4 +1,4 @@
-@extends('layouts.dashboard') @section('products')
+@extends('layouts.dashboard') @section('productList')
 <h1 class="mx-auto pt-14 w-96 text-lg text-gray-700 text-center">
     Товары
     <a href="/admin/products/create" class="mx-auto w-12 block">

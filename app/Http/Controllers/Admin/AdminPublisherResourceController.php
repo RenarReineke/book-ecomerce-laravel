@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
+use App\Services\PublisherService;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Publisher\StorePublisherRequest;
+use App\Http\Requests\Publisher\UpdatePublisherRequest;
 
 class AdminPublisherResourceController extends Controller
 {
@@ -14,7 +17,7 @@ class AdminPublisherResourceController extends Controller
     public function index()
     {
         $publishers = Publisher::paginate(10);
-        return view('admin.main.publishers', compact('publishers'));
+        return view('admin.main.publishers.publisherList', compact('publishers'));
     }
 
     /**
@@ -22,46 +25,49 @@ class AdminPublisherResourceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.main.publishers.publisherCreateForm');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePublisherRequest $request, PublisherService $publisherService)
     {
-        //
+        $publisher = $publisherService->store($request->validated());
+        return redirect()->route('publishers.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Publisher $publisher)
     {
-        //
+        return view('admin.main.publishers.publisherDetail', compact('publisher'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Publisher $publisher)
     {
-        //
+        return view('admin.main.publishers.publisherUpdateForm', compact('publisher'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdatePublisherRequest $request, Publisher $publisher, PublisherService $publisherService)
     {
-        //
+        $publisher = $publisherService->update($request->validated(), $publisher);
+        return redirect()->route('publishers.index', compact('publisher'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Publisher $publisher)
     {
-        //
+        $publisher->delete();
+        return back();
     }
 }

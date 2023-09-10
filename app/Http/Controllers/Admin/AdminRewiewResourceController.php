@@ -56,6 +56,7 @@ class AdminRewiewResourceController extends Controller
      */
     public function edit(Rewiew $rewiew)
     {   
+        dd(request());
         $ratings = RatingEnum::class;
         $reflection = new ReflectionClass($ratings);
         $ratingList = $reflection->getConstants();

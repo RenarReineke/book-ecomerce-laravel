@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('orders')
+@section('orderList')
 <h1 class="mx-auto mt-5 w-96 text-lg text-gray-700 text-center">
     Заказы
     <a href="{{route('orders.create')}}" class="mx-auto w-12 block">
