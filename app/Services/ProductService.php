@@ -8,6 +8,7 @@ use App\Models\Author;
 use App\Models\Series;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 

@@ -9,3 +9,30 @@
         margin: 0;
     }
 } */
+
+@layer base {
+    input[type="range"],
+    input[type="range"]::-webkit-slider-runnable-track,
+    input[type="range"]::-webkit-range-track,
+    input[type="range"]::-webkit-range-tumb,
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        height: 30px;
+        width: 30px;
+        background: url('../images/bitcoin.png');
+        background-position: center;
+        background-size: contain;
+        border-radius: 50%;
+        border: 2px solid gray;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+        cursor: pointer;
+    }
+}
+

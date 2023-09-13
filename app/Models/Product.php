@@ -67,10 +67,70 @@ class Product extends Model
             $filters['search'] ?? false,
             function ($query, $search) {
                 $query
-                ->where('title', 'like', '%' . $search . '%')
-                ->orWhere('description', 'like', '%' . $search . '%');
+                ->where('title', 'like', '%' . $search . '%');
             }
         );
+
+        $query->when(
+            $filters['rating'] ?? false,
+            function ($query, $rating) {
+                $query
+                ->where('rating', $rating);
+            }
+        );
+
+        $query->when(
+            $filters['cover'] ?? false,
+            function ($query, $cover) {
+                $query
+                ->where('cover', $cover);
+            }
+        );
+
+        $query->when(
+            $filters['fromPrice'] ?? false,
+            function ($query, $fromPrice) {
+                $query
+                ->where('price', '>',$fromPrice);
+            }
+        );
+
+        $query->when(
+            $filters['toPrice'] ?? false,
+            function ($query, $toPrice) {
+                $query
+                ->where('price', '<',$toPrice);
+            }
+        );
+
+        $query->when(
+            $filters['category'] ?? false,
+            function ($query, $category) {
+                $query
+                ->where('category_id', $category);
+            }
+        );
+
+        $query->when(
+            $filters['series'] ?? false,
+            function ($query, $series) {
+                $query
+                ->where('series_id', $series);
+            }
+        );
+
+        $query->when(
+            $filters['publisher'] ?? false,
+            function ($query, $publisher) {
+                $query
+                ->whereIn('series_id',function ($query) use ($publisher) {
+                    $query->select('id')
+                    ->from('series')
+                    ->where('publisher_id', $publisher);
+                });
+            }
+        );
+
     }
 
 }
