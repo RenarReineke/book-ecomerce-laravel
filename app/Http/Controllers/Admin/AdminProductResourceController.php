@@ -24,7 +24,7 @@ class AdminProductResourceController extends Controller
         $products = Product::filter(request([
             'search', 'rating', 'cover', 'fromPrice', 
             'toPrice', 'category', 'series', 'publisher',
-            ]))->paginate(10);
+            ]))->paginate(6);
         
         $categories = Category::all();
         $publishers = Publisher::all();

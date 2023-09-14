@@ -1,8 +1,8 @@
 @extends('layouts.dashboard') 
 @section('productList')
-<div class="relative flex flex-row-reverse">
+<div class="relative flex flex-row-reverse h-screen bg-sky-50">
     <!-- Фильтры -->
-    <div id="filterBar" class="hidden absolute z-10 bg-slate-500 w-1/4 h-screen flex flex-col justify-start items-start space-y-6 px-6 py-4 border-b-2 border-slate-300">
+    <div id="filterBar" class="hidden absolute z-10 bg-slate-500 w-1/4 h-screen flex-col justify-start items-start space-y-6 px-6 py-4 border-b-2 border-slate-300">
         
         <button id="filterButton" class="w-40 h-10 rounded-md bg-violet-800 hover:bg-indigo-800 text-white text-md font-medium">Фильтры</button>
         <!-- Поиск -->
@@ -125,12 +125,12 @@
     <!-- Фильтры конец -->
 
     <!-- Main -->
-    <div class="p-10 pt-4 px-5 h-auto bg-sky-50">
+    <div class="p-10 pt-4 px-5 h-auto w-full bg-sky-50">
 
         <div class="flex justify-between">
             <!-- Заголовок -->
-        <h1 class="mx-auto w-full pb-2 text-gray-700 bg-sky-50 flex justify-center">
-            <span class="mr-1">Товары</span>
+        <h1 class="mx-auto w-full pb-2 text-gray-700 bg-sky-50 flex justify-start">
+            <span class="mr-1 text-lg font-medium">Товары</span>
             <a href="/admin/products/create">
                 <svg
                     class="w-8 h-8 text-sky-500 hover:text-sky-700"
@@ -154,27 +154,72 @@
             class="mx-auto w-full text-sm font-medium text-slate-800"
         >   
             <!-- Заголовок таблицы -->
-            <div class="h-12 grid grid-cols-12 bg-slate-200 rounded-t-md">    
-                    <div class="p-2">Del</div>
-                    <div class="p-2">Pic</div>
-                    <div class="p-2">ID</div>
-                    <div class="p-2">Название</div>
-                    <div class="p-2">Цена</div>
-                    <div class="p-2">Рейтинг</div>
-                    <div class="p-2">Обложка</div>
-                    <div class="p-2">Категория</div>
-                    <div class="p-2">Издатель</div>
-                    <div class="p-2">Серия</div>
-                    <div class="p-2">Год</div>
-                    <div class="p-2">Edit</div>
+            <div class="h-12 grid grid-cols-[30px_100px_200px_100px_100px_100px_200px_200px_200px_100px_100px] gap-x-3 bg-slate-200 rounded-t-md">    
+                    <div class="p-2 w-5">ID</div>
+                    <div class="p-2 w-20">Thumb</div>
+                    <div class="p-2 w-20">Название</div>
+                    <div class="p-2 w-10">Цена</div>
+                    <div class="p-2 w-5">Рейтинг</div>
+                    <div class="p-2 w-10">Обложка</div>
+                    <div class="p-2 w-10">Категория</div>
+                    <div class="p-2 w-20">Издатель</div>
+                    <div class="p-2 w-20">Серия</div>
+                    <div class="p-2 w-10">Год</div>
+                    <div class="p-2 w-10">Действия</div>
                 
             </div>
 
                 <!-- Тело таблицы -->
                 @foreach ($products as $product)
                 <!-- Строка таблицы -->
-                <div class="h-12 grid grid-cols-12 mb-2 rounded-md bg-white text-slate-600 shadow-md">
-                    <div class="text-center pl-4">
+                <div class="h-20 grid grid-cols-[30px_100px_200px_100px_100px_100px_200px_200px_200px_100px_100px] gap-x-3 mb-2 rounded-md bg-white text-slate-600 shadow-md">
+                    <div class="p-2 w-5 flex justify-start items-center">
+                        {{$product->id}}
+                    </div>
+
+                    <!-- Картинка -->
+                    <div
+                        class="p-2 w-full flex justify-start items-center"
+                    >
+                        <img
+                            class="object-cover w-full h-full rounded-full shadow-sm"
+                            src="{{ Vite::asset('resources/images/book.jpg') }}"
+                        />
+                        <!-- @foreach ($product->images as $image)
+                            <img
+                                class="object-cover w-10 h-6"
+                                src="{{ asset('storage/' . $image->url) }}"
+                            />
+                        @endforeach -->
+                    </div>
+                    <div class="p-2 flex justify-start items-center">
+                        {{$product->title}}
+                    </div>
+                    <div class="p-2 w-10 flex justify-start items-center">
+                        {{$product->price}}
+                    </div>
+                    <div class="p-2 flex justify-start items-center">
+                        {{$product->rating}}
+                    </div>
+                    <div class="p-2 w-10 flex justify-start items-center">
+                        {{$product->cover_type}}
+                    </div>
+                    <div class="p-2 flex justify-start items-center">
+                        {{$product->category?->title ?? 'Нет'}}
+                    </div>
+                    <div class="p-2 flex justify-start items-center">
+                        {{$product->series?->publisher->title ?? 'Нет'}}
+                    </div>
+                    <div class="p-2 flex justify-start items-center">
+                        {{$product->series?->title ?? 'Нет'}}
+                    </div>
+                    <div class="p-2 w-10 flex justify-start items-center">
+                        {{$product->year}}
+                    </div>
+                    
+                    <!-- Действия -->
+                    <div class="pl-2 w-10 flex justify-start items-center">
+                        <!-- Удалить товар -->
                         <form
                             method="post"
                             action="products/{{$product->id}}/delete"
@@ -182,7 +227,7 @@
                             @csrf
                             <button type="submit" class="h-full w-full">
                                 <svg
-                                    class="w-6 h-6 text-red-600 hover:text-red-800"
+                                    class="mr-2 w-6 h-6 text-red-600 hover:text-red-800"
                                     viewBox="0 0 24 24"
                                     fill="currentColor"
                                 >
@@ -194,49 +239,8 @@
                                 </svg>
                             </button>
                         </form>
-                    </div>
-                    <div
-                        class="p-2 text-center flex justify-center"
-                    >
-                        <img
-                            class="object-cover w-10 h-6"
-                            src="{{ Vite::asset('resources/images/book.jpg') }}"
-                        />
-                        <!-- @foreach ($product->images as $image)
-                            <img
-                                class="object-cover w-10 h-6"
-                                src="{{ asset('storage/' . $image->url) }}"
-                            />
-                        @endforeach -->
-                    </div>
-                    <div class="p-2 text-center">
-                        {{$product->id}}
-                    </div>
-                    <div class="p-2 text-center">
-                        {{$product->title}}
-                    </div>
-                    <div class="p-2 text-center">
-                        {{$product->price}}
-                    </div>
-                    <div class="p-2 text-center">
-                        {{$product->rating}}
-                    </div>
-                    <div class="p-2 text-center">
-                        {{$product->cover_type}}
-                    </div>
-                    <div class="p-2 text-center">
-                        {{$product->category?->title ?? 'Нет'}}
-                    </div>
-                    <div class="p-2 text-center">
-                        {{$product->series?->title ?? 'Нет'}}
-                    </div>
-                    <div class="p-2 text-center">
-                        {{$product->series?->publisher->title ?? 'Нет'}}
-                    </div>
-                    <div class="p-2 text-center">
-                        {{$product->year}}
-                    </div>
-                    <div class="pl-4 text-center">
+
+                        <!-- Редактировать товар -->
                         <form method="post" action="products/{{$product->id}}/edit">
                             @csrf
                             <button type="submit" class="h-full w-full">
