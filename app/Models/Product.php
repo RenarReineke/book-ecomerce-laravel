@@ -14,6 +14,11 @@ class Product extends Model
 {
     use HasFactory;
 
+    public const FILTERS = [
+        'search', 'rating', 'cover', 'fromPrice', 
+        'toPrice', 'category', 'series', 'publisher',
+        ];
+
     protected $fillable = [
         'title', 'description', 'price', 'amount', 'pages', 'size', 'cover-type', 'weight',
         'year', 'rating'
