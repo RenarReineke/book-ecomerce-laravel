@@ -12,10 +12,6 @@ use App\Http\Requests\Product\UpdateProductRequest;
 
 class ProductResourceController extends Controller
 {
-    public function __construct()
-    {
-    }
-
     public function index(ProductService $productService)
     {
         $products = $productService->getProductList();
