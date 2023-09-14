@@ -8,6 +8,7 @@ use App\Models\Author;
 use App\Models\Series;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Publisher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -62,5 +63,23 @@ final class ProductService
         });
 
         return $product;
+    }
+
+    public function getDataForFrontendFilters(): array
+    {
+        $categories = Category::all();
+        $publishers = Publisher::all();
+        $seriesList = Series::all();
+
+        $minPriceProducts = Product::min('price');
+        $maxPriceProducts = Product::max('price');
+        $avgPriceProducts = Product::avg('price');
+
+        $data = [
+            'categories', 'publishers', 'seriesList', 
+            'minPriceProducts', 'maxPriceProducts', 'avgPriceProducts'
+        ];
+
+        return compact(...$data);
     }
 }

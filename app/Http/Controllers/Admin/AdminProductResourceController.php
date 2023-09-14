@@ -19,27 +19,13 @@ class AdminProductResourceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ProductService $productService)
     {   
-        $products = Product::filter(request([
-            'search', 'rating', 'cover', 'fromPrice', 
-            'toPrice', 'category', 'series', 'publisher',
-            ]))->paginate(6);
+        $products = Product::filter(request(Product::FILTERS))->paginate(6);
         
-        $categories = Category::all();
-        $publishers = Publisher::all();
-        $seriesList = Series::all();
+        $data = $productService->getDataForFrontendFilters();
 
-        $minPriceProducts = Product::min('price');
-        $maxPriceProducts = Product::max('price');
-        $avgPriceProducts = Product::avg('price');
-
-        $data = [
-            'products', 'categories', 'publishers', 'seriesList', 
-            'minPriceProducts', 'maxPriceProducts', 'avgPriceProducts'
-        ];
-
-        return view('admin.main.products.productList', compact(...$data));
+        return view('admin.main.products.productList', $data + compact('products'));
     }
 
     /**
