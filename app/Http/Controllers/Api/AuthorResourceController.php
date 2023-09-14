@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Models\Author;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\AuthorResource;
 use App\Http\Requests\Author\StoreAuthorRequest;
 use App\Http\Requests\Author\UpdateAuthorRequest;
-use App\Http\Resources\AuthorResource;
-use App\Models\Author;
 
 class AuthorResourceController extends Controller
 {

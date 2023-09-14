@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Order\StoreOrderRequest;
-use App\Http\Resources\OrderResource;
 use App\Models\User;
 use App\Models\Order;
-use App\Models\OrderProduct;
-use App\Models\Product;
-use App\Services\OrderService;
 use Illuminate\Http\Request;
+use App\Services\OrderService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\OrderResource;
+use App\Http\Requests\Order\StoreOrderRequest;
 
 class OrderResourceController extends Controller
 {

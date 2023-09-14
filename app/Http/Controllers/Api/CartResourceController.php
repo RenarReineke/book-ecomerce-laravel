@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Cart;
 use App\Models\User;
 use App\Models\Product;
-use Illuminate\Http\Request;
+use App\Services\CartService;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\CartResource;
 use App\Http\Requests\Cart\StoreCartRequest;
 use App\Http\Requests\Cart\UpdateCartRequest;
-use App\Http\Requests\StoreCartRequest as RequestsStoreCartRequest;
-use App\Http\Resources\CartResource;
-use App\Services\CartService;
 
 class CartResourceController extends Controller
 {

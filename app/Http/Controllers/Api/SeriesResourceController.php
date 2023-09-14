@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Models\Series;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\SeriesResource;
 use App\Http\Requests\Series\StoreSeriesRequest;
 use App\Http\Requests\Series\UpdateSeriesRequest;
-use App\Models\Series;
-use Illuminate\Http\Request;
-use App\Http\Resources\SeriesResource;
 
 class SeriesResourceController extends Controller
 {

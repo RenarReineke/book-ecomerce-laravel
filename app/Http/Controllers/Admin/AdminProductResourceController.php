@@ -21,7 +21,7 @@ class AdminProductResourceController extends Controller
      */
     public function index(ProductService $productService)
     {   
-        $products = Product::filter(request(Product::FILTERS))->paginate(6);
+        $products = $productService->getProductList();
         
         $data = $productService->getDataForFrontendFilters();
 

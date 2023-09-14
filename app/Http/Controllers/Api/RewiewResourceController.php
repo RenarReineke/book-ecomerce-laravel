@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Rewiew;
-use App\Http\Requests\Rewiew\CreateRewiewRequest;
-use App\Http\Requests\Rewiew\UpdateRewiewRequest;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\RewiewResource;
+use App\Http\Requests\Rewiew\StoreRewiewRequest;
+use App\Http\Requests\Rewiew\UpdateRewiewRequest;
 
 class RewiewResourceController extends Controller
 {
@@ -20,7 +21,7 @@ class RewiewResourceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateRewiewRequest $request)
+    public function store(StoreRewiewRequest $request)
     {
         return new RewiewResource(Rewiew::create($request->validated()));
     }

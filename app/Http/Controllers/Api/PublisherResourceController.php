@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Models\Publisher;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\PublisherResource;
 use App\Http\Requests\Publisher\StorePublisherRequest;
 use App\Http\Requests\Publisher\UpdatePublisherRequest;
-use App\Models\Publisher;
-use Illuminate\Http\Request;
-use App\Http\Resources\PublisherResource;
 
 class PublisherResourceController extends Controller
 {

@@ -2,19 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\PersonalAccessToken;
-use App\Http\Controllers\TagResourceController;
-use App\Http\Controllers\CartResourceController;
-use App\Http\Controllers\RoleResourceController;
-use App\Http\Controllers\UserResourceController;
-use App\Http\Controllers\ImageResourceController;
-use App\Http\Controllers\OrderResourceController;
-use App\Http\Controllers\AuthorResourceController;
-use App\Http\Controllers\RewiewResourceController;
-use App\Http\Controllers\SeriesResourceController;
-use App\Http\Controllers\ProductResourceController;
-use App\Http\Controllers\CategoryResourceController;
-use App\Http\Controllers\PublisherResourceController;
 use App\Http\Controllers\Auth\PersonalAccessTokenController;
+use App\Http\Controllers\Api\TagResourceController;
+use App\Http\Controllers\Api\CartResourceController;
+use App\Http\Controllers\Api\RoleResourceController;
+use App\Http\Controllers\Api\UserResourceController;
+use App\Http\Controllers\Api\ImageResourceController;
+use App\Http\Controllers\Api\OrderResourceController;
+use App\Http\Controllers\Api\AuthorResourceController;
+use App\Http\Controllers\Api\RewiewResourceController;
+use App\Http\Controllers\Api\SeriesResourceController;
+use App\Http\Controllers\Api\ProductResourceController;
+use App\Http\Controllers\Api\CategoryResourceController;
+use App\Http\Controllers\Api\PublisherResourceController;
 
 Route::prefix('auth')->group(function () {
     Route::post('/personal-access-tokens', [PersonalAccessTokenController::class, 'store']);

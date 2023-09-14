@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Models\Image;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Image\StoreImageRequest;
 use App\Http\Requests\Image\UpdateImageRequest;
-use App\Models\Image;
 
 class ImageResourceController extends Controller
 {

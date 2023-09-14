@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Models\Tag;
+use App\Http\Resources\TagResource;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Tag\StoreTagRequest;
 use App\Http\Requests\Tag\UpdateTagRequest;
-use App\Http\Requests\TagRequest;
-use App\Http\Resources\TagResource;
-use App\Models\Tag;
-use Throwable;
 
 class TagResourceController extends Controller
 {

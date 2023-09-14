@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Storage;
 
 final class ProductService
 {
+    public function getProductList()
+    {
+        return Product::filter(request(Product::FILTERS))->paginate(6);
+    }
+
     public function store(array $request): Product
     {
         $product = DB::transaction(function () use ($request) {
