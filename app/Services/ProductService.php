@@ -12,11 +12,12 @@ use App\Models\Publisher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 final class ProductService
 {
     public function getProductList()
-    {
+    {   
         return Product::filter(request(Product::FILTERS))->paginate(6);
     }
 

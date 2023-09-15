@@ -150,7 +150,7 @@
                 @endforeach
             
         </div>
-        <div class="mt-3">
+        <div id="pagination" class="mt-3">
             {{$products->links()}}
         </div>
     </div>
@@ -163,7 +163,14 @@
 
     filterButtonUp.addEventListener('click', (e) => filterBar.style.display = `flex`);
     filterButton.addEventListener('click', (e) => filterBar.style.display = `none`);
-    console.log(window.history);
+
+    // Спарсить квери параметры урла
+    params = new URLSearchParams(location.search);
+    params.has('page') ? params.delete('page') : params;
+
+    let links = document.querySelectorAll('#pagination a');
+    console.log(params.keys());
+    links.forEach((item) => item.setAttribute('href', item.attributes['href'].value + `&${params}`));
 </script>
 @endpush
 @endsection
