@@ -3,10 +3,12 @@
 namespace App\Services;
 
 use App\Enums\OrderStatusEnum;
+use App\Mail\OrderShipped;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 final class OrderService
 {
@@ -36,6 +38,9 @@ final class OrderService
         }
 
         $order->push();
+
+        // Отправить письмо на почту юзеру с уведомлением о создании заказа
+        Mail->to($order->user)->send(new OrderShipped($order));
 
         // Удалить корзину
         $cart->delete();

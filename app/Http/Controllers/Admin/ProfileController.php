@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
@@ -12,8 +13,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $user = request()->user();
-        return view('admin.profile', compact('user'));
+        // 
     }
 
     /**
@@ -35,9 +35,9 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        return view('admin.main.profile', compact('user'));
     }
 
     /**

@@ -5,6 +5,6 @@
     >
         {{$slot}}
 
-        <span>{{$title}}</span>
+        <span class="capitalize">{{$title}}</span>
     </a>
 </li>

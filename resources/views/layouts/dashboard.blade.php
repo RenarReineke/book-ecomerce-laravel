@@ -17,15 +17,14 @@
     </head>
 
     <body
-        class="h-screen"
+        class="h-screen p-5 pl-0 bg-blue-950 overflow-hidden"
     >
             
                 @include('admin.sidebar')
-                <div class="pl-[271px] relative">
-                    @include('admin.header')
+                <div class="pl-[271px] h-full relative">
 
-                    @yield('statistic')
                     @yield('profile')
+                    @yield('statistic')
 
                     @yield('clientList')
                     @yield('employeeList')

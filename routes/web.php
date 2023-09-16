@@ -41,9 +41,9 @@ Route::prefix('auth')->group(function () {
     Route::view('/verify-email', 'verifyEmail')->name('verifyEmail');
 });
 
-Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth:sanctum')->name('dashboard');
-    Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth:sanctum')->name('profile');
+Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile');
     Route::resources([
         'products' => AdminProductResourceController::class,
         'authors' => AdminAuthorResourceController::class,

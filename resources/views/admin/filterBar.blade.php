@@ -16,36 +16,6 @@
         method="get"
         class="h-5/6 flex flex-col items-start justify-between"
     >
-        <!-- Поиск -->
-        <div class="relative rounded-md shadow-sm">
-            <button
-                class="absolute left-0 w-9 h-10 rounded-l-md bg-sky-800 hover:bg-sky-900 inset-y-0 flex justify-center items-center"
-                type="submit"
-            >
-                <svg
-                    class="w-6 h-6 text-gray-100"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                    />
-                </svg>
-            </button>
-            <input
-                class="pl-10 h-10 w-full rounded-md text-sm"
-                value="{{ old('search') }}"
-                type="text"
-                id="search"
-                name="search"
-                placeholder="Что вы хотите найти?"
-            />
-        </div>
-
         <!-- Рейтинг -->
         <div class="bg-sky-200 rounded-md">
             <fieldset class="flex">

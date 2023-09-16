@@ -24,8 +24,7 @@ class ProductResourceController extends Controller
      */
     public function store(StoreProductRequest $request, ProductService $productService)
     {
-        $category = Category::findOrFail($request->category_id);
-        $product = $productService->store($request->validated(), $category);
+        $product = $productService->store($request->validated());
         return $product;
     }
 

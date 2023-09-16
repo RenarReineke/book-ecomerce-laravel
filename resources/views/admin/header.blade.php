@@ -48,7 +48,7 @@
         <div class="pr-10 flex items-center justify-center space-x-6">
             @auth
             <a
-                href="{{ route('profile') }}"
+                href="{{ route('profile', ['user' => Auth::user()]) }}"
                 class="flex items-center justify-center space-x-2 hover:text-slate-200"
             >
                 <svg
@@ -86,7 +86,9 @@
                     <span>Выйти</span>
                 </button>
             </form>
-            @endauth @guest
+            @endauth 
+            
+            @guest
             <a
                 href="{{ route('register') }}"
                 class="flex items-center justify-center space-x-2 hover:text-slate-200"
