@@ -34,50 +34,46 @@
             </fieldset>
         </div>
 
-        <!-- Диапазон цен -->
+        <!-- Цена -->
         <div>
             <div class="flex justify-between space-x-2">
                 <div>
                     <label for="from">От</label>
                     <input
-                        class="p-0 h-5 w-12 rounded-md"
+                        class="p-1 pr-0 h-6 w-16 rounded-md outline-none border-1 border-slate-300"
                         type="number"
                         id="from"
-                        name="fromPrice"
-                        value="{{ $minPriceProducts }}"
-                        min="{{ $minPriceProducts }}"
-                        max="{{ $maxPriceProducts }}"
                     />
                 </div>
 
                 <div>
                     <label for="from">До</label>
                     <input
-                        class="p-0 h-5 w-12 rounded-md"
+                        class="p-1 pr-0 h-6 w-16 rounded-md outline-none border-1 border-slate-300"
                         type="number"
                         id="to"
-                        name="toPrice"
-                        value="{{ $maxPriceProducts }}"
-                        min="{{ $minPriceProducts }}"
-                        max="{{ $maxPriceProducts }}"
                     />
                 </div>
             </div>
+
+            <!-- Диапазон цен -->
             <div class="flex mt-2">
                 <input
-                    name="price"
-                    value="{{ $avgPriceProducts }}"
+                    id="fromRange"
+                    name="fromPrice"
+                    value="{{ $minPriceProducts }}"
                     min="{{ $minPriceProducts }}"
-                    max="{{ $maxPriceProducts }}"
-                    class="w-1/2 h-[20px] border-2 border-r-0 border-slate-500 rounded-l-md"
+                    max="{{ $avgPriceProducts - 1 }}"
+                    class="w-1/2 h-[10px] border-2 border-r-0 border-violet-500 rounded-l-md"
                     type="range"
                 />
                 <input
-                    name="price"
-                    value="{{ $avgPriceProducts }}"
-                    min="{{ $minPriceProducts }}"
+                    id="toRange"
+                    name="toPrice"
+                    value="{{ $maxPriceProducts }}"
+                    min="{{ $avgPriceProducts + 1 }}"
                     max="{{ $maxPriceProducts }}"
-                    class="w-1/2 h-[20px] border-2 border-l-0 border-slate-500 rounded-r-md"
+                    class="w-1/2 h-[10px] border-2 border-l-0 border-violet-500 rounded-r-md"
                     type="range"
                 />
             </div>

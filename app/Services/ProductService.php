@@ -18,7 +18,8 @@ final class ProductService
 {
     public function getProductList()
     {   
-        return Product::filter(request(Product::FILTERS))->paginate(6);
+        // dd(get_class_methods(request()));
+        return Product::filter(request(Product::FILTERS))->paginate(6)->withPath("?" . request()->getQueryString());
     }
 
     public function store(array $request): Product
@@ -72,14 +73,14 @@ final class ProductService
     }
 
     public function getDataForFrontendFilters(): array
-    {
+    {   
         $categories = Category::all();
         $publishers = Publisher::all();
         $seriesList = Series::all();
 
         $minPriceProducts = Product::min('price');
         $maxPriceProducts = Product::max('price');
-        $avgPriceProducts = Product::avg('price');
+        $avgPriceProducts = round(Product::avg('price'));
 
         $data = [
             'categories', 'publishers', 'seriesList', 
