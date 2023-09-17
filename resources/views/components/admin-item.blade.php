@@ -1,10 +1,10 @@
 <li>
     <a
-        class="px-10 w-full h-10 flex justify-start items-center hover:bg-slate-300 hover:text-black"
-        href={{$url}}
+        class="pl-10 w-full h-10 flex justify-start items-center hover:bg-indigo-100 hover:text-gray-700"
+        href="{{ $url }}"
     >
-        {{$slot}}
+        {{ $slot }}
 
-        <span class="capitalize">{{$title}}</span>
+        <span class="capitalize">{{ $title }}</span>
     </a>
 </li>

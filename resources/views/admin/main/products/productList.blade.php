@@ -47,7 +47,7 @@
             <form action="{{ route('products.index') }}" method="get" class="w-1/2">
                 <div class="relative rounded-md shadow-sm">
                     <button
-                        class="absolute left-0 w-9 h-8 rounded-l-md bg-sky-800 hover:bg-sky-900 inset-y-0 flex justify-center items-center"
+                        class="absolute left-0 w-9 h-8 rounded-l-md bg-indigo-700 hover:bg-indigo-900 inset-y-0 flex justify-center items-center"
                         type="submit"
                     >
                         <svg
@@ -65,7 +65,7 @@
                         </svg>
                     </button>
                     <input
-                        class="pl-10 h-8 w-full rounded-md text-sm border-2 border-slate-200 focus:border-sky-800 hover:border-sky-800"
+                        class="pl-10 h-8 w-full rounded-md text-slate-600 text-sm font-medium border-2 border-indigo-200 focus:border-indigo-800 hover:border-indigo-800"
                         value="{{ old('search') }}"
                         type="text"
                         id="search"
@@ -138,7 +138,7 @@
                 <div class="p-2 flex justify-start items-center">
                     @for ($i = 1; $i <= 5; $i++)
                     <svg
-                        class="w-8 h-8 stroke-none {{$i <= $product->rating ? 'fill-red-500' : 'fill-slate-500'}}"
+                        class="w-8 h-8 stroke-none {{$i <= $product->rating ? 'fill-pink-500' : 'fill-slate-500'}}"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke-width="1.5"
@@ -180,7 +180,7 @@
                         @csrf
                         <button type="submit" class="h-full w-full">
                             <svg
-                                class="w-6 h-6 text-red-600 hover:text-red-800"
+                                class="w-6 h-6 text-rose-600 hover:text-rose-800"
                                 viewBox="0 0 24 24"
                                 fill="currentColor"
                             >
@@ -198,7 +198,7 @@
                         @csrf
                         <button type="submit" class="h-full w-full">
                             <svg
-                                class="w-6 h-6 text-cyan-600 hover:text-cyan-800"
+                                class="w-6 h-6 text-sky-500 hover:text-sky-700"
                                 viewBox="0 0 24 24"
                                 fill="currentColor"
                             >

@@ -40,7 +40,7 @@ final class OrderService
         $order->push();
 
         // Отправить письмо на почту юзеру с уведомлением о создании заказа
-        Mail->to($order->user)->send(new OrderShipped($order));
+        Mail::to($order->user->email)->send(new OrderShipped($order));
 
         // Удалить корзину
         $cart->delete();

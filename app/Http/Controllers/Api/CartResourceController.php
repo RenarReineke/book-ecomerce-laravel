@@ -28,7 +28,7 @@ class CartResourceController extends Controller
     {
         $cart = new Cart();
 
-        $user = User::findOrFail(1);
+        $user = User::findOrFail(261);
         $cart->user()->associate($user);
 
         $cart->save();

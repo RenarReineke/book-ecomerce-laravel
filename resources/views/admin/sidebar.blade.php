@@ -1,5 +1,5 @@
 <div class="bg-blue-950 text-white backdrop-blur-sm min-h-[1000px] fixed z-10">
-    <ul class="mx-auto mt-[17px] w-full text-md text-bold space-y-[6px]">
+    <ul class="mx-auto mt-[17px] w-[271px] text-md text-bold space-y-[6px]">
         <x-admin-item title="{{auth()->user()->name}}" url="{{ route('profile', ['user' => auth()->user()])}}">
             <!-- <svg
                 class="mr-2 w-8 h-8 text-white"

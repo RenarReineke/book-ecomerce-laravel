@@ -17,14 +17,13 @@
     </head>
 
     <body
-        class="min-h-screen bg-[url('../../public/storage/wave.svg')] bg-fixed bg-bottom bg-no-repeat"
+        class="min-h-screen fon bg-center bg-contain"
     >
         <div class="h-screen">
 
             @include('admin.header')
 
             <h1 class="text-center mt-10 text-2xl text-gray-700">Добро пожаловать!</h1>
-            <img class="w-1/2 h-auto mx-auto rounded-xl mt-5" src="{{ Vite::asset('resources/images/many.jpg') }}">
         
             @yield('register')
             @yield('login')
@@ -35,4 +34,10 @@
 
         </div>
     </body>
+    <style>
+        .fon {
+            background-image: url("{{asset('images/many.jpg')}}");
+            background-repeat: no-repeat;
+        }
+    </style>
 </html>
