@@ -91,7 +91,7 @@
         <div class="mx-auto w-full text-sm font-medium text-slate-800">
             <!-- Заголовок таблицы -->
             <div
-                class="h-12 grid grid-cols-[30px_100px_200px_80px_120px_100px_200px_190px_190px_100px_100px] gap-x-3 bg-slate-200 rounded-t-md"
+                class="h-12 grid grid-cols-[30px_100px_190px_80px_120px_100px_200px_180px_180px_100px_130px] gap-x-3 bg-slate-200 rounded-t-md"
             >
                 <div class="p-2 w-5">ID</div>
                 <div class="p-2 w-20">Thumb</div>
@@ -110,7 +110,7 @@
             @foreach ($products as $product)
             <!-- Строка таблицы -->
             <div
-                class="h-20 grid grid-cols-[30px_100px_200px_80px_120px_100px_200px_190px_190px_100px_100px] gap-x-3 mb-2 rounded-md bg-white text-slate-600 shadow-md"
+                class="h-20 grid grid-cols-[30px_100px_190px_80px_120px_100px_200px_180px_180px_100px_130px] gap-x-3 mb-2 rounded-md bg-white text-slate-600 shadow-md"
             >
                 <div class="p-2 w-5 flex justify-start items-center">
                     {{$product->id}}
@@ -171,27 +171,14 @@
                 <!-- Действия -->
                 <div
                     class="pl-2 w-10 flex justify-start items-center space-x-2"
-                >
-                    <!-- Удалить товар -->
-                    <form
-                        method="post"
-                        action="products/{{$product->id}}/delete"
-                    >
-                        @csrf
-                        <button type="submit" class="h-full w-full">
-                            <svg
-                                class="w-6 h-6 text-rose-600 hover:text-rose-800"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                            >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z"
-                                    clip-rule="evenodd"
-                                />
-                            </svg>
-                        </button>
-                    </form>
+                >   
+                    <!-- Ссылка на страницу продукта -->
+                    <a href="{{route('products.show', ['product' => $product])}}">
+                        <svg class="w-6 h-6 text-indigo-600 hover:text-indigo-800" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
 
                     <!-- Редактировать товар -->
                     <form method="post" action="products/{{$product->id}}/edit">
@@ -218,6 +205,28 @@
                             </svg>
                         </button>
                     </form>
+
+                    <!-- Удалить товар -->
+                    <form
+                        method="post"
+                        action="products/{{$product->id}}/delete"
+                    >
+                        @csrf
+                        <button type="submit" class="h-full w-full">
+                            <svg
+                                class="w-6 h-6 text-rose-600 hover:text-rose-800"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z"
+                                    clip-rule="evenodd"
+                                />
+                            </svg>
+                        </button>
+                    </form>
+                    
                 </div>
             </div>
             @endforeach
@@ -243,13 +252,21 @@
     );
 
     // Спарсить квери параметры урла
-    params = new URLSearchParams(location.search);
-    params.has("page") ? params.delete("page") : params;
+    // params = new URLSearchParams(location.search);
+    // params.has("page") ? params.delete("page") : params;
 
-    let links = document.querySelectorAll("#pagination a");
-    console.log(params.keys());
-    links.forEach((item) =>
-        item.setAttribute("href", item.attributes["href"].value + `&${params}`)
-    );
+    // let links = document.querySelectorAll("#pagination a");
+    // console.log(params.keys());
+    // links.forEach((item) =>
+    //     item.setAttribute("href", item.attributes["href"].value + `&${params}`)
+    // );
+
+    let priceToInput = document.getElementById("to");
+    let priceFromInput = document.getElementById("from");
+    let priceToRangeInput = document.getElementById("toRange");
+    let priceFromRangeInput = document.getElementById("fromRange");
+
+    priceFromRangeInput.addEventListener('input', (e) => priceFromInput.value = e.target.value);
+    priceToRangeInput.addEventListener('input', (e) => priceToInput.value = e.target.value);
 </script>
 @endpush @endsection
