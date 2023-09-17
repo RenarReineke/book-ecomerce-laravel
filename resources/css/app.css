@@ -21,14 +21,15 @@
         margin: 0;
     }
 
+    input[type="range"]::-webkit-range-track {
+        background-color: darkmagenta;
+    }
+
     input[type="range"]::-webkit-slider-thumb {
-        height: 30px;
-        width: 30px;
-        background: url('../images/bitcoin.png');
-        background-position: center;
-        background-size: contain;
+        height: 20px;
+        width: 20px;
+        background-color: darkorchid;
         border-radius: 50%;
-        border: 2px solid gray;
     }
 
     input[type="range"]::-webkit-slider-thumb:hover {
