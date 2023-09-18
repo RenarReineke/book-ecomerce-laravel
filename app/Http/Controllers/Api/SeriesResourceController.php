@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Series;
+use App\Services\SeriesService;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SeriesResource;
 use App\Http\Requests\Series\StoreSeriesRequest;
@@ -22,9 +23,9 @@ class SeriesResourceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSeriesRequest $request)
-    {
-        return Series::create($request->validated());
+    public function store(StoreSeriesRequest $request, SeriesService $seriesService)
+    {   $series = $seriesService->store($request->validated());
+        return $series;
     }
 
     /**
@@ -38,10 +39,9 @@ class SeriesResourceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSeriesRequest $request, string $id)
+    public function update(UpdateSeriesRequest $request, Series $series, SeriesService $seriesService)
     {
-        $series = Series::findOrFail($id);
-        $series->update($request->validated());
+        $series = $seriesService->update($request->validated(), $series);
         return $series;
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Author;
+use App\Services\AuthorService;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AuthorResource;
 use App\Http\Requests\Author\StoreAuthorRequest;
@@ -22,9 +23,9 @@ class AuthorResourceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAuthorRequest $request)
+    public function store(StoreAuthorRequest $request, AuthorService $authorService)
     {
-        return Author::create($request->validated());
+        return $authorService->store($request->validated());
     }
 
     /**
@@ -38,10 +39,9 @@ class AuthorResourceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAuthorRequest $request, string $id)
+    public function update(UpdateAuthorRequest $request, Author $author, AuthorService $authorService)
     {
-        $author = Author::findOrFail($id);
-        $author->update($request->validated());
+        $author = $authorService->update($request->validated(), $author);
         return $author;
     }
 

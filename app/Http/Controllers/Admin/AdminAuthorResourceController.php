@@ -16,7 +16,7 @@ class AdminAuthorResourceController extends Controller
      */
     public function index()
     {
-        $authors = Author::paginate(10);
+        $authors = Author::paginate(6);
         return view('admin.main.authors.authorList', compact('authors'));
     }
 

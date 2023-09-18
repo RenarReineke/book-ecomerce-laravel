@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Publisher;
+use App\Services\PublisherService;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PublisherResource;
 use App\Http\Requests\Publisher\StorePublisherRequest;
@@ -22,9 +23,10 @@ class PublisherResourceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePublisherRequest $request)
+    public function store(StorePublisherRequest $request, PublisherService $publisherService)
     {
-        return Publisher::create($request->validated());
+        $publisher = $publisherService->store($request->validated());
+        return $publisher;
     }
 
     /**
@@ -38,10 +40,9 @@ class PublisherResourceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePublisherRequest $request, string $id)
+    public function update(UpdatePublisherRequest $request, Publisher $publisher, PublisherService $publisherService)
     {
-         $publisher = Publisher::findOrFail($id);
-         $publisher->update($request->validated());
+        $publisher = $publisherService->update($request->validated(), $publisher);
         return  $publisher;
     }
 

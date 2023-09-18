@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Tag;
+use App\Services\TagService;
 use App\Http\Resources\TagResource;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tag\StoreTagRequest;
@@ -22,9 +23,9 @@ class TagResourceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTagRequest $request)
+    public function store(StoreTagRequest $request, TagService $tagService)
     {
-        $tag = Tag::create($request->validated());
+        $tag = $tagService->store($request->validated());
         return new TagResource($tag);
     }
 
@@ -40,10 +41,9 @@ class TagResourceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTagRequest $request, string $id)
+    public function update(UpdateTagRequest $request, Tag $tag, TagService $tagService)
     {
-        $tag = Tag::findOrFail($id);
-        $tag->update($request->validated());
+        $tag = $tagService->update($request->validated(), $tag);
         return new TagResource($tag);
 
     }
