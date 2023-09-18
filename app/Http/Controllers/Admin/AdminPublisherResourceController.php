@@ -16,7 +16,7 @@ class AdminPublisherResourceController extends Controller
      */
     public function index()
     {
-        $publishers = Publisher::paginate(10);
+        $publishers = Publisher::paginate(6);
         return view('admin.main.publishers.publisherList', compact('publishers'));
     }
 

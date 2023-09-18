@@ -2,6 +2,10 @@
 @section('authorList')
 <div class="relative flex flex-row-reverse h-full bg-sky-50 border-4 rounded-lg">
 
+    <x-filters url="{{route('authors.index')}}">
+        <x-author-filters></x-author-filters>
+    </x-filters>
+
     <!-- Main -->
     <div class="p-10 pt-4 px-5 h-auto w-full bg-sky-50">
         <!-- Верхняя панель -->       
@@ -52,4 +56,38 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script>
+    let filterButtonUp = document.getElementById("filterButtonUp");
+    let filterButton = document.getElementById("filterButton");
+    let filterBar = document.getElementById("filterBar");
+
+    filterButtonUp.addEventListener(
+        "click",
+        (e) => (filterBar.style.display = `flex`)
+    );
+    filterButton.addEventListener(
+        "click",
+        (e) => (filterBar.style.display = `none`)
+    );
+
+    // Спарсить квери параметры урла
+    // params = new URLSearchParams(location.search);
+    // params.has("page") ? params.delete("page") : params;
+
+    // let links = document.querySelectorAll("#pagination a");
+    // console.log(params.keys());
+    // links.forEach((item) =>
+    //     item.setAttribute("href", item.attributes["href"].value + `&${params}`)
+    // );
+
+    let priceToInput = document.getElementById("to");
+    let priceFromInput = document.getElementById("from");
+    let priceToRangeInput = document.getElementById("toRange");
+    let priceFromRangeInput = document.getElementById("fromRange");
+
+    priceFromRangeInput.addEventListener('input', (e) => priceFromInput.value = e.target.value);
+    priceToRangeInput.addEventListener('input', (e) => priceToInput.value = e.target.value);
+</script>
+@endpush
 @endsection

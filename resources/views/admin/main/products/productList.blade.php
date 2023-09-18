@@ -1,6 +1,8 @@
 @extends('layouts.dashboard') @section('productList')
 <div class="relative flex flex-row-reverse h-full bg-sky-50 border-4 rounded-lg">
-    @include('.admin.filterBar')
+    <x-filters url="{{route('products.index')}}">
+        <x-product-filters></x-product-filters>
+    </x-filters>
 
     <!-- Main -->
     <div class="p-10 pt-4 px-5 h-auto w-full bg-sky-50">

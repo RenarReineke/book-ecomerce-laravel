@@ -12,12 +12,12 @@
 
     <!-- Форма с фильтрами -->
     <form
-        action="{{ route('products.index') }}"
+        action="{{ $url }}"
         method="get"
         class="h-5/6 flex flex-col items-start justify-between"
     >   
         <!-- Список фильтров -->
-        <x-product-filters></x-product-filters>
+        {{$slot}}
 
         <button
             id="filterButton"
@@ -27,7 +27,7 @@
         </button>
     </form>
 
-    <form action="{{ route('products.index') }}" method="get">
+    <form action="{{ $url }}" method="get">
         <button
                 id="filterButton"
                 class="w-40 h-8 rounded-md bg-pink-700 hover:bg-pink-800 text-white text-md"

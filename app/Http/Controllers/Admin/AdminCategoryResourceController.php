@@ -16,7 +16,7 @@ class AdminCategoryResourceController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(10);
+        $categories = Category::paginate(6);
         return view('admin.main.categories.categoryList', compact('categories'));
     }
 

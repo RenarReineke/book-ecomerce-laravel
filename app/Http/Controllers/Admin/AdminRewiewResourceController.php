@@ -18,7 +18,7 @@ class AdminRewiewResourceController extends Controller
      */
     public function index()
     {
-        $rewiews = Rewiew::paginate(10);
+        $rewiews = Rewiew::paginate(6);
         return view('admin.main.rewiews.rewiewList', compact('rewiews'));
     }
 
