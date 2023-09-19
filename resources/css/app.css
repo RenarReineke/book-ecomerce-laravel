@@ -11,6 +11,7 @@
 } */
 
 @layer base {
+    /* Инпут типа range */
     input[type="range"],
     input[type="range"]::-webkit-slider-runnable-track,
     input[type="range"]::-webkit-range-track,
@@ -35,5 +36,28 @@
     input[type="range"]::-webkit-slider-thumb:hover {
         cursor: pointer;
     }
-}
 
+    /* Полоса прокрутки */
+    /* Для фаерфокса */
+    * {
+        scrollbar-width: 2px;
+        scrollbar-color: rgb(207, 206, 206);
+    }
+
+    /* Работает в Chrome, Edge и Safari */
+    *::-webkit-scrollbar {
+        width: 2px;
+    }
+
+    *::-webkit-scrollbar-track {
+        background: none;
+        border-bottom-right-radius: 20px;
+        height: calc(100% - 20px);
+        
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background-color: rgb(196, 154, 240);
+        border-radius: 20px;
+    }
+}

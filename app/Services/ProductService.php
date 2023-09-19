@@ -89,4 +89,19 @@ final class ProductService
 
         return compact(...$data);
     }
+
+    public function getDataForModalForm(): array
+    {   
+        $categories = Category::all();
+        $tags = Tag::all();
+        $publishers = Publisher::all();
+        $seriesList = Series::all();
+        $authors = Author::all();
+
+        $data = [
+            'categories', 'tags', 'publishers', 'seriesList', 'authors'
+        ];
+
+        return compact(...$data);
+    }
 }

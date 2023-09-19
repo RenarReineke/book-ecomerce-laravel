@@ -14,6 +14,4 @@
         <div>Зачислен {{$user->created_at}}</div>
         <div>Почта {{$user->email}}</div>
     </div>
-
-
 @endsection
