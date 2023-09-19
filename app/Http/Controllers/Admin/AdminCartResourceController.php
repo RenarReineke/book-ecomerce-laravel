@@ -16,7 +16,7 @@ class AdminCartResourceController extends Controller
      */
     public function index()
     {
-        $carts = Cart::paginate();
+        $carts = Cart::paginate(6);
         return view('admin.main.carts.cartList', compact('carts'));
     }
 

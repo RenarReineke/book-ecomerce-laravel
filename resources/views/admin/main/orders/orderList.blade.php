@@ -1,54 +1,108 @@
 @extends('layouts.dashboard')
 @section('orderList')
-<h1 class="mx-auto mt-5 w-96 text-lg text-gray-700 text-center">
-    Заказы
-    <a href="{{route('orders.create')}}" class="mx-auto w-12 block">
-        <svg
-            class="w-12 h-12 text-sky-700/30 hover:text-sky-700"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-        >
-            <path
-                fill-rule="evenodd"
-                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z"
-                clip-rule="evenodd"
-            />
-        </svg>
-    </a>
-</h1>
-<div class="m-3 p-10 h-auto bg-sky-50">
-    <table class="mx-auto w-full table-auto border-collapse border border-slate-400 bg-white text-md">
-        <thead class="bg-slate-400">
-            <tr class="h-10">
-                <th class="border border-slate-300">ID заказа</th>
-                <th class="border border-slate-300">Клиент</th>
-                <th class="border border-slate-300">Сумма</th>
-                <th class="border border-slate-300">Дата формирования</th>
-                <th class="border border-slate-300">Статус</th>
-                <th class="border border-slate-300">Оплата</th>
-            </tr>
-        </thead>
-        <tbody>
+<div class="relative flex flex-row-reverse h-full bg-sky-50 border-4 rounded-lg">
+
+    <x-filters url="{{route('orders.index')}}">
+        <x-order-filters></x-order-filters>
+    </x-filters>
+
+    <!-- Main -->
+    <div class="p-10 pt-4 px-5 h-auto w-full bg-sky-50">
+        <!-- Верхняя панель -->       
+            <x-header title="Заказы" formUrl="{{route('orders.create')}}" searchUrl="{{route('orders.index')}}"></x-header>
+        <!-- Верхняя панель конец -->
+
+        <!-- Разделительная линия -->
+        <div class="mb-6 h-[2px] bg-slate-400"></div>
+
+        <!-- Таблица -->
+        <div class="mx-auto w-full text-sm font-medium text-slate-800">
+            <!-- Заголовок таблицы -->
+            <div
+                class="h-12 w-full grid grid-cols-[1fr_3fr_2fr_2fr_3fr_4fr] gap-x-3 justify-items-center bg-slate-200 rounded-t-md"
+            >
+                <div class="p-2 w-5">ID</div>
+                <div class="p-2 w-20">Клиент</div>
+                <div class="p-2 w-20">Статус</div>
+                <div class="p-2 w-20">Оплата</div>
+                <div class="p-2 w-20">Дата</div>
+                <div class="p-2 w-10">Действия</div>
+            </div>
+
+            <!-- Тело таблицы -->
             @foreach ($orders as $order)
-            <tr class="h-10 hover:bg-slate-200 hover:cursor-pointer">
-                <td class="text-center border border-slate-300">
-                    <a href="{{route('orders.show', ['order' => $order])}}" class="block hover:bg-slate-700 hover:text-white">
-                        {{$order->id}}
-                    </a>
-                </td>
-                <td class="p-2 text-center border border-slate-300">   
-                    {{$order->user->name}} 
-                </td>
-                <td class="p-2 text-center border border-slate-300">{{$order->totalPrice()}}</td>
-                <td class="p-2 text-center border border-slate-300">{{$order->created_at}}</td>
-                <td class="p-2 text-center border border-slate-300">{{$order->status}}</td>
-                <td class="p-2 text-center border border-slate-300">{{$order->payment ? 'Оплачен' : 'Нет'}}</td>
-            </tr>
-             @endforeach
-        </tbody>
-    </table>
-    <div class="mt-3">
-        {{$orders->links()}}
+            <!-- Строка таблицы -->
+            <div
+                class="h-20 w-full grid grid-cols-[1fr_3fr_2fr_2fr_3fr_4fr] gap-x-3 justify-items-center mb-2 capitalize rounded-md bg-white text-slate-600 shadow-md"
+            >
+                <div class="p-2 w-5 flex justify-start items-center">
+                    {{$order->id}}
+                </div>
+
+                <div class="p-2 flex justify-start items-center">
+                    {{$order->user->name}}
+                </div>
+
+                <div class="p-2 flex justify-start items-center">
+                    {{$order->status}}
+                </div>
+
+                <div class="p-2 flex justify-start items-center">
+                    {{$order->payment}}
+                </div>
+
+                <div class="p-2 flex justify-start items-center">
+                    {{$order->created_at}}
+                </div>
+
+                <!-- Действия -->
+                <x-action-list 
+                    detail-link="{{route('orders.show', ['order' => $order])}}"
+                    edit-link="{{route('orders.edit', ['order' => $order])}}"
+                    delete-link="{{route('orders.destroy', ['order' => $order])}}"
+                    >
+                </x-action-list>
+
+            </div>
+            @endforeach
+        </div>
+        <div id="pagination" class="mt-3">
+            {{$orders->links()}}
+        </div>
     </div>
 </div>
+@push('scripts')
+<script>
+    let filterButtonUp = document.getElementById("filterButtonUp");
+    let filterButton = document.getElementById("filterButton");
+    let filterBar = document.getElementById("filterBar");
+
+    filterButtonUp.addEventListener(
+        "click",
+        (e) => (filterBar.style.display = `flex`)
+    );
+    filterButton.addEventListener(
+        "click",
+        (e) => (filterBar.style.display = `none`)
+    );
+
+    // Спарсить квери параметры урла
+    // params = new URLSearchParams(location.search);
+    // params.has("page") ? params.delete("page") : params;
+
+    // let links = document.querySelectorAll("#pagination a");
+    // console.log(params.keys());
+    // links.forEach((item) =>
+    //     item.setAttribute("href", item.attributes["href"].value + `&${params}`)
+    // );
+
+    let priceToInput = document.getElementById("to");
+    let priceFromInput = document.getElementById("from");
+    let priceToRangeInput = document.getElementById("toRange");
+    let priceFromRangeInput = document.getElementById("fromRange");
+
+    priceFromRangeInput.addEventListener('input', (e) => priceFromInput.value = e.target.value);
+    priceToRangeInput.addEventListener('input', (e) => priceToInput.value = e.target.value);
+</script>
+@endpush
 @endsection

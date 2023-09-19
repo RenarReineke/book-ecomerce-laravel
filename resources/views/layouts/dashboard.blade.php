@@ -21,7 +21,7 @@
     >
             
                 @include('admin.sidebar')
-                <div class="pl-[271px] h-full relative">
+                <div class="ml-[271px] relative h-full bg-sky-50 border-4 rounded-lg">
 
                     @yield('profile')
                     @yield('statistic')

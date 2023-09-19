@@ -13,7 +13,7 @@ class AdminClientResourceController extends Controller
      */
     public function index()
     {
-        $clients = User::paginate(10);
+        $clients = User::paginate(6);
         return view('admin.main.clients.clientList', compact('clients'));
     }
 

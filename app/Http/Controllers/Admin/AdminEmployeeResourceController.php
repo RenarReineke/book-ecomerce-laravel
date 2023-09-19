@@ -13,7 +13,7 @@ class AdminEmployeeResourceController extends Controller
      */
     public function index()
     {
-        $employees = User::paginate(10);
+        $employees = User::paginate(6);
         return view('admin.main.employees.employeeList', compact('employees'));
     }
 
