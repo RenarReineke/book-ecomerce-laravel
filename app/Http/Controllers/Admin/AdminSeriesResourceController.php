@@ -71,6 +71,6 @@ class AdminSeriesResourceController extends Controller
     public function destroy(Series $series)
     {
         $series->delete();
-        return back();
+        return redirect()->route('series.index');
     }
 }

@@ -79,6 +79,6 @@ class AdminRewiewResourceController extends Controller
     public function destroy(Rewiew $rewiew)
     {
         $rewiew->delete();
-        return back();
+        return redirect()->route('rewiews.index');
     }
 }

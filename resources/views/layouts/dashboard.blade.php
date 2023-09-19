@@ -42,6 +42,7 @@
                     @yield('categoryUpdateForm')
 
                     @yield('productList')
+                    @yield('productDetail')
                     @yield('productCreateForm')
 
                     @yield('tagList')

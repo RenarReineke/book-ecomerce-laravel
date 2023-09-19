@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('publisherList')
-<div class="relative flex flex-row-reverse h-full bg-sky-50 border-4 rounded-lg">
+<div class="h-full w-full relative flex flex-row-reverse">
 
     <x-filters url="{{route('publishers.index')}}">
         <x-publisher-filters></x-publisher-filters>

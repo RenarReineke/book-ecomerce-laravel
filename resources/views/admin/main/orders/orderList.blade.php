@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('orderList')
-<div class="relative flex flex-row-reverse h-full bg-sky-50 border-4 rounded-lg">
+<div class="h-full w-full relative flex flex-row-reverse">
 
     <x-filters url="{{route('orders.index')}}">
         <x-order-filters></x-order-filters>

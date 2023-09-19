@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('tagList')
-<div class="relative flex flex-row-reverse h-full bg-sky-50 border-4 rounded-lg">
+<div class="h-full w-full relative flex flex-row-reverse">
 
     <x-filters url="{{route('tags.index')}}">
         <x-tag-filters></x-tag-filters>

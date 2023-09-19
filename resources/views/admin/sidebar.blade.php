@@ -83,7 +83,7 @@
             </svg>
         </x-admin-item>
 
-        <x-admin-item title="Корзины" url="carts">
+        <x-admin-item title="Корзины" url="{{ route('carts.index') }}">
             <svg
                 class="mr-2 w-6 h-6 text-white"
                 viewBox="0 0 24 24"

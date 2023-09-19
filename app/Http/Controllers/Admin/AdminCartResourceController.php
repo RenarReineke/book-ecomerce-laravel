@@ -64,11 +64,10 @@ class AdminCartResourceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Cart $cart)
     {
-        $cart = Cart::find($id);
         $cart->delete();
-        return redirect('admin/carts');
+        return redirect()->route('carts.index');
     }
 
     public function remove(UpdateCartRequest $request, Cart $cart, CartService $cartService)

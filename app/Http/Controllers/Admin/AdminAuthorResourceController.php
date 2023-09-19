@@ -68,6 +68,6 @@ class AdminAuthorResourceController extends Controller
     public function destroy(Author $author)
     {
         $author->delete();
-        return back();
+        return redirect()->route('authors.index');
     }
 }

@@ -68,6 +68,6 @@ class AdminPublisherResourceController extends Controller
     public function destroy(Publisher $publisher)
     {
         $publisher->delete();
-        return back();
+        return redirect()->route('publishers.index');
     }
 }

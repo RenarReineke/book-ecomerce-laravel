@@ -53,9 +53,9 @@ class AdminProductResourceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
-        //
+        return view('admin.main.products.productDetail', compact('product'));
     }
 
     /**
@@ -77,10 +77,9 @@ class AdminProductResourceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        $cart = Product::find($id);
-        $cart->delete();
-        return back();
+        $product->delete();
+        return redirect()->route('products.index');
     }
 }

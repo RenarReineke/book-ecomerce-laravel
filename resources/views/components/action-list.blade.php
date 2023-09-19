@@ -1,5 +1,7 @@
 <div class="pl-2 w-10 flex justify-start items-center space-x-2">
+
     <!-- Ссылка на детальную страницу -->
+    @isset($detailLink)
     <a href="{{$detailLink}}">
         <svg
             class="w-6 h-6 text-indigo-600 hover:text-indigo-800"
@@ -14,6 +16,7 @@
             />
         </svg>
     </a>
+    @endisset
 
     <!-- Редактировать -->
     <form method="get" action="{{$editLink}}">

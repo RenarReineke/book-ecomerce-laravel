@@ -68,6 +68,6 @@ class AdminTagResourceController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
-        return back();
+        return redirect()->route('tags.index');
     }
 }

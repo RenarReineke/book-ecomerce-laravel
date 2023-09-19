@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('rewiewList')               
-<div class="relative flex flex-row-reverse h-full bg-sky-50 border-4 rounded-lg">
+<div class="h-full w-full relative flex flex-row-reverse">
     <x-filters url="{{route('rewiews.index')}}">
         <x-rewiew-filters></x-rewiew-filters>
     </x-filters>

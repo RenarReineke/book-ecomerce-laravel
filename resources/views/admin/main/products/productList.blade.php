@@ -1,5 +1,5 @@
 @extends('layouts.dashboard') @section('productList')
-<div class="relative flex flex-row-reverse h-full bg-sky-50 border-4 rounded-lg">
+<div class="h-full w-full relative flex flex-row-reverse">
     <x-filters url="{{route('products.index')}}">
         <x-product-filters></x-product-filters>
     </x-filters>
