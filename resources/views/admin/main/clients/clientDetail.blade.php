@@ -2,7 +2,7 @@
 @section('clientDetail')
 
 <x-page-detail 
-    title="Отзыв {{$client->id}}" 
+    title="Клиент {{$client->id}}" 
     editLink="{{ route('clients.edit', ['client' => $client]) }}" 
     deleteLink="{{ route('clients.destroy', ['client' => $client]) }}"
     listLink="{{ route('clients.index') }}"

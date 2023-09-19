@@ -27,7 +27,12 @@
                     @yield('statistic')
 
                     @yield('clientList')
+                    @yield('clientDetail')
+                    @yield('clientCreateForm')
+
                     @yield('employeeList')
+                    @yield('employeeDetail')
+                    @yield('employeeCreateForm')
 
                     @yield('orderList')
                     @yield('orderDetail')

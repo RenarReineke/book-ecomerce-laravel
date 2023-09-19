@@ -36,17 +36,17 @@ class AdminClientResourceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(User $client)
     {
-        return view('admin.main.clients.clientDetail', compact('user'));
+        return view('admin.main.clients.clientDetail', compact('client'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(User $client)
     {
-        return view('admin.main.clients.clientUpdateForm', compact('user'));
+        return view('admin.main.clients.clientUpdateForm', compact('client'));
     }
 
     /**
@@ -60,8 +60,9 @@ class AdminClientResourceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $client)
     {
-        //
+        $client->delete();
+        return redirect()->route('clients.index');
     }
 }

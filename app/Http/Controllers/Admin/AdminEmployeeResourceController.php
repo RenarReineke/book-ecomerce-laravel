@@ -36,17 +36,17 @@ class AdminEmployeeResourceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(User $employee)
     {
-        return view('admin.main.employees.employeeDetail', compact('user'));
+        return view('admin.main.employees.employeeDetail', compact('employee'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
-    {
-        return view('admin.main.employees.employeeUpdateForm', compact('user'));
+    public function edit(User $employee)
+    {   
+        return view('admin.main.employees.employeeUpdateForm', compact('employee'));
     }
 
     /**
@@ -60,8 +60,9 @@ class AdminEmployeeResourceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $employee)
     {
-        //
+        $employee->delete();
+        return redirect()->route('clients.employee');
     }
 }
