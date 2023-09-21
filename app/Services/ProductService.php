@@ -28,6 +28,7 @@ final class ProductService
             $product = new Product();
 
             $product->title = $request['title'];
+            $product->slug = $request['title'];
             $product->description = $request['description'];
             $product->price = $request['price'];
             $product->amount = $request['amount'];
@@ -58,10 +59,14 @@ final class ProductService
                 $product->authors()->attach($author);
             }
 
-            $images = array_map(fn($image) => Storage::disk('public')->put('/products', $image), $request['images']);
-            foreach($images as $imagePath)
+            if(isset($request['images']))
             {
-                $product->images()->create(['url' => $imagePath]);
+                // Превратить массив файлов в массив ссылок, попутно сохраняя файлы на диск
+                $images = array_map(fn($image) => Storage::disk('public')->put('/products', $image), $request['images']);
+                foreach($images as $imagePath)
+                {
+                    $product->images()->create(['url' => $imagePath]);
+                }
             }
 
             $product->push();
