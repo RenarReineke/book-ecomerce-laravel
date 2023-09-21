@@ -21,6 +21,6 @@ class EmployeeFilters extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.employee-filters');
+        return view('components.filters.employee-filters');
     }
 }

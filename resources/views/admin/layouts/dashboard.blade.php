@@ -22,7 +22,7 @@
         class="h-screen p-5 pl-0 bg-blue-950 overflow-hidden"
     >
             
-                @include('admin.sidebar')
+                @include('admin.layouts.sidebar')
                 <div class="ml-[271px] relative h-full bg-sky-50 border-4 rounded-lg">
 
                     @yield('profile')
@@ -51,6 +51,7 @@
                     @yield('productList')
                     @yield('productDetail')
                     @yield('productCreateForm')
+                    @yield('productUpdateForm')
 
                     @yield('tagList')
                     @yield('tagDetail')

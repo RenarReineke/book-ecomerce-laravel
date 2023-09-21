@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('admin.layouts.dashboard')
 @section('commentDetail')
 <h1
     class="mt-5 w-full text-center text-lg text-gray-700 flex justify-center items-center"

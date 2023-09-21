@@ -23,7 +23,7 @@ use App\Http\Controllers\Admin\AdminEmployeeResourceController;
 use App\Http\Controllers\Admin\AdminPublisherResourceController;
 
 Route::get('/', function () {
-    return view('layouts.welcome');
+    return view('admin.layouts.welcome.welcome');
 });
 
 Route::prefix('auth')->group(function () {

@@ -28,6 +28,6 @@ class PublisherFilters extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.publisher-filters');
+        return view('components.filters.publisher-filters');
     }
 }

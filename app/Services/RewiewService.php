@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
-use App\Models\Product;
 use App\Models\User;
+use ReflectionClass;
 use App\Models\Rewiew;
+use App\Models\Product;
+use App\Enums\RatingEnum;
 
 final class RewiewService
 {
@@ -33,5 +35,18 @@ final class RewiewService
         $rewiew->save();
 
         return $rewiew;
+    }
+
+    public function getDataForModalForm(): array
+    {   
+        $ratings = RatingEnum::class;
+        $reflection = new ReflectionClass($ratings);
+        $ratingList = $reflection->getConstants();
+
+        $data = [
+            'ratingList'
+        ];
+
+        return compact(...$data);
     }
 }

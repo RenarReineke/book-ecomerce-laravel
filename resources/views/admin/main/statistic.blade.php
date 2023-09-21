@@ -1,6 +1,8 @@
-@extends('layouts.dashboard')
+@extends('admin.layouts.dashboard')
 @section('statistic')
-<h1 class="mx-auto mt-5 w-96 text-2xl text-gray-700">Панель администратора</h1>
+<h1 class="mx-auto p-3 w-96 text-2xl text-gray-700">Панель администратора</h1>
+<!-- Разделительная линия -->
+<div class="mb-2 mx-2 h-[2px] bg-slate-400"></div>
 
 <div class="flex flex-wrap justify-around items-center w-full h-auto">
     <x-statistic-item title="Всего клиентов" info={{$total}} color="bg-yellow-500" colorBottom="border-red-600"></x-statistic-item>

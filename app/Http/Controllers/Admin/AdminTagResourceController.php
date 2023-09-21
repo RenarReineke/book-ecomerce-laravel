@@ -42,7 +42,7 @@ class AdminTagResourceController extends Controller
      */
     public function show(Tag $tag)
     {
-        return view('admin.main.tags.tagUpdateForm', compact('tag'));
+        return view('admin.main.tags.tagDetail', compact('tag'));
     }
 
     /**

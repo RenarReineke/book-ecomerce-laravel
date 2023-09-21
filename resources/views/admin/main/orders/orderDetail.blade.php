@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('admin.layouts.dashboard')
 @section('orderDetail')
 <x-page-detail 
     title="Заказ {{$order->id}}" 

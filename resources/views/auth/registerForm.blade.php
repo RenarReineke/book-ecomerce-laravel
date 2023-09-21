@@ -1,4 +1,4 @@
-@extends('layouts.welcome')
+@extends('admin.layouts.welcome.welcome')
 
 @section('register')
 <!-- Компонент регистрации -->

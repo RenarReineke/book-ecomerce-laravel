@@ -21,7 +21,7 @@
     >
         <div class="h-screen">
 
-            @include('admin.header')
+            @include('admin.layouts.welcome.header')
 
             <h1 class="text-center mt-10 text-2xl text-gray-700">Добро пожаловать!</h1>
         

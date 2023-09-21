@@ -21,6 +21,6 @@ class OrderFilters extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.order-filters');
+        return view('components.filters.order-filters');
     }
 }

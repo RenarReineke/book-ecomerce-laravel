@@ -33,12 +33,7 @@ class AdminProductResourceController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        $tags = Tag::all();
-        $publishers = Publisher::all();
-        $seriesList = Series::all();
-        $authors = Author::all();
-        return view('admin.main.products.productCreateForm', compact('categories', 'tags', 'publishers', 'seriesList', 'authors'));
+        return view('admin.main.products.productCreateForm');
     }
 
     /**
@@ -61,15 +56,15 @@ class AdminProductResourceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        return view('admin.main.products.productUpdateForm', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
         //
     }

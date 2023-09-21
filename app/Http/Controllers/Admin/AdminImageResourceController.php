@@ -13,8 +13,8 @@ class AdminImageResourceController extends Controller
      */
     public function index()
     {
-        $images = Image::all();
-        return view('admin.main.images', compact('images'));
+        $images = Image::paginate(6);
+        return view('admin.main.images.imageList', compact('images'));
     }
 
     /**
@@ -36,7 +36,7 @@ class AdminImageResourceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Image $image)
     {
         //
     }
@@ -44,7 +44,7 @@ class AdminImageResourceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Image $image)
     {
         //
     }
@@ -52,7 +52,7 @@ class AdminImageResourceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Image $image)
     {
         //
     }
@@ -60,8 +60,9 @@ class AdminImageResourceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Image $image)
     {
-        //
+        $image->delete();
+        return redirect()->route('images.index');
     }
 }

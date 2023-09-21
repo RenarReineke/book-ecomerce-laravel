@@ -7,7 +7,7 @@ use Illuminate\View\Component;
 use App\Services\ProductService;
 use Illuminate\Contracts\View\View;
 
-class CreateProductForm extends Component
+class ProductFormItems extends Component
 {
     public $categories;
     public $tags;
@@ -28,6 +28,6 @@ class CreateProductForm extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.create-product-form');
+        return view('components.forms.product-form-items');
     }
 }

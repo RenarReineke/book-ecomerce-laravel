@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('admin.layouts.dashboard')
 @section('authorDetail')
 
 <x-page-detail 

@@ -38,6 +38,6 @@ class ProductFilters extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.product-filters');
+        return view('components.filters.product-filters');
     }
 }

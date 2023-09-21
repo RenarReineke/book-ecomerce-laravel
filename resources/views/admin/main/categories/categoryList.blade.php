@@ -1,60 +1,47 @@
-@extends('layouts.dashboard')
-@section('categoryList')
-<div class="h-full w-full relative flex flex-row-reverse">
+@extends('admin.layouts.dashboard') @section('categoryList')
+<x-page-list
+    title="Категории"
+    formUrl="{{ route('categories.create') }}"
+    indexUrl="{{ route('categories.index') }}"
+    componentName="category-filters"
+>
+    <!-- Таблица -->
+    <div class="mx-auto w-1/2 text-sm font-medium text-slate-800">
+        <!-- Заголовок таблицы -->
+        <div
+            class="h-12 w-full grid grid-cols-[1fr_3fr_4fr] gap-x-3 justify-items-center bg-slate-200 rounded-t-md"
+        >
+            <div class="p-2 w-5">ID</div>
+            <div class="p-2 w-20">Название</div>
+            <div class="p-2 w-10">Действия</div>
+        </div>
 
-    <x-filters url="{{route('categories.index')}}">
-        <x-category-filters></x-category-filters>
-    </x-filters>
-
-    <!-- Main -->
-    <div class="p-10 pt-4 px-5 h-auto w-full bg-sky-50">
-        <!-- Верхняя панель -->       
-            <x-header title="Категории" formUrl="{{route('categories.create')}}" searchUrl="{{route('categories.index')}}"></x-header>
-        <!-- Верхняя панель конец -->
-
-        <!-- Разделительная линия -->
-        <div class="mb-6 h-[2px] bg-slate-400"></div>
-
-        <!-- Таблица -->
-        <div class="mx-auto w-1/2 text-sm font-medium text-slate-800">
-            <!-- Заголовок таблицы -->
-            <div
-                class="h-12 w-full grid grid-cols-[1fr_3fr_4fr] gap-x-3 justify-items-center bg-slate-200 rounded-t-md"
-            >
-                <div class="p-2 w-5">ID</div>
-                <div class="p-2 w-20">Название</div>
-                <div class="p-2 w-10">Действия</div>
+        <!-- Тело таблицы -->
+        @foreach ($categories as $category)
+        <!-- Строка таблицы -->
+        <div
+            class="h-20 w-full grid grid-cols-[1fr_3fr_4fr] gap-x-3 justify-items-center mb-2 capitalize rounded-md bg-white text-slate-600 shadow-md"
+        >
+            <div class="p-2 w-5 flex justify-start items-center">
+                {{$category->id}}
             </div>
 
-            <!-- Тело таблицы -->
-            @foreach ($categories as $category)
-            <!-- Строка таблицы -->
-            <div
-                class="h-20 w-full grid grid-cols-[1fr_3fr_4fr] gap-x-3 justify-items-center mb-2 capitalize rounded-md bg-white text-slate-600 shadow-md"
-            >
-                <div class="p-2 w-5 flex justify-start items-center">
-                    {{$category->id}}
-                </div>
-
-                <div class="p-2 flex justify-start items-center">
-                    {{$category->title}}
-                </div>
-
-                <!-- Действия -->
-                <x-action-list 
-                    detail-link="{{route('categories.show', ['category' => $category])}}"
-                    edit-link="{{route('categories.edit', ['category' => $category])}}"
-                    delete-link="{{route('categories.destroy', ['category' => $category])}}"
-                    >
-                </x-action-list>
-
+            <div class="p-2 flex justify-start items-center">
+                {{$category->title}}
             </div>
-            @endforeach
+
+            <!-- Действия -->
+            <x-action-list
+                detail-link="{{route('categories.show', ['category' => $category])}}"
+                edit-link="{{route('categories.edit', ['category' => $category])}}"
+                delete-link="{{route('categories.destroy', ['category' => $category])}}"
+            >
+            </x-action-list>
         </div>
-        <div id="pagination" class="mt-3">
-            {{$categories->links()}}
-        </div>
+        @endforeach
     </div>
-</div>
+    <div id="pagination" class="mt-3">
+        {{$categories->links()}}
+    </div>
+</x-page-list>
 @endsection
-

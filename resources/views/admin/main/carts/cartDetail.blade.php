@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('admin.layouts.dashboard')
 @section('cartDetail')
 <x-page-detail 
     title="Корзина {{$cart->id}}" 

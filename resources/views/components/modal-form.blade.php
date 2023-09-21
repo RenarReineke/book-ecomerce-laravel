@@ -6,9 +6,14 @@
     <div class="fixed z-50 left-[calc(50%-280px)] top-8 w-auto h-[calc(100vh-150px)]">
 
         <!-- Цветная шапка формы -->
-        <div class="mx-auto pt-1 max-w-md w-full h-10 bg-slate-600 rounded-t-xl">
+        <div class="mx-auto max-w-md w-full h-10 bg-slate-600 rounded-t-xl flex justify-between">
             <!-- Заголовок формы -->
-            <h2 class="text-center text-lg font-bold text-slate-100">{{$title}}</h1>
+            <h2 class="pt-1 w-full text-center text-lg font-bold text-slate-100">{{$title}}</h1>
+            <a class="h-10 w-10 rounded-tr-xl flex justify-center items-center bg-violet-900 hover:bg-violet-700" href="{{ $url }}">
+                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </a>
         </div>
 
         <!-- Форма -->
@@ -18,7 +23,7 @@
                 <path d="M6 3a3 3 0 00-3 3v2.25a3 3 0 003 3h2.25a3 3 0 003-3V6a3 3 0 00-3-3H6zM15.75 3a3 3 0 00-3 3v2.25a3 3 0 003 3H18a3 3 0 003-3V6a3 3 0 00-3-3h-2.25zM6 12.75a3 3 0 00-3 3V18a3 3 0 003 3h2.25a3 3 0 003-3v-2.25a3 3 0 00-3-3H6zM17.625 13.5a.75.75 0 00-1.5 0v2.625H13.5a.75.75 0 000 1.5h2.625v2.625a.75.75 0 001.5 0v-2.625h2.625a.75.75 0 000-1.5h-2.625V13.5z" />
             </svg>
 
-            <form class="space-y-2" action="{{$url}}" method="post" novalidate class="space-y-6" enctype="multipart/form-data">
+            <form class="space-y-2" action="{{ $url }}" method="post" novalidate class="space-y-6" enctype="multipart/form-data">
                 @csrf
                 {{$slot}}
 

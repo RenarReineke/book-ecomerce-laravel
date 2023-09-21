@@ -26,6 +26,6 @@ class TagFilters extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.tag-filters');
+        return view('components.filters.tag-filters');
     }
 }

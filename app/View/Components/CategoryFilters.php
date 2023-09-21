@@ -28,6 +28,6 @@ class CategoryFilters extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.category-filters');
+        return view('components.filters.category-filters');
     }
 }

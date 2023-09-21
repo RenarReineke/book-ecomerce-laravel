@@ -1,4 +1,4 @@
-@extends('layouts.dashboard') @section('rewiewDetail')
+@extends('admin.layouts.dashboard') @section('rewiewDetail')
 
 
 

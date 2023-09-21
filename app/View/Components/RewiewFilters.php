@@ -21,6 +21,6 @@ class RewiewFilters extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.rewiew-filters');
+        return view('components.filters.rewiew-filters');
     }
 }

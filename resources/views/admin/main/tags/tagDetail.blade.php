@@ -1,4 +1,4 @@
-@extends('layouts.dashboard') @section('tagDetail')
+@extends('admin.layouts.dashboard') @section('tagDetail')
 
     <x-page-detail 
         title="Отзыв {{$tag->id}}" 

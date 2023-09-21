@@ -21,6 +21,6 @@ class ClientFilters extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.client-filters');
+        return view('components.filters.client-filters');
     }
 }

@@ -2,20 +2,20 @@
 
 namespace App\View\Components;
 
-use App\Services\AuthorService;
 use Closure;
-use Illuminate\Contracts\View\View;
+use App\Services\TagService;
 use Illuminate\View\Component;
+use Illuminate\Contracts\View\View;
 
-class AuthorFilters extends Component
+class ImageFilters extends Component
 {
     public int $minCountProducts;
     public int $maxCountProducts;
     public int $avgCountProducts;
     
-    public function __construct(AuthorService $authorService)
+    public function __construct(TagService $tagService)
     {
-        foreach($authorService->getDataForFrontendFilters() as $key => $value)
+        foreach($tagService->getDataForFrontendFilters() as $key => $value)
         {
             $this->{$key} = $value;
         }
@@ -26,6 +26,6 @@ class AuthorFilters extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.filters.author-filters');
+        return view('components.filters.tag-filters');
     }
 }

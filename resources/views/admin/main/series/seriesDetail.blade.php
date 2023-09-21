@@ -1,5 +1,5 @@
-@extends('layouts.dashboard')
-@section('rewiewDetail')
+@extends('admin.layouts.dashboard')
+@section('seriesDetail')
 
 <x-page-detail 
     title="Серия {{$series->id}}" 

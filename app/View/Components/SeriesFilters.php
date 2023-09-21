@@ -28,6 +28,6 @@ class SeriesFilters extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.series-filters');
+        return view('components.filters.series-filters');
     }
 }

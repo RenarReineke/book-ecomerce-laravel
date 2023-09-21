@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('admin.layouts.dashboard')
 @section('publisherUpdateForm')
 <div class="p-4 pb-12 flex flex-col justify-center">
 

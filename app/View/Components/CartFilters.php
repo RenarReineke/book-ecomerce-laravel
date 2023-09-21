@@ -21,6 +21,6 @@ class CartFilters extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.cart-filters');
+        return view('components.filters.cart-filters');
     }
 }
