@@ -1,7 +1,8 @@
 @extends('admin.layouts.dashboard') @section('tagDetail')
 
     <x-page-detail 
-        title="Отзыв {{$tag->id}}" 
+        title="{{$tag->title}}"
+        listTitle="Теги" 
         editLink="{{ route('tags.edit', ['tag' => $tag]) }}" 
         deleteLink="{{ route('tags.destroy', ['tag' => $tag]) }}"
         listLink="{{ route('tags.index') }}"

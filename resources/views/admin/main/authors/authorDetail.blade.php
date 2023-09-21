@@ -2,7 +2,8 @@
 @section('authorDetail')
 
 <x-page-detail 
-    title="Автор {{$author->id}}" 
+    title="{{$author->name}}"
+    listTitle="Авторы" 
     editLink="{{ route('authors.edit', ['author' => $author]) }}" 
     deleteLink="{{ route('authors.destroy', ['author' => $author]) }}"
     listLink="{{ route('authors.index') }}"

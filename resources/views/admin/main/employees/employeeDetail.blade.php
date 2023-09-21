@@ -2,7 +2,8 @@
 @section('employeeDetail')
 
 <x-page-detail 
-    title="Сотрудник {{$employee->id}}" 
+    title="{{$employee->name}}"
+    listTitle="Сотрудники" 
     editLink="{{ route('employees.edit', ['employee' => $employee]) }}" 
     deleteLink="{{ route('employees.destroy', ['employee' => $employee]) }}"
     listLink="{{ route('employees.index') }}"

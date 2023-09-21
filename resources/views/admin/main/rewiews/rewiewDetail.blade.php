@@ -3,7 +3,8 @@
 
 
 <x-page-detail 
-    title="Отзыв {{$rewiew->id}}" 
+    title="Отзыв {{$rewiew->id}}"
+    listTitle="Отзывы" 
     editLink="{{ route('rewiews.edit', ['rewiew' => $rewiew]) }}" 
     deleteLink="{{ route('rewiews.destroy', ['rewiew' => $rewiew]) }}"
     listLink="{{ route('rewiews.index') }}"

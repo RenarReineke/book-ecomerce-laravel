@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Rewiew;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -21,10 +22,15 @@ class Product extends Model
 
     protected $fillable = [
         'title', 'description', 'price', 'amount', 'pages', 'size', 'cover-type', 'weight',
-        'year', 'rating'
+        'year', 'rating', 'slug'
     ];
 
     protected $with = ['tags', 'rewiews', 'images'];
+
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = Str::slug($value);
+    }
 
     public function category()
     {

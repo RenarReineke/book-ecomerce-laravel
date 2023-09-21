@@ -4,15 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\StoreProductRequest;
-use App\Models\Author;
-use App\Models\Category;
 use App\Models\Product;
-use App\Models\Publisher;
-use App\Models\Series;
-use App\Models\Tag;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class AdminProductResourceController extends Controller
 {

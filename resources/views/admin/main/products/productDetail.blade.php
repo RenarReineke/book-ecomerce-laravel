@@ -2,7 +2,8 @@
 @section('productDetail')
 
 <x-page-detail 
-    title="Продукт {{$product->id}}" 
+    title="{{$product->title}}"
+    listTitle="Товары" 
     editLink="{{ route('products.edit', ['product' => $product]) }}" 
     deleteLink="{{ route('products.destroy', ['product' => $product]) }}"
     listLink="{{ route('products.index') }}"

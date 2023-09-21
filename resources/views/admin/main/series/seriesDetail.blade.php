@@ -2,7 +2,8 @@
 @section('seriesDetail')
 
 <x-page-detail 
-    title="Серия {{$series->id}}" 
+    title="{{$series->title}}"
+    listTitle="Серии" 
     editLink="{{ route('series.edit', ['series' => $series]) }}" 
     deleteLink="{{ route('series.destroy', ['series' => $series]) }}"
     listLink="{{ route('series.index') }}"

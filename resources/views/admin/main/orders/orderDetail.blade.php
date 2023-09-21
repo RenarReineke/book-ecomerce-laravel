@@ -1,7 +1,8 @@
 @extends('admin.layouts.dashboard')
 @section('orderDetail')
 <x-page-detail 
-    title="Заказ {{$order->id}}" 
+    title="Заказ {{$order->id}}"
+    listTitle="Заказы" 
     editLink="{{ route('orders.edit', ['order' => $order]) }}" 
     deleteLink="{{ route('orders.destroy', ['order' => $order]) }}"
     listLink="{{ route('orders.index') }}"
