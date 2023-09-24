@@ -13,7 +13,7 @@ class Rewiew extends Model
     protected $fillable = ['profit', 'unprofit', 'text', 'user_id', 'product_id'];
 
     protected $casts = [
-        'rating' => RatingEnum::class
+        'rating' => RatingEnum::class,
     ];
 
     public function user()
@@ -38,6 +38,6 @@ class Rewiew extends Model
 
     public function likes()
     {
-        return $this->belongsToMany(User::class, 'likes');
+        return $this->hasMany(Like::class);
     }
 }

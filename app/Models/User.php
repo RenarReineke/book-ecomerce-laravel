@@ -23,7 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
     ];
 
     /**
@@ -73,6 +73,6 @@ class User extends Authenticatable
 
     public function likes()
     {
-        return $this->belongsToMany(Rewiew::class);
+        return $this->hasMany(Like::class);
     }
 }
