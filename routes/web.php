@@ -1,26 +1,23 @@
 <?php
 
-use App\Models\User;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Admin\DashboardController;
-
-use App\Http\Controllers\Admin\AdminTagResourceController;
-use App\Http\Controllers\Admin\AdminCartResourceController;
-use App\Http\Controllers\Admin\AdminImageResourceController;
-use App\Http\Controllers\Admin\AdminOrderResourceController;
-use App\Http\Controllers\Admin\Auth\AdminRegisterController;
 use App\Http\Controllers\Admin\AdminAuthorResourceController;
-use App\Http\Controllers\Admin\AdminClientResourceController;
-use App\Http\Controllers\Admin\AdminRewiewResourceController;
-use App\Http\Controllers\Admin\AdminSeriesResourceController;
-use App\Http\Controllers\Admin\AdminProductResourceController;
+use App\Http\Controllers\Admin\AdminCartResourceController;
 use App\Http\Controllers\Admin\AdminCategoryResourceController;
+use App\Http\Controllers\Admin\AdminClientResourceController;
 use App\Http\Controllers\Admin\AdminCommentResourceController;
 use App\Http\Controllers\Admin\AdminEmployeeResourceController;
+use App\Http\Controllers\Admin\AdminImageResourceController;
+use App\Http\Controllers\Admin\AdminOrderResourceController;
+use App\Http\Controllers\Admin\AdminProductResourceController;
 use App\Http\Controllers\Admin\AdminPublisherResourceController;
+use App\Http\Controllers\Admin\AdminRewiewResourceController;
+use App\Http\Controllers\Admin\AdminSeriesResourceController;
+use App\Http\Controllers\Admin\AdminTagResourceController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('admin.layouts.welcome.welcome');
@@ -41,7 +38,7 @@ Route::prefix('auth')->group(function () {
     Route::view('/verify-email', 'verifyEmail')->name('verifyEmail');
 });
 
-Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
+Route::prefix('admin')->middleware('auth:sanctum')->middleware('can:view-admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile');
     Route::resources([

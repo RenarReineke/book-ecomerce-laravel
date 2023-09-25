@@ -39,22 +39,4 @@ class LikeController extends Controller
             'isPositive' => $request->isPositive,
         ]);
     }
-
-    public function dislike(Request $request)
-    {
-        $user = Auth::user() ?? User::findOrFail($request->user_id);
-        $rewiew = Rewiew::findOrFail($request->rewiew_id);
-
-        $like = Like::updateOrCreate(
-            [
-                'user_id' => $user->id,
-                'rewiew_id' => $rewiew->id,
-            ],
-            [
-                'isPositive' => false,
-            ]
-        );
-
-        return $like;
-    }
 }
