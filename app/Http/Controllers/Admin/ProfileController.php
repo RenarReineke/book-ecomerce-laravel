@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class ProfileController extends Controller
 {
@@ -13,7 +14,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        // 
+        //
     }
 
     /**
@@ -37,6 +38,10 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {
+        if (Gate::denies('view-admin-profile', $user)) {
+            abort(403);
+        }
+
         return view('admin.main.profile', compact('user'));
     }
 

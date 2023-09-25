@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -24,6 +25,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         Gate::define('view-admin', function ($user) {
             if ($user->role !== 'user') {
+                return Response::allow();
+            }
+
+            return Response::deny('У вас нет прав для просмотра этой страницы');
+        });
+
+        Gate::define('view-admin-profile', function (User $user, User $profile) {
+            if ($user->id === $profile->id) {
                 return Response::allow();
             }
 
