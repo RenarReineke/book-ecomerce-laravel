@@ -2,26 +2,32 @@
 
 namespace App\Policies;
 
+use App\Enums\RoleEnum;
 use App\Models\Author;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
 class AuthorPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
     public function viewAny(User $user): bool
     {
-        //
+        dd('Test');
+
+        return $user->role->title === RoleEnum::Moderator;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Author $author): bool
+    public function view(User $user, Author $author): Response
     {
-        //
+        dd('Test123');
+
+        if ($user->role->title === RoleEnum::Manager) {
+            return Response::allow();
+        }
+
+        return Response::deny('Вам сюда нельзя');
     }
 
     /**
@@ -29,7 +35,7 @@ class AuthorPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->role->title === RoleEnum::Manager;
     }
 
     /**
@@ -37,7 +43,7 @@ class AuthorPolicy
      */
     public function update(User $user, Author $author): bool
     {
-        //
+        return $user->role->title === RoleEnum::Manager || RoleEnum::Moderator;
     }
 
     /**
@@ -45,7 +51,7 @@ class AuthorPolicy
      */
     public function delete(User $user, Author $author): bool
     {
-        //
+        return $user->role->title === RoleEnum::Manager;
     }
 
     /**
@@ -53,7 +59,7 @@ class AuthorPolicy
      */
     public function restore(User $user, Author $author): bool
     {
-        //
+        return $user->role->title === RoleEnum::Manager;
     }
 
     /**
@@ -61,6 +67,6 @@ class AuthorPolicy
      */
     public function forceDelete(User $user, Author $author): bool
     {
-        //
+        return $user->role->title === RoleEnum::Manager;
     }
 }

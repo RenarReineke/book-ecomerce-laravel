@@ -2,21 +2,27 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Author;
-use App\Services\AuthorService;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AuthorResource;
 use App\Http\Requests\Author\StoreAuthorRequest;
 use App\Http\Requests\Author\UpdateAuthorRequest;
+use App\Http\Resources\AuthorResource;
+use App\Models\Author;
+use App\Services\AuthorService;
 
 class AuthorResourceController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Author::class, 'author');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $authors = Author::paginate(10);
+
         return AuthorResource::collection($authors);
     }
 
@@ -42,6 +48,7 @@ class AuthorResourceController extends Controller
     public function update(UpdateAuthorRequest $request, Author $author, AuthorService $authorService)
     {
         $author = $authorService->update($request->validated(), $author);
+
         return $author;
     }
 
@@ -51,6 +58,7 @@ class AuthorResourceController extends Controller
     public function destroy(Author $author)
     {
         $author->delete();
+
         return response()->noContent();
     }
 }

@@ -38,9 +38,7 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {
-        if (Gate::denies('view-admin-profile', $user)) {
-            abort(403);
-        }
+        Gate::authorize('view-admin-profile', $user);
 
         return view('admin.main.profile', compact('user'));
     }

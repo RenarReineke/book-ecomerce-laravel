@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Publisher;
-use Illuminate\Http\Request;
-use App\Services\PublisherService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Publisher\StorePublisherRequest;
 use App\Http\Requests\Publisher\UpdatePublisherRequest;
+use App\Models\Publisher;
+use App\Services\PublisherService;
 
 class AdminPublisherResourceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->authorizeResource(Publisher::class, 'publisher');
+    }
+
     public function index()
     {
         $publishers = Publisher::paginate(6);
+
         return view('admin.main.publishers.publisherList', compact('publishers'));
     }
 
@@ -34,6 +36,7 @@ class AdminPublisherResourceController extends Controller
     public function store(StorePublisherRequest $request, PublisherService $publisherService)
     {
         $publisher = $publisherService->store($request->validated());
+
         return redirect()->route('publishers.index');
     }
 
@@ -59,6 +62,7 @@ class AdminPublisherResourceController extends Controller
     public function update(UpdatePublisherRequest $request, Publisher $publisher, PublisherService $publisherService)
     {
         $publisher = $publisherService->update($request->validated(), $publisher);
+
         return redirect()->route('publishers.index', compact('publisher'));
     }
 
@@ -68,6 +72,7 @@ class AdminPublisherResourceController extends Controller
     public function destroy(Publisher $publisher)
     {
         $publisher->delete();
+
         return redirect()->route('publishers.index');
     }
 }

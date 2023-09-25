@@ -2,21 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Category;
-use Illuminate\Http\Request;
-use App\Services\CategoryService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\StoreCategoryRequest;
 use App\Http\Requests\Category\UpdateCategoryRequest;
+use App\Models\Category;
+use App\Services\CategoryService;
+use Illuminate\Support\Facades\Gate;
 
 class AdminCategoryResourceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->authorizeResource(Category::class, 'category');
+    }
+
     public function index()
     {
         $categories = Category::paginate(6);
+
         return view('admin.main.categories.categoryList', compact('categories'));
     }
 
@@ -34,6 +37,7 @@ class AdminCategoryResourceController extends Controller
     public function store(StoreCategoryRequest $request, CategoryService $categoryService)
     {
         $category = $categoryService->store($request->validated());
+
         return redirect()->route('categories.index', compact('category'));
     }
 
@@ -42,6 +46,8 @@ class AdminCategoryResourceController extends Controller
      */
     public function show(Category $category)
     {
+        Gate::authorize('view');
+
         return view('admin.main.categories.categoryDetail', compact('category'));
     }
 
@@ -59,6 +65,7 @@ class AdminCategoryResourceController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category, CategoryService $categoryService)
     {
         $category = $categoryService->update($request->validated(), $category);
+
         return redirect()->route('categories.index', compact('category'));
     }
 
@@ -68,6 +75,7 @@ class AdminCategoryResourceController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
+
         return redirect()->route('categories.index');
     }
 }

@@ -2,21 +2,28 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Author;
-use Illuminate\Http\Request;
-use App\Services\AuthorService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Author\StoreAuthorRequest;
 use App\Http\Requests\Author\UpdateAuthorRequest;
+use App\Models\Author;
+use App\Services\AuthorService;
 
 class AdminAuthorResourceController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(Author::class, 'author');
+    // }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $this->authorize('viewAny', Author::class);
+
         $authors = Author::paginate(6);
+
         return view('admin.main.authors.authorList', compact('authors'));
     }
 
@@ -32,8 +39,9 @@ class AdminAuthorResourceController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreAuthorRequest $request, AuthorService $authorService)
-    {   
+    {
         $author = $authorService->store($request->validated());
+
         return redirect()->route('authors.index');
     }
 
@@ -42,6 +50,8 @@ class AdminAuthorResourceController extends Controller
      */
     public function show(Author $author)
     {
+        $this->authorize('view', $author);
+
         return view('admin.main.authors.authorDetail', compact('author'));
     }
 
@@ -59,6 +69,7 @@ class AdminAuthorResourceController extends Controller
     public function update(UpdateAuthorRequest $request, Author $author, AuthorService $authorService)
     {
         $author = $authorService->update($request->validated(), $author);
+
         return redirect()->route('authors.index', compact('author'));
     }
 
@@ -68,6 +79,7 @@ class AdminAuthorResourceController extends Controller
     public function destroy(Author $author)
     {
         $author->delete();
+
         return redirect()->route('authors.index');
     }
 }
