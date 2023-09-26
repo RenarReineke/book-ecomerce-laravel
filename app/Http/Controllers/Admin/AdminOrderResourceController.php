@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
-use App\Models\Order;
-use Illuminate\Http\Request;
-use App\Services\OrderService;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Order\StoreOrderRequest;
+use App\Models\Order;
+use App\Models\User;
+use App\Services\OrderService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminOrderResourceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->authorizeResource(Order::class, 'order');
+    }
+
     public function index()
     {
         $orders = Order::withCount('products')->paginate(6);
+
         return view('admin.main.orders.orderList', compact('orders'));
     }
 
@@ -35,9 +38,9 @@ class AdminOrderResourceController extends Controller
     public function store(StoreOrderRequest $request, OrderService $orderService)
     {
         Auth::login(User::find(1));
-        
+
         $cart = $request->user()->carts()->first();
-        
+
         $order = $orderService->saveOrder($request->validated(), $cart);
 
         return redirect()->route('orders.show', ['order' => $order]);
@@ -49,6 +52,7 @@ class AdminOrderResourceController extends Controller
     public function show(string $id)
     {
         $order = Order::findOrFail($id);
+
         return view('admin.main.orders.orderDetail', compact('order'));
     }
 
@@ -74,6 +78,7 @@ class AdminOrderResourceController extends Controller
     public function destroy(Order $order)
     {
         $order->delete();
+
         return redirect()->route('orders.index');
     }
 }

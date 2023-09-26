@@ -3,22 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\RatingEnum;
-use App\Models\Rewiew;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Rewiew\StoreRewiewRequest;
 use App\Http\Requests\Rewiew\UpdateRewiewRequest;
+use App\Models\Rewiew;
 use App\Services\RewiewService;
 use ReflectionClass;
 
 class AdminRewiewResourceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->authorizeResource(Rewiew::class, 'rewiew');
+    }
+
     public function index()
     {
         $rewiews = Rewiew::paginate(6);
+
         return view('admin.main.rewiews.rewiewList', compact('rewiews'));
     }
 
@@ -26,10 +28,11 @@ class AdminRewiewResourceController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {   
+    {
         $ratings = RatingEnum::class;
         $reflection = new ReflectionClass($ratings);
         $ratingList = $reflection->getConstants();
+
         return view('admin.main.rewiews.rewiewCreateForm', compact('ratingList'));
     }
 
@@ -40,6 +43,7 @@ class AdminRewiewResourceController extends Controller
     {
         $user = $request->user();
         $rewiew = $rewiewService->store($request->validated(), $user);
+
         return redirect()->route('rewiews.show', ['rewiew' => $rewiew]);
     }
 
@@ -55,7 +59,7 @@ class AdminRewiewResourceController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Rewiew $rewiew)
-    {   
+    {
         return view('admin.main.rewiews.rewiewUpdateForm', compact('rewiew'));
     }
 
@@ -66,6 +70,7 @@ class AdminRewiewResourceController extends Controller
     {
         $user = $request->user();
         $updatedComment = $rewiewService->update($request->validated(), $user, $rewiew);
+
         return redirect()->route('rewiews.show', ['rewiew' => $rewiew]);
     }
 
@@ -75,6 +80,7 @@ class AdminRewiewResourceController extends Controller
     public function destroy(Rewiew $rewiew)
     {
         $rewiew->delete();
+
         return redirect()->route('rewiews.index');
     }
 }

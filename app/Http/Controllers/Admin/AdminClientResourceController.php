@@ -8,12 +8,15 @@ use Illuminate\Http\Request;
 
 class AdminClientResourceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'client');
+    }
+
     public function index()
     {
         $clients = User::paginate(6);
+
         return view('admin.main.clients.clientList', compact('clients'));
     }
 
@@ -22,7 +25,7 @@ class AdminClientResourceController extends Controller
      */
     public function create()
     {
-        return view('admin.main.clients.clientClientForm');
+        return view('admin.main.clients.clientCreateForm');
     }
 
     /**
@@ -30,7 +33,7 @@ class AdminClientResourceController extends Controller
      */
     public function store()
     {
-        // 
+        //
     }
 
     /**
@@ -63,6 +66,7 @@ class AdminClientResourceController extends Controller
     public function destroy(User $client)
     {
         $client->delete();
+
         return redirect()->route('clients.index');
     }
 }

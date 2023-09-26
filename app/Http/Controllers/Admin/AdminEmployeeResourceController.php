@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class AdminEmployeeResourceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'employee');
+    }
+
     public function index()
     {
         $employees = User::paginate(6);
+
         return view('admin.main.employees.employeeList', compact('employees'));
     }
 
@@ -45,7 +48,7 @@ class AdminEmployeeResourceController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(User $employee)
-    {   
+    {
         return view('admin.main.employees.employeeUpdateForm', compact('employee'));
     }
 
@@ -63,6 +66,7 @@ class AdminEmployeeResourceController extends Controller
     public function destroy(User $employee)
     {
         $employee->delete();
+
         return redirect()->route('clients.employee');
     }
 }

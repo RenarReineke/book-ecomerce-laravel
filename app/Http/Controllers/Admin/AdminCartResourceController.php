@@ -2,21 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Cart;
-use App\Models\User;
-use Illuminate\Http\Request;
-use App\Services\CartService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cart\UpdateCartRequest;
+use App\Models\Cart;
+use App\Models\User;
+use App\Services\CartService;
+use Illuminate\Http\Request;
 
 class AdminCartResourceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->authorizeResource(Cart::class, 'cart');
+    }
+
     public function index()
     {
         $carts = Cart::paginate(6);
+
         return view('admin.main.carts.cartList', compact('carts'));
     }
 
@@ -42,6 +45,7 @@ class AdminCartResourceController extends Controller
     public function show(string $id)
     {
         $cart = Cart::findOrFail($id);
+
         return view('admin.main.carts.cartDetail', compact('cart'));
     }
 
@@ -67,6 +71,7 @@ class AdminCartResourceController extends Controller
     public function destroy(Cart $cart)
     {
         $cart->delete();
+
         return redirect()->route('carts.index');
     }
 
@@ -78,48 +83,48 @@ class AdminCartResourceController extends Controller
         $product_id = $request->validated()['product_id'];
 
         $cartService->removeCartItem($cart, $product_id);
-        
+
         return back();
     }
 
     public function increase(UpdateCartRequest $request, Cart $cart, CartService $cartService)
-    {   
+    {
         // Имитирует юзера, который должен браться из запроса
         $user = User::findOrFail(1);
-        
+
         // Получить конкретное значение из отвалидированного массива
         $product_id = $request->validated()['product_id'];
-        
+
         $cartService->increaseAmount($cart, $product_id);
-        
+
         return back();
     }
 
     public function decrease(UpdateCartRequest $request, Cart $cart, CartService $cartService)
-    {   
+    {
 
         // Имитирует юзера, который должен браться из запроса
         $user = User::findOrFail(1);
-        
+
         // Получить конкретное значение из отвалидированного массива
         $product_id = $request->validated()['product_id'];
-        
+
         $cartService->decreaseAmount($cart, $product_id);
-        
+
         return back();
     }
 
     public function change(UpdateCartRequest $request, Cart $cart, CartService $cartService)
-    {   
+    {
 
         // Имитирует юзера, который должен браться из запроса
         $user = User::findOrFail(1);
         // Получить конкретное значение из отвалидированного массива
         $product_id = $request->validated()['product_id'];
         $amount = $request->validated()['amount'];
-        
+
         $cartService->changeAmount($cart, $product_id, $amount);
-        
+
         return back();
     }
 }

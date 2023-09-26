@@ -3,11 +3,11 @@
 namespace App\Policies;
 
 use App\Enums\RoleEnum;
-use App\Models\Cart;
+use App\Models\Rewiew;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class CartPolicy
+class RewiewPolicy
 {
     const MESSAGE = 'Ваших прав недостаточно';
 
@@ -23,7 +23,7 @@ class CartPolicy
 
     public function viewAny(User $user): Response
     {
-        if (in_array($user->role->title, [RoleEnum::Manager])) {
+        if (in_array($user->role->title, [RoleEnum::Manager, RoleEnum::Moderator])) {
             return Response::allow();
         }
 
@@ -33,9 +33,9 @@ class CartPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Cart $cart): Response
+    public function view(User $user, Rewiew $rewiew): Response
     {
-        if (in_array($user->role->title, [RoleEnum::Manager])) {
+        if (in_array($user->role->title, [RoleEnum::Manager, RoleEnum::Moderator])) {
             return Response::allow();
         }
 
@@ -47,7 +47,7 @@ class CartPolicy
      */
     public function create(User $user): Response
     {
-        if (in_array($user->role->title, [RoleEnum::Manager])) {
+        if (in_array($user->role->title, [RoleEnum::Moderator])) {
             return Response::allow();
         }
 
@@ -57,9 +57,9 @@ class CartPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Cart $cart): Response
+    public function update(User $user, Rewiew $rewiew): Response
     {
-        if (in_array($user->role->title, [RoleEnum::Manager])) {
+        if (in_array($user->role->title, [RoleEnum::Moderator])) {
             return Response::allow();
         }
 
@@ -69,9 +69,9 @@ class CartPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Cart $cart): Response
+    public function delete(User $user, Rewiew $rewiew): Response
     {
-        if (in_array($user->role->title, [RoleEnum::Manager])) {
+        if (in_array($user->role->title, [RoleEnum::Moderator])) {
             return Response::allow();
         }
 
@@ -81,9 +81,9 @@ class CartPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Cart $cart): Response
+    public function restore(User $user, Rewiew $rewiew): Response
     {
-        if (in_array($user->role->title, [RoleEnum::Manager])) {
+        if (in_array($user->role->title, [RoleEnum::Moderator])) {
             return Response::allow();
         }
 
@@ -93,9 +93,9 @@ class CartPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Cart $cart): Response
+    public function forceDelete(User $user, Rewiew $rewiew): Response
     {
-        if (in_array($user->role->title, [RoleEnum::Manager])) {
+        if (in_array($user->role->title, [RoleEnum::Moderator])) {
             return Response::allow();
         }
 

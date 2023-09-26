@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Comment;
-use Illuminate\Http\Request;
-use App\Services\CommentService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Comment\StoreCommentRequest;
 use App\Http\Requests\Comment\UpdateCommentRequest;
+use App\Models\Comment;
+use App\Services\CommentService;
 
 class AdminCommentResourceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->authorizeResource(Comment::class, 'comment');
+    }
+
     public function index()
     {
         //
@@ -23,8 +24,9 @@ class AdminCommentResourceController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {   
+    {
         $rewiew_id = request()->rewiew_id;
+
         return view('admin.main.comments.commentCreateForm', compact('rewiew_id'));
     }
 
@@ -35,6 +37,7 @@ class AdminCommentResourceController extends Controller
     {
         $user = $request->user();
         $comment = $commentService->store($request->validated(), $user);
+
         return redirect()->route('rewiews.show', ['rewiew' => $comment->rewiew]);
     }
 
@@ -50,8 +53,9 @@ class AdminCommentResourceController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Comment $comment)
-    {   
+    {
         $rewiew_id = request()->rewiew_id;
+
         return view('admin.main.comments.commentUpdateForm', compact(['comment', 'rewiew_id']));
     }
 
@@ -62,6 +66,7 @@ class AdminCommentResourceController extends Controller
     {
         $user = $request->user();
         $updatedComment = $commentService->update($request->validated(), $user, $comment);
+
         return redirect()->route('rewiews.show', ['rewiew' => $comment->rewiew]);
     }
 
@@ -71,6 +76,7 @@ class AdminCommentResourceController extends Controller
     public function destroy(Comment $comment)
     {
         $comment->delete();
+
         return back();
     }
 }

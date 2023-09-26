@@ -9,11 +9,25 @@ use Illuminate\Auth\Access\Response;
 
 class AuthorPolicy
 {
-    public function viewAny(User $user): bool
-    {
-        dd('Test');
+    const MESSAGE = 'Ваших прав недостаточно';
 
-        return $user->role->title === RoleEnum::Moderator;
+    public function before(User $user): bool|null
+    {
+        if ($user->role->title === RoleEnum::Admin) {
+
+            return true;
+        }
+
+        return null;
+    }
+
+    public function viewAny(User $user): Response
+    {
+        if (in_array($user->role->title, [RoleEnum::Manager, RoleEnum::Moderator])) {
+            return Response::allow();
+        }
+
+        return Response::deny(static::MESSAGE);
     }
 
     /**
@@ -21,52 +35,70 @@ class AuthorPolicy
      */
     public function view(User $user, Author $author): Response
     {
-        dd('Test123');
-
-        if ($user->role->title === RoleEnum::Manager) {
+        if (in_array($user->role->title, [RoleEnum::Manager, RoleEnum::Moderator])) {
             return Response::allow();
         }
 
-        return Response::deny('Вам сюда нельзя');
+        return Response::deny(static::MESSAGE);
     }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user): Response
     {
-        return $user->role->title === RoleEnum::Manager;
+        if (in_array($user->role->title, [RoleEnum::Manager])) {
+            return Response::allow();
+        }
+
+        return Response::deny(static::MESSAGE);
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Author $author): bool
+    public function update(User $user, Author $author): Response
     {
-        return $user->role->title === RoleEnum::Manager || RoleEnum::Moderator;
+        if (in_array($user->role->title, [RoleEnum::Manager, RoleEnum::Moderator])) {
+            return Response::allow();
+        }
+
+        return Response::deny(static::MESSAGE);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Author $author): bool
+    public function delete(User $user, Author $author): Response
     {
-        return $user->role->title === RoleEnum::Manager;
+        if (in_array($user->role->title, [RoleEnum::Manager])) {
+            return Response::allow();
+        }
+
+        return Response::deny(static::MESSAGE);
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Author $author): bool
+    public function restore(User $user, Author $author): Response
     {
-        return $user->role->title === RoleEnum::Manager;
+        if (in_array($user->role->title, [RoleEnum::Manager, RoleEnum::Moderator])) {
+            return Response::allow();
+        }
+
+        return Response::deny(static::MESSAGE);
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Author $author): bool
+    public function forceDelete(User $user, Author $author): Response
     {
-        return $user->role->title === RoleEnum::Manager;
+        if (in_array($user->role->title, [RoleEnum::Manager])) {
+            return Response::allow();
+        }
+
+        return Response::deny(static::MESSAGE);
     }
 }

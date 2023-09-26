@@ -10,13 +10,15 @@ use Illuminate\Http\Request;
 
 class AdminProductResourceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->authorizeResource(Product::class, 'product');
+    }
+
     public function index(ProductService $productService)
-    {   
+    {
         $products = $productService->getProductList();
-        
+
         $data = $productService->getDataForFrontendFilters();
 
         return view('admin.main.products.productList', $data + compact('products'));
@@ -34,8 +36,9 @@ class AdminProductResourceController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreProductRequest $request, ProductService $productService)
-    {   
+    {
         $product = $productService->store($request->validated());
+
         return redirect()->route('products.index');
     }
 
@@ -69,6 +72,7 @@ class AdminProductResourceController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+
         return redirect()->route('products.index');
     }
 }

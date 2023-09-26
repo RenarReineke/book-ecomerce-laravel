@@ -3,11 +3,10 @@
 namespace App\Policies;
 
 use App\Enums\RoleEnum;
-use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class CartPolicy
+class UserPolicy
 {
     const MESSAGE = 'Ваших прав недостаточно';
 
@@ -21,7 +20,7 @@ class CartPolicy
         return null;
     }
 
-    public function viewAny(User $user): Response
+    public function viewAny(User $user, User $person): Response
     {
         if (in_array($user->role->title, [RoleEnum::Manager])) {
             return Response::allow();
@@ -33,7 +32,7 @@ class CartPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Cart $cart): Response
+    public function view(User $user, User $model): Response
     {
         if (in_array($user->role->title, [RoleEnum::Manager])) {
             return Response::allow();
@@ -57,7 +56,7 @@ class CartPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Cart $cart): Response
+    public function update(User $user, User $model): Response
     {
         if (in_array($user->role->title, [RoleEnum::Manager])) {
             return Response::allow();
@@ -69,7 +68,7 @@ class CartPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Cart $cart): Response
+    public function delete(User $user, User $model): Response
     {
         if (in_array($user->role->title, [RoleEnum::Manager])) {
             return Response::allow();
@@ -81,7 +80,7 @@ class CartPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Cart $cart): Response
+    public function restore(User $user, User $model): Response
     {
         if (in_array($user->role->title, [RoleEnum::Manager])) {
             return Response::allow();
@@ -93,7 +92,7 @@ class CartPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Cart $cart): Response
+    public function forceDelete(User $user, User $model): Response
     {
         if (in_array($user->role->title, [RoleEnum::Manager])) {
             return Response::allow();

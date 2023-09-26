@@ -10,18 +10,16 @@ use App\Services\AuthorService;
 
 class AdminAuthorResourceController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(Author::class, 'author');
-    // }
+    public function __construct()
+    {
+        $this->authorizeResource(Author::class, 'author');
+    }
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $this->authorize('viewAny', Author::class);
-
         $authors = Author::paginate(6);
 
         return view('admin.main.authors.authorList', compact('authors'));
@@ -50,8 +48,6 @@ class AdminAuthorResourceController extends Controller
      */
     public function show(Author $author)
     {
-        $this->authorize('view', $author);
-
         return view('admin.main.authors.authorDetail', compact('author'));
     }
 

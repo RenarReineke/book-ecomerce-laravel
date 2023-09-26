@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Tag;
-use App\Services\TagService;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tag\StoreTagRequest;
 use App\Http\Requests\Tag\UpdateTagRequest;
+use App\Models\Tag;
+use App\Services\TagService;
 
 class AdminTagResourceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->authorizeResource(Tag::class, 'tag');
+    }
+
     public function index()
     {
         $tags = Tag::paginate(6);
+
         return view('admin.main.tags.tagList', compact('tags'));
     }
 
@@ -34,6 +36,7 @@ class AdminTagResourceController extends Controller
     public function store(StoreTagRequest $request, TagService $tagService)
     {
         $tag = $tagService->store($request->validated());
+
         return redirect()->route('tags.index');
     }
 
@@ -49,7 +52,7 @@ class AdminTagResourceController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Tag $tag)
-    {   
+    {
         return view('admin.main.tags.tagUpdateForm', compact('tag'));
     }
 
@@ -59,6 +62,7 @@ class AdminTagResourceController extends Controller
     public function update(UpdateTagRequest $request, Tag $tag, TagService $tagService)
     {
         $tag = $tagService->update($request->validated(), $tag);
+
         return redirect()->route('tags.index');
     }
 
@@ -68,6 +72,7 @@ class AdminTagResourceController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
+
         return redirect()->route('tags.index');
     }
 }
