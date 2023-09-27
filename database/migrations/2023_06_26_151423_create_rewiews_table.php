@@ -1,14 +1,14 @@
 <?php
 
 use App\Enums\RatingEnum;
-use App\Models\Image;
+use App\Models\Client;
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -21,10 +21,10 @@ return new class () extends Migration {
             $table->text('text')->nullable();
             $table->integer('rating')->default(RatingEnum::None->value);
             $table->timestamps();
-            $table->foreignIdFor(User::class)->constrained()
-            ->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignIdFor(Client::class)->constrained()
+                ->onUpdate('cascade')->onDelete('restrict');
             $table->foreignIdFor(Product::class)->constrained()
-            ->onUpdate('cascade')->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

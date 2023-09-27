@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Client;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,7 +23,7 @@ class RewiewFactory extends Factory
             'unprofit' => fake()->word(),
             'text' => fake()->text(),
             'rating' => fake()->numberBetween(0, 5),
-            'user_id' => User::factory(),
+            'client_id' => Client::factory(),
             'product_id' => Product::factory(),
         ];
     }

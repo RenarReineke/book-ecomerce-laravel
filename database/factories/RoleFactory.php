@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Client;
+use App\Enums\RoleEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cart>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Role>
  */
-class CartFactory extends Factory
+class RoleFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,7 @@ class CartFactory extends Factory
     public function definition(): array
     {
         return [
-            'client_id' => Client::factory(),
+            'title' => [RoleEnum::Admin, RoleEnum::Manager, RoleEnum::Moderator][rand(0, 2)],
         ];
     }
 }

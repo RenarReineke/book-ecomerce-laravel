@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Client;
 use App\Models\Rewiew;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +20,7 @@ class CommentFactory extends Factory
     {
         return [
             'message' => fake()->text(),
-            'user_id' => User::factory(),
+            'client_id' => Client::factory(),
             'rewiew_id' => Rewiew::factory(),
         ];
     }

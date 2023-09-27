@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\OrderStatusEnum;
-use App\Models\User;
+use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,10 +19,10 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'client_id' => Client::factory(),
             'phone' => fake()->phoneNumber,
             'address' => fake()->address,
-            'status' => OrderStatusEnum::Processed
+            'status' => OrderStatusEnum::Processed,
         ];
     }
 }

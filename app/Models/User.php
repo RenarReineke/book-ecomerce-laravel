@@ -51,28 +51,8 @@ class User extends Authenticatable
         static::deleting(fn (User $user) => $user->tokens()->delete());
     }
 
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
-
-    public function carts()
-    {
-        return $this->hasMany(Cart::class);
-    }
-
     public function role()
     {
         return $this->belongsTo(Role::class);
-    }
-
-    public function rewiews()
-    {
-        return $this->hasMany(Rewiew::class);
-    }
-
-    public function likes()
-    {
-        return $this->hasMany(Like::class);
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-use App\Models\Order;
-use App\Models\User;
+use App\Models\Client;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -19,8 +19,8 @@ return new class () extends Migration {
             $table->string('address');
             $table->string('status');
             $table->boolean('payment')->default(false);
-            $table->foreignIdFor(User::class)->constrained()
-            ->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignIdFor(Client::class)->constrained()
+                ->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

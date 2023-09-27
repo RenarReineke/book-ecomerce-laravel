@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class AdminClientResourceController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(User::class, 'client');
+        $this->authorizeResource(Client::class, 'client');
     }
 
     public function index()
     {
-        $clients = User::paginate(6);
+        $clients = Client::paginate(6);
 
         return view('admin.main.clients.clientList', compact('clients'));
     }
@@ -39,7 +39,7 @@ class AdminClientResourceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $client)
+    public function show(Client $client)
     {
         return view('admin.main.clients.clientDetail', compact('client'));
     }
@@ -47,7 +47,7 @@ class AdminClientResourceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $client)
+    public function edit(Client $client)
     {
         return view('admin.main.clients.clientUpdateForm', compact('client'));
     }
@@ -63,7 +63,7 @@ class AdminClientResourceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $client)
+    public function destroy(Client $client)
     {
         $client->delete();
 

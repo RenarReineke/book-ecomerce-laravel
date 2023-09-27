@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Enums\RoleEnum;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,10 +14,9 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         DB::table('roles')->insert([
-            ['title' => 'admin'],
-            ['title' => 'manager'],
-            ['title' => 'moderator'],
-            ['title' => 'client'],
+            ['title' => RoleEnum::Admin],
+            ['title' => RoleEnum::Manager],
+            ['title' => RoleEnum::Moderator],
         ]);
     }
 }
