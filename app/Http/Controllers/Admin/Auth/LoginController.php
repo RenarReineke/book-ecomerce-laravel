@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\User\LoginUserRequest;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use App\Providers\RouteServiceProvider;
-use App\Http\Requests\User\LoginUserRequest;
 
 class LoginController extends Controller
 {
@@ -22,27 +21,27 @@ class LoginController extends Controller
         $credentials = $request->validated();
 
         try {
-            if(!Auth::attempt($credentials)) {
-                if (!$request->expectsJson()) {
+            if (! Auth::attempt($credentials)) {
+                if (! $request->expectsJson()) {
                     return back()->withInput()->withErrors([
-                        'email' => trans('auth.failed')
+                        'email' => trans('auth.failed'),
                     ]);
                 }
 
                 return response([
-                    'error' => 'Указаны неверные данные для входа'
+                    'error' => 'Указаны неверные данные для входа',
                 ], Response::HTTP_UNPROCESSABLE_ENTITY);
             }
 
             $request->session()->regenerate();
 
-            if (!$request->expectsJson()) {
+            if (! $request->expectsJson()) {
                 return redirect()->intended(RouteServiceProvider::HOME);
             }
 
             return response($request->user(), Response::HTTP_CREATED);
 
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             return response($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
     }
@@ -55,7 +54,7 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        if (!$request->expectsJson()) {
+        if (! $request->expectsJson()) {
             return redirect('/');
         }
 

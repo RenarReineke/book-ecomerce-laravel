@@ -15,8 +15,9 @@ use App\Http\Controllers\Admin\AdminSeriesResourceController;
 use App\Http\Controllers\Admin\AdminTagResourceController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\RegisterController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -63,3 +64,9 @@ Route::prefix('admin')->middleware('auth:sanctum')->middleware('can:view-admin')
     Route::post('carts/{id}/delete', [AdminCartResourceController::class, 'destroy'])->name('deleteCart');
     Route::put('carts/{cart}/change', [AdminCartResourceController::class, 'change'])->name('changeCart');
 });
+
+Route::get('web/kupons', function () {
+    $user = Auth::guard('web')->user()->name;
+
+    return "Ты зашел по вебу как сотрудник админки {$user}";
+})->middleware('auth:sanctum');

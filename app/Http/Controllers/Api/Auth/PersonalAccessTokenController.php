@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api\Auth;
 
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Client;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -17,27 +17,28 @@ class PersonalAccessTokenController extends Controller
             $request->validate([
                 'email' => 'required|email',
                 'password' => 'required',
-                'device_name' => 'required'
+                'device_name' => 'required',
             ]);
 
-            $user = User::where('email', $request->email)->first();
+            $client = Client::where('email', $request->email)->first();
 
-            if(!$user || !Hash::check($request->password, $user->password)) {
+            if (! $client || ! Hash::check($request->password, $client->password)) {
                 throw ValidationException::withMessages([
-                    'email' => ['Указанный емайл не валидный']
+                    'email' => ['Указанный емайл не валидный'],
                 ]);
             }
 
-            $token = $user->createToken($request->device_name)->plainTextToken;
+            $token = $client->createToken($request->device_name)->plainTextToken;
+
             return ['token' => $token];
 
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             return $e->getMessage();
         }
     }
 
     public function destroy(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        $request->client()->currentAccessToken()->delete();
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\PersonalAccessTokenController;
 use App\Http\Controllers\Api\AuthorResourceController;
 use App\Http\Controllers\Api\CartResourceController;
 use App\Http\Controllers\Api\CategoryResourceController;
@@ -13,7 +14,7 @@ use App\Http\Controllers\Api\RoleResourceController;
 use App\Http\Controllers\Api\SeriesResourceController;
 use App\Http\Controllers\Api\TagResourceController;
 use App\Http\Controllers\Api\UserResourceController;
-use App\Http\Controllers\Auth\PersonalAccessTokenController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
@@ -42,3 +43,15 @@ Route::put('/carts/{cart}/decrease', [CartResourceController::class, 'decrease']
 
 Route::post('/likes', [LikeController::class, 'like']);
 Route::post('/dislikes', [LikeController::class, 'dislike']);
+
+Route::get('/kupons', function () {
+    $user = Auth::guard('spa')->user()->name;
+
+    return "Ты зашел по токену как клиент магазина {$user}";
+})->middleware('auth:spa');
+
+Route::get('/admins', function () {
+    $user = Auth::user()->name;
+
+    return "Ты зашел по вебу как сотрудник админки {$user}";
+})->middleware('auth:emp');

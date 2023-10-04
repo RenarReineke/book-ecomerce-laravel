@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\User\RegisterUserRequest;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Providers\RouteServiceProvider;
-use App\Http\Requests\User\RegisterUserRequest;
 
 class RegisterController extends Controller
 {
@@ -19,19 +19,21 @@ class RegisterController extends Controller
 
     public function store(RegisterUserRequest $request)
     {
+
+        dd('ты попал на контроллер админки каким то чудом....');
         try {
             $user = User::create($request->validated());
 
             Auth::login($user);
 
-            if (!$request->expectsJson()) {
+            if (! $request->expectsJson()) {
                 return redirect(RouteServiceProvider::HOME);
             }
 
             return response($user, Response::HTTP_CREATED);
 
-        } catch(\Throwable $e) {
-            if (!$request->expectsJson()) {
+        } catch (\Throwable $e) {
+            if (! $request->expectsJson()) {
                 return back()->withInput();
             }
 

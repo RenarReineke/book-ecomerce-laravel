@@ -42,7 +42,12 @@ return [
         ],
 
         'spa' => [
-            'driver' => 'session',
+            'driver' => 'sanctum',
+            'provider' => 'clients',
+        ],
+
+        'emp' => [
+            'driver' => 'token',
             'provider' => 'clients',
         ],
     ],
