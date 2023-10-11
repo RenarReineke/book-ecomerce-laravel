@@ -2,8 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Rewiew;
-use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -21,8 +19,19 @@ class ProductResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'price' => $this->price,
-            'category' => $this->category?->title,
+            'amount' => $this->amount,
+            'pages' => $this->pages,
+            'size' => $this->size,
+            'cover_type' => $this->cover_type,
+            'weight' => $this->weight,
+            'year' => $this->year,
+            'rating' => $this->rating,
+            'category' => $this->category->title,
+            'publisher' => $this->series->publisher->title,
+            'series' => $this->series->title,
             'tags' => TagResource::collection($this->tags),
+            'authors' => AuthorResource::collection($this->authors),
+            'images' => ImageResource::collection($this->images),
             'rewiews' => RewiewResource::collection($this->rewiews),
         ];
     }

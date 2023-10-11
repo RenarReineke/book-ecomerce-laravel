@@ -11,11 +11,11 @@ class BusinessException extends Exception
     public function __construct(string $userMessage)
     {
         $this->userMessage = $userMessage;
-        parent::__construct('Business exception');
+        parent::__construct($userMessage);
     }
 
     public function getUserMessage()
     {
-        return $this->message;
+        return $this->userMessage;
     }
 }

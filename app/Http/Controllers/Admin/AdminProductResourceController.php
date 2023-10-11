@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use App\Services\ProductService;
-use Illuminate\Http\Request;
 
 class AdminProductResourceController extends Controller
 {
@@ -37,7 +37,7 @@ class AdminProductResourceController extends Controller
      */
     public function store(StoreProductRequest $request, ProductService $productService)
     {
-        $product = $productService->store($request->validated());
+        $productService->store($request->getDto());
 
         return redirect()->route('products.index');
     }
@@ -61,9 +61,11 @@ class AdminProductResourceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product, ProductService $productService)
     {
-        //
+        $productService->update($request->getDto(), $product);
+
+        return redirect()->route('products.index');
     }
 
     /**

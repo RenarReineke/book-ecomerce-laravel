@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Product;
 
-use App\DTO\ProductCreateDto;
+use App\DTO\Product\ProductCreateDto;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreProductRequest extends FormRequest
@@ -24,12 +24,12 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'description' => 'string',
+            'description' => 'nullable|string',
             'price' => 'required|numeric',
             'amount' => 'numeric',
             'pages' => 'required|numeric',
             'size' => 'required|string',
-            'cover-type' => 'required|string',
+            'cover_type' => 'required|string',
             'weight' => 'required|numeric',
             'year' => 'required|numeric',
             'rating' => 'required|numeric',
@@ -38,23 +38,30 @@ class StoreProductRequest extends FormRequest
             'series' => 'required|numeric',
             'tags' => 'array',
             'authors' => 'array',
-            'images.*' => 'image'
+            'images.*' => 'image',
         ];
     }
 
-    // public function getDto(): ProductCreateDto
-    // {
-    //     $ta = [
-    //         'title' => $this->title,
-    //         'desc' => $this->desc,
-    //         'price' => $this->price,
-    //         'category' => $this->category_id
-    //     ];
-    //     return new ProductCreateDto(
-    //         $this->title,
-    //         $this->price,
-    //         $this->category_id,
-    //         $this->description,
-    //     );
-    // }
+    public function getDto(): ProductCreateDto
+    {
+
+        return new ProductCreateDto(
+            $this->title,
+            $this->description,
+            $this->price,
+            $this->amount,
+            $this->pages,
+            $this->size,
+            $this->cover_type,
+            $this->weight,
+            $this->year,
+            $this->rating,
+            $this->category,
+            $this->publisher,
+            $this->series,
+            $this->tags,
+            $this->authors,
+            $this->images,
+        );
+    }
 }

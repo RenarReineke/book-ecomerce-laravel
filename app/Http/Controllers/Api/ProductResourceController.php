@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Product;
-use App\Models\Category;
-use App\Services\ProductService;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProductResource;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
+use App\Http\Resources\ProductResource;
+use App\Models\Product;
+use App\Services\ProductService;
 
 class ProductResourceController extends Controller
 {
     public function index(ProductService $productService)
     {
         $products = $productService->getProductList();
-        
+
         return ProductResource::collection($products);
     }
 
@@ -24,7 +23,8 @@ class ProductResourceController extends Controller
      */
     public function store(StoreProductRequest $request, ProductService $productService)
     {
-        $product = $productService->store($request->validated());
+        $product = $productService->store($request->getDto());
+
         return $product;
     }
 
@@ -34,16 +34,17 @@ class ProductResourceController extends Controller
     public function show(string $id)
     {
         $product = Product::findOrFail($id);
+
         return new ProductResource($product);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, string $id)
+    public function update(UpdateProductRequest $request, Product $product, ProductService $productService)
     {
-        $product = Product::findOrFail($id);
-        $product->update($request->validated());
+        $product = $productService->update($request->getDto(), $product);
+
         return new ProductResource($product);
     }
 
@@ -53,6 +54,7 @@ class ProductResourceController extends Controller
     public function destroy(string $id)
     {
         Product::destroy($id);
+
         return response()->noContent();
     }
 }

@@ -2,30 +2,30 @@
 
 namespace App\Models;
 
-use App\Models\Tag;
-use App\Models\Cart;
-use App\Models\Order;
-use App\Models\Rewiew;
-use App\Models\Category;
-use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Model;
+use App\Enums\CoverTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
     use HasFactory;
 
     public const FILTERS = [
-        'search', 'rating', 'cover', 'fromPrice', 
+        'search', 'rating', 'cover', 'fromPrice',
         'toPrice', 'category', 'series', 'publisher',
-        ];
+    ];
 
     protected $fillable = [
-        'title', 'description', 'price', 'amount', 'pages', 'size', 'cover-type', 'weight',
-        'year', 'rating', 'slug'
+        'title', 'description', 'price', 'amount', 'pages', 'size', 'cover_type', 'weight',
+        'year', 'rating', 'slug',
     ];
 
     protected $with = ['tags', 'rewiews', 'images'];
+
+    // protected $casts = [
+    //     'cover_type' => CoverTypeEnum::class,
+    // ];
 
     public function setSlugAttribute($value)
     {
@@ -78,7 +78,7 @@ class Product extends Model
             $filters['search'] ?? false,
             function ($query, $search) {
                 $query
-                ->where('title', 'like', '%' . $search . '%');
+                    ->where('title', 'like', '%'.$search.'%');
             }
         );
 
@@ -86,7 +86,7 @@ class Product extends Model
             $filters['rating'] ?? false,
             function ($query, $rating) {
                 $query
-                ->where('rating', $rating);
+                    ->where('rating', $rating);
             }
         );
 
@@ -94,7 +94,7 @@ class Product extends Model
             $filters['cover'] ?? false,
             function ($query, $cover) {
                 $query
-                ->where('cover', $cover);
+                    ->where('cover', $cover);
             }
         );
 
@@ -102,7 +102,7 @@ class Product extends Model
             $filters['fromPrice'] ?? false,
             function ($query, $fromPrice) {
                 $query
-                ->where('price', '>',$fromPrice);
+                    ->where('price', '>', $fromPrice);
             }
         );
 
@@ -110,7 +110,7 @@ class Product extends Model
             $filters['toPrice'] ?? false,
             function ($query, $toPrice) {
                 $query
-                ->where('price', '<',$toPrice);
+                    ->where('price', '<', $toPrice);
             }
         );
 
@@ -118,7 +118,7 @@ class Product extends Model
             $filters['category'] ?? false,
             function ($query, $category) {
                 $query
-                ->where('category_id', $category);
+                    ->where('category_id', $category);
             }
         );
 
@@ -126,7 +126,7 @@ class Product extends Model
             $filters['series'] ?? false,
             function ($query, $series) {
                 $query
-                ->where('series_id', $series);
+                    ->where('series_id', $series);
             }
         );
 
@@ -134,13 +134,12 @@ class Product extends Model
             $filters['publisher'] ?? false,
             function ($query, $publisher) {
                 $query
-                ->whereIn('series_id',function ($query) use ($publisher) {
-                    $query->select('id')
-                    ->from('series')
-                    ->where('publisher_id', $publisher);
-                });
+                    ->whereIn('series_id', function ($query) use ($publisher) {
+                        $query->select('id')
+                            ->from('series')
+                            ->where('publisher_id', $publisher);
+                    });
             }
         );
     }
-
 }
