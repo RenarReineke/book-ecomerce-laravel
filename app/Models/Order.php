@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use App\Enums\OrderStatusEnum;
-use App\Models\Product;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
@@ -14,12 +13,12 @@ class Order extends Model
     protected $fillable = ['phone', 'address', 'status'];
 
     protected $casts = [
-        'status' => OrderStatusEnum::class
+        'status' => OrderStatusEnum::class,
     ];
 
-    public function user()
+    public function client()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Client::class);
     }
 
     public function products()
@@ -28,7 +27,7 @@ class Order extends Model
     }
 
     public function scopeTotalPrice(): int
-    {   
-        return $this->products->reduce(fn($accum, $product) => $accum + $product->price * $product->pivot->amount, 0);
+    {
+        return $this->products->reduce(fn ($accum, $product) => $accum + $product->price * $product->pivot->amount, 0);
     }
 }

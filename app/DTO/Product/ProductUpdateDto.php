@@ -46,6 +46,7 @@ final class ProductUpdateDto
         $this->cover_type = $cover_type;
     }
 
+    // Вернуть только те поля, которые переданы для обновления
     public function toArray(): array
     {
         return array_filter(get_object_vars($this));

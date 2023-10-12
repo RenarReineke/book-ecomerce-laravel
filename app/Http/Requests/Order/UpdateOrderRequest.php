@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Order;
 
+use App\DTO\Order\OrderUpdateDto;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateOrderRequest extends FormRequest
@@ -22,7 +23,17 @@ class UpdateOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'phone' => 'string',
+            'address' => 'string',
         ];
+    }
+
+    public function getDto(): OrderUpdateDto
+    {
+
+        return new OrderUpdateDto(
+            $this->phone,
+            $this->address,
+        );
     }
 }

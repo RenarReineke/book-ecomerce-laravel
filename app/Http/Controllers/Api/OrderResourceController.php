@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\User;
-use App\Models\Order;
-use Illuminate\Http\Request;
-use App\Services\OrderService;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\OrderResource;
 use App\Http\Requests\Order\StoreOrderRequest;
+use App\Http\Requests\Order\UpdateOrderRequest;
+use App\Http\Resources\OrderResource;
+use App\Models\Order;
+use App\Services\OrderService;
+use Illuminate\Support\Facades\Auth;
 
 class OrderResourceController extends Controller
 {
@@ -26,14 +25,10 @@ class OrderResourceController extends Controller
      */
     public function store(StoreOrderRequest $request, OrderService $orderService)
     {
-        Auth::login(User::find(261));
+        $user = Auth::guard('spa')->user();
+        $order = $orderService->save($request->validated(), $user);
 
-        
-        $cart = $request->user()->carts()->first();
-        
-        $order = $orderService->saveOrder($request->validated(), $cart);
-
-        return $order;
+        return new OrderResource($order);
     }
 
     /**
@@ -47,9 +42,11 @@ class OrderResourceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Order $order)
+    public function update(UpdateOrderRequest $request, Order $order, OrderService $orderService)
     {
-        //
+        $order = $orderService->update($request->getDto(), $order);
+
+        return new OrderResource($order);
     }
 
     /**
@@ -57,6 +54,8 @@ class OrderResourceController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+
+        return response()->noContent();
     }
 }

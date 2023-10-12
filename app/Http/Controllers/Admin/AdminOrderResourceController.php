@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\StoreOrderRequest;
+use App\Http\Requests\Order\UpdateOrderRequest;
+use App\Models\Client;
 use App\Models\Order;
-use App\Models\User;
 use App\Services\OrderService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AdminOrderResourceController extends Controller
 {
@@ -29,7 +28,9 @@ class AdminOrderResourceController extends Controller
      */
     public function create()
     {
-        return view('admin.main.orders.orderCreateForm');
+        $clients = Client::all();
+
+        return view('admin.main.orders.orderCreateForm', compact('clients'));
     }
 
     /**
@@ -37,11 +38,7 @@ class AdminOrderResourceController extends Controller
      */
     public function store(StoreOrderRequest $request, OrderService $orderService)
     {
-        Auth::login(User::find(1));
-
-        $cart = $request->user()->carts()->first();
-
-        $order = $orderService->saveOrder($request->validated(), $cart);
+        $order = $orderService->save($request->validated(), $request->client);
 
         return redirect()->route('orders.show', ['order' => $order]);
     }
@@ -67,9 +64,11 @@ class AdminOrderResourceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateOrderRequest $request, Order $order, OrderService $orderService)
     {
-        //
+        $order = $orderService->update($request->getDto(), $order);
+
+        return redirect()->route('orders.show', ['order' => $order]);
     }
 
     /**

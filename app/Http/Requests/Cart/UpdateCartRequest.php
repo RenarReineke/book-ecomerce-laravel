@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Cart;
 
-use App\Rules\CartRule;
+use App\DTO\Cart\CartUpdateDto;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCartRequest extends FormRequest
@@ -24,7 +24,14 @@ class UpdateCartRequest extends FormRequest
     {
         return [
             'product_id' => ['required', 'numeric'],
-            'amount' => ['numeric']
+            'amount' => ['numeric'],
         ];
+    }
+
+    public function getDto(): CartUpdateDto
+    {
+        $client = $this->user();
+
+        return new CartUpdateDto($this->product_id, $this->amount, $client);
     }
 }

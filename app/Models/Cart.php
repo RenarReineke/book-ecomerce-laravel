@@ -11,9 +11,9 @@ class Cart extends Model
 
     protected $with = ['products'];
 
-    public function user()
+    public function client()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Client::class);
     }
 
     public function products()
@@ -22,7 +22,7 @@ class Cart extends Model
     }
 
     public function scopeTotalPrice(): int
-    {   
-        return $this->products->reduce(fn($accum, $product) => $accum + $product->price * $product->pivot->amount, 0);
+    {
+        return $this->products->reduce(fn ($accum, $product) => $accum + $product->price * $product->pivot->amount, 0);
     }
 }

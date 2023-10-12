@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Cart;
 
+use App\DTO\Cart\CartCreateDto;
 use App\Rules\CartRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,7 +24,14 @@ class StoreCartRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'products' => ['required', 'array', new CartRule()]
+            'products' => ['required', 'array', new CartRule()],
         ];
+    }
+
+    public function getDto(): CartCreateDto
+    {
+        $client = $this->user();
+
+        return new CartCreateDto($this->products, $client);
     }
 }

@@ -25,7 +25,7 @@ class ProductResourceController extends Controller
     {
         $product = $productService->store($request->getDto());
 
-        return $product;
+        return new ProductResource($product);
     }
 
     /**
