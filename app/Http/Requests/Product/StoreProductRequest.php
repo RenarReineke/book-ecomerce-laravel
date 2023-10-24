@@ -33,11 +33,14 @@ class StoreProductRequest extends FormRequest
             'weight' => 'required|numeric',
             'year' => 'required|numeric',
             'rating' => 'required|numeric',
-            'category' => 'required|numeric',
-            'publisher' => 'required|numeric',
-            'series' => 'required|numeric',
+            'category' => 'required|numeric|exists:categories,id',
+            'publisher' => 'required|numeric|exists:publishers,id',
+            'series' => 'required|numeric|exists:series,id',
             'tags' => 'array',
+            'tag.*' => 'required|numeric|exists:tags,id',
             'authors' => 'array',
+            'authors.*' => 'required|numeric|exists:authors,id',
+            'images' => 'array',
             'images.*' => 'image',
         ];
     }

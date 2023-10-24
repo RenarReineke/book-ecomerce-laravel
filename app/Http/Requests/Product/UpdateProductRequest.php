@@ -33,11 +33,14 @@ class UpdateProductRequest extends FormRequest
             'weight' => 'numeric',
             'year' => 'numeric',
             'rating' => 'numeric',
-            'category' => 'numeric',
-            'publisher' => 'numeric',
-            'series' => 'numeric',
+            'category' => 'numeric|exists:categories,id',
+            'publisher' => 'numeric|exists:publishers,id',
+            'series' => 'numeric|exists:series,id',
             'tags' => 'array',
+            'tag.*' => 'numeric|exists:tags,id',
             'authors' => 'array',
+            'authors.*' => 'numeric|exists:authors,id',
+            'images' => 'array',
             'images.*' => 'image',
         ];
     }
