@@ -23,7 +23,8 @@ class StoreCommentRequest extends FormRequest
     {
         return [
             'message' => ['required', 'string'],
-            'rewiew_id' => ['required', 'numeric']
+            'commentable_type' => ['required'],
+            'commentable_id' => ['required', 'int'],
         ];
     }
 }

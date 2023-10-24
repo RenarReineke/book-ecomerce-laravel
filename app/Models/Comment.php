@@ -11,13 +11,18 @@ class Comment extends Model
 
     protected $fillable = ['message', 'rewiew_id', 'user_id'];
 
-    public function rewiew()
+    public function commentable()
     {
-        return $this->belongsTo(Rewiew::class);
+        return $this->morphTo();
     }
 
-    public function user()
+    public function owner()
     {
-        return $this->belongsTo(User::class);
+        return $this->morphTo();
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\Rewiew\StoreRewiewRequest;
 use App\Http\Requests\Rewiew\UpdateRewiewRequest;
 use App\Models\Rewiew;
 use App\Services\RewiewService;
+use Illuminate\Support\Facades\Auth;
 use ReflectionClass;
 
 class AdminRewiewResourceController extends Controller
@@ -41,8 +42,8 @@ class AdminRewiewResourceController extends Controller
      */
     public function store(StoreRewiewRequest $request, RewiewService $rewiewService)
     {
-        $user = $request->user();
-        $rewiew = $rewiewService->store($request->validated(), $user);
+        $client = Auth::guard('spa')->user();
+        $rewiew = $rewiewService->store($request->validated(), $client);
 
         return redirect()->route('rewiews.show', ['rewiew' => $rewiew]);
     }
@@ -52,7 +53,9 @@ class AdminRewiewResourceController extends Controller
      */
     public function show(Rewiew $rewiew)
     {
-        return view('admin.main.rewiews.rewiewDetail', compact('rewiew'));
+        $commentable_type = Rewiew::class;
+
+        return view('admin.main.rewiews.rewiewDetail', compact('rewiew', 'commentable_type'));
     }
 
     /**

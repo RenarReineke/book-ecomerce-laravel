@@ -7,6 +7,7 @@ use App\Http\Requests\Comment\StoreCommentRequest;
 use App\Http\Requests\Comment\UpdateCommentRequest;
 use App\Models\Comment;
 use App\Services\CommentService;
+use Illuminate\Support\Facades\Auth;
 
 class AdminCommentResourceController extends Controller
 {
@@ -25,9 +26,10 @@ class AdminCommentResourceController extends Controller
      */
     public function create()
     {
-        $rewiew_id = request()->rewiew_id;
+        $commentable_type = request()->commentable_type;
+        $commentable_id = request()->commentable_id;
 
-        return view('admin.main.comments.commentCreateForm', compact('rewiew_id'));
+        return view('admin.main.comments.commentCreateForm', compact('commentable_type', 'commentable_id'));
     }
 
     /**
@@ -35,10 +37,10 @@ class AdminCommentResourceController extends Controller
      */
     public function store(StoreCommentRequest $request, CommentService $commentService)
     {
-        $user = $request->user();
-        $comment = $commentService->store($request->validated(), $user);
+        $owner = Auth::user();
+        $commentService->store($request->validated(), $owner);
 
-        return redirect()->route('rewiews.show', ['rewiew' => $comment->rewiew]);
+        return redirect()->route('rewiews.index');
     }
 
     /**

@@ -16,9 +16,9 @@ class Rewiew extends Model
         'rating' => RatingEnum::class,
     ];
 
-    public function user()
+    public function client()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Client::class);
     }
 
     public function product()
@@ -33,7 +33,7 @@ class Rewiew extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function likes()

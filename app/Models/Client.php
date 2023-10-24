@@ -70,4 +70,9 @@ class Client extends Authenticatable
     {
         return $this->hasMany(Like::class);
     }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }
