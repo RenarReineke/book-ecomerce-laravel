@@ -1,90 +1,87 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <title>Laravel</title>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net" />
-        <link
-            href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap"
-            rel="stylesheet"
-        />
+    <title>Laravel</title>
 
-        <script src="//unpkg.com/alpinejs" defer></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
+    <script src="//unpkg.com/alpinejs" defer></script>
 
-    <body
-        class="h-screen p-5 pl-0 bg-blue-950 overflow-hidden"
-    >
-            
-                @include('admin.layouts.sidebar')
-                <div class="ml-[271px] relative h-full bg-sky-50 border-4 rounded-lg">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
 
-                    @yield('profile')
-                    @yield('statistic')
+<body class="h-screen p-5 pl-0 bg-blue-950 overflow-hidden">
 
-                    @yield('clientList')
-                    @yield('clientDetail')
-                    @yield('clientCreateForm')
+    @include('admin.layouts.sidebar')
+    <div class="ml-[271px] relative h-full bg-sky-50 border-4 rounded-lg">
 
-                    @yield('employeeList')
-                    @yield('employeeDetail')
-                    @yield('employeeCreateForm')
+        @yield('profile')
+        @yield('statistic')
 
-                    @yield('orderList')
-                    @yield('orderDetail')
-                    @yield('orderCreateForm')
+        @yield('clientList')
+        @yield('clientDetail')
+        @yield('clientCreateForm')
 
-                    @yield('cartList')
-                    @yield('cartDetail')
+        @yield('employeeList')
+        @yield('employeeDetail')
+        @yield('employeeCreateForm')
 
-                    @yield('categoryList')
-                    @yield('categoryDetail')
-                    @yield('categoryCreateForm')
-                    @yield('categoryUpdateForm')
+        @yield('orderList')
+        @yield('orderDetail')
+        @yield('orderCreateForm')
 
-                    @yield('productList')
-                    @yield('productDetail')
-                    @yield('productCreateForm')
-                    @yield('productUpdateForm')
+        @yield('cartList')
+        @yield('cartDetail')
 
-                    @yield('tagList')
-                    @yield('tagDetail')
-                    @yield('tagCreateForm')
-                    @yield('tagUpdateForm')
+        @yield('categoryList')
+        @yield('categoryDetail')
+        @yield('categoryCreateForm')
+        @yield('categoryUpdateForm')
 
-                    @yield('authorList')
-                    @yield('authorDetail')
-                    @yield('authorCreateForm')
-                    @yield('authorUpdateForm')
+        @yield('productList')
+        @yield('productDetail')
+        @yield('productCreateForm')
+        @yield('productUpdateForm')
 
-                    @yield('publisherList')
-                    @yield('publisherDetail')
-                    @yield('publisherCreateForm')
-                    @yield('publisherUpdateForm')
+        @yield('tagList')
+        @yield('tagDetail')
+        @yield('tagCreateForm')
+        @yield('tagUpdateForm')
 
-                    @yield('seriesList')
-                    @yield('seriesDetail')
-                    @yield('seriesCreateForm')
-                    @yield('seriesUpdateForm')
-                    
-                    @yield('rewiewList')
-                    @yield('rewiewDetail')
-                    @yield('rewiewCreateForm')
-                    @yield('rewiewUpdateForm')
-                    
-                    @yield('commentDetail')
-                    @yield('commentCreateForm')
-                    @yield('commentUpdateForm')
-                    
-                    @yield('images')
-                </div>
-            
-        @stack('scripts')
-    </body>
+        @yield('authorList')
+        @yield('authorDetail')
+        @yield('authorCreateForm')
+        @yield('authorUpdateForm')
+
+        @yield('publisherList')
+        @yield('publisherDetail')
+        @yield('publisherCreateForm')
+        @yield('publisherUpdateForm')
+
+        @yield('seriesList')
+        @yield('seriesDetail')
+        @yield('seriesCreateForm')
+        @yield('seriesUpdateForm')
+
+        @yield('rewiewList')
+        @yield('rewiewDetail')
+        @yield('rewiewCreateForm')
+        @yield('rewiewUpdateForm')
+
+        @yield('commentDetail')
+        @yield('commentCreateForm')
+        @yield('commentUpdateForm')
+
+        @yield('images')
+    </div>
+
+    @stack('scripts')
+</body>
+
 </html>
