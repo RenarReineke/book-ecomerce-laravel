@@ -56,9 +56,7 @@ class AdminCommentResourceController extends Controller
      */
     public function edit(Comment $comment)
     {
-        $rewiew_id = request()->rewiew_id;
-
-        return view('admin.main.comments.commentUpdateForm', compact(['comment', 'rewiew_id']));
+        return view('admin.main.comments.commentUpdateForm', compact('comment'));
     }
 
     /**
@@ -66,10 +64,9 @@ class AdminCommentResourceController extends Controller
      */
     public function update(UpdateCommentRequest $request, Comment $comment, CommentService $commentService)
     {
-        $user = $request->user();
-        $updatedComment = $commentService->update($request->validated(), $user, $comment);
+        $commentService->update($request->validated(), $comment);
 
-        return redirect()->route('rewiews.show', ['rewiew' => $comment->rewiew]);
+        return redirect()->route('rewiews.index');
     }
 
     /**

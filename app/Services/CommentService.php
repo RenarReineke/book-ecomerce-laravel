@@ -22,7 +22,7 @@ final class CommentService
         return $comment;
     }
 
-    public function update(array $request, User|Client $owner, Comment $comment)
+    public function update(array $request, Comment $comment)
     {
         $comment->message = $request['message'];
         $comment->save();

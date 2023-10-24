@@ -26,7 +26,7 @@ final class RewiewService
         return $rewiew;
     }
 
-    public function update(array $request, Client $client, Rewiew $rewiew): Rewiew
+    public function update(array $request, Rewiew $rewiew): Rewiew
     {
         $rewiew->rating = $request['rating'];
         $rewiew->profit = $request['profit'];

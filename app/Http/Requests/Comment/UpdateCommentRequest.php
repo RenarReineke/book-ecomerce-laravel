@@ -23,7 +23,6 @@ class UpdateCommentRequest extends FormRequest
     {
         return [
             'message' => ['required', 'string'],
-            'rewiew_id' => ['required', 'numeric']
         ];
     }
 }

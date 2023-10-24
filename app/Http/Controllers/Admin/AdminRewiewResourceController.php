@@ -72,7 +72,7 @@ class AdminRewiewResourceController extends Controller
     public function update(UpdateRewiewRequest $request, Rewiew $rewiew, RewiewService $rewiewService)
     {
         $user = $request->user();
-        $updatedComment = $rewiewService->update($request->validated(), $user, $rewiew);
+        $rewiewService->update($request->validated(), $user, $rewiew);
 
         return redirect()->route('rewiews.show', ['rewiew' => $rewiew]);
     }
