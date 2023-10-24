@@ -5,10 +5,12 @@ namespace App\Models;
 use App\Enums\RatingEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Rewiew extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = ['profit', 'unprofit', 'text', 'user_id', 'product_id'];
 
