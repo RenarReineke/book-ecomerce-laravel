@@ -1,66 +1,123 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Магазин книг
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Контроллеры разделены на две директории:
 
-## About Laravel
+-   _API_: сам магазин
+-   _Admin_: админка на _blade_ + _tailwind_ + _js_.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Аутентификация реализована с помощью _Sanctum_ и разделена для двух моделей:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   _User_ для сотрудников магазина, имеющих доступ в админку.
+-   _Client_ для покупателей.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Обработка исключений из контроллеров вынесена в отдельный слой, в глобальный обработчик _Handler.php_.
+Создано кастомное исключение для описания ошибок бизнес-логики: _BusinessException.php_
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Сущности
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Для всех сущностей валидация запросов проходит в _FormRequest_ классах.
+В ответах API выдается _Resource_.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Для некоторых сущностей сделаны _DTO_.
 
-## Laravel Sponsors
+Сервисный слой представлен в виде _Service_ классов для каждой сущности.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Тип обложки и рейтинг продукт, а так же статус заказа и роли описаны в виде _Enum_.
 
-### Premium Partners
+Для тестового заполениня БД описаны _Factory_.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### **Product**
 
-## Contributing
+Товар в магазине(книга).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+У книги может быть несколько авторов. Принадлежит к книжной серии.
+К одному товару можно загружать несколько изображений.
 
-## Code of Conduct
+Клиенты могут оставлять текстовый отзыв, в котором так же проставляют рейтинг от 1 до 5.
+К отзыву можно писать комментарии и ставить лайки.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### **Category**
 
-## Security Vulnerabilities
+Категория с книгами.  
+Реализовано в виде _nested sets_.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### **Client**
 
-## License
+Клиента магазина, покупатель.
+Может помещать товары в корзину и оформлять заказ.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### **User**
+
+Сотрудник магазина, пользователь админки.
+Принадлежит к одной из трех ролей:
+
+-   _admin_ - может все
+-   _manager_ - работает с товарами, заказами и клиентами
+-   _moderator_ - работает с отзывами и комментариями
+
+### **Role**
+
+Роль для сотрудника магазина. Описано выше.
+Права и ограничения реализованы с помощью политик.
+
+### **Rewiew**
+
+Отзыв клиента на товар.
+При написании обязательно проставляется рейтинг в виде оценки от 1 до 5.
+
+На отзыв можно писать коммента и ставить лайки.
+
+### **Comment**
+
+Комментарий к отзыву и к другому комментарию.
+Могут писать не только клиенты, но и сотрудники магазина.
+
+Реализован в виде полиморфной связи с _User/Client_, а также с _Rewiew/Comment_.
+Удаление в виде _soft delete_.
+
+### **Like**
+
+Лайк может ставить клиент на отзыв другого клиента.
+
+### **Author**
+
+Автор, many-to-many с книгами.
+
+### **Publisher**
+
+Издатель. Может иметь много книжных серий.
+
+### **Series**
+
+Книжная серия, принадлежит издателю и имеет много книг.
+
+### **Tag**
+
+Тег, просто тег.
+
+### **Image**
+
+Изображение товара.
+Из админки можно загружать несколько изображений для одного товара.
+
+### **Cart**
+
+Корзина клиента.
+Сохраняется в БД. Состоит из отдельных items, каждый из которых описывает товар в корзине.
+
+### **Order**
+
+Заказ клиента.
+Формируется по корзине клиента.
+В процессе формирования уменьшается количество товара в магазине.
+
+Имеет один из следующих статусов:
+
+-   _Оформлен_
+-   _Ожидает отправки_
+-   _Отправлен_
+-   _Доставлен_
+-   _Завершен_
+-   _Отменен_
